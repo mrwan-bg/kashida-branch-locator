@@ -1,0 +1,8 @@
+GitHub publishing notes
+
+- Upload the CONTENTS of this repository bundle to the root of the GitHub repository, including the hidden .github directory.
+- Create a GitHub Release tagged v2.5.22.
+- Attach the original ready-to-install archive: kashida-branch-locator-v2.5.22.zip.
+- Do not use GitHub's auto-generated Source code ZIP as the WordPress install package.
+- The README release link assumes the repository URL https://github.com/mrwan-bg/kashida-branch-locator. Change that URL if the repository name differs.
+- PHP syntax workflow included; PHPCS is intentionally omitted to avoid failing on style-only issues until separately configured and reviewed.

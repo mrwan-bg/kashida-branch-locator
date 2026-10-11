@@ -1,0 +1,159 @@
+<?php
+declare(strict_types=1);
+
+namespace Kashida\BranchLocator\Database;
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
+class Installer {
+    const DB_VERSION_KEY = 'kashida_branch_locator_db_version';
+    const DB_VERSION     = '1.2';
+
+    public static function maybe_upgrade(): void {
+        global $wpdb;
+        $installed_version = (string) get_option( self::DB_VERSION_KEY, '' );
+        $groups_table      = $wpdb->prefix . 'kashida_branch_locator_groups';
+        $branches_table    = $wpdb->prefix . 'kashida_branch_locator_branches';
+        $tables_missing    = ! self::table_exists( $groups_table ) || ! self::table_exists( $branches_table );
+
+        // Schema version alone is not sufficient: recover if an interrupted installation
+        // left the option saved but one or both plugin tables missing.
+        if ( version_compare( $installed_version, self::DB_VERSION, '<' ) || $tables_missing ) {
+            self::install();
+        }
+    }
+
+    public static function install(): void {
+        global $wpdb;
+
+        $legacy_groups   = $wpdb->prefix . 'bl_groups';
+        $legacy_branches = $wpdb->prefix . 'bl_branches';
+        $groups_table    = $wpdb->prefix . 'kashida_branch_locator_groups';
+        $branches_table  = $wpdb->prefix . 'kashida_branch_locator_branches';
+
+        // Rename legacy tables when the new prefixed tables do not exist.
+        self::rename_legacy_table( $legacy_groups, $groups_table );
+        self::rename_legacy_table( $legacy_branches, $branches_table );
+
+        $charset = $wpdb->get_charset_collate();
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
+        dbDelta( "CREATE TABLE {$groups_table} (
+            id         BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+            name       VARCHAR(255)    NOT NULL,
+            slug       VARCHAR(255)    NOT NULL,
+            color      VARCHAR(20)     NOT NULL DEFAULT '#0a6b70',
+            created_at DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id),
+            UNIQUE KEY slug (slug)
+        ) {$charset};" );
+
+        dbDelta( "CREATE TABLE {$branches_table} (
+            id         BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+            name       VARCHAR(255)    NOT NULL,
+            city       VARCHAR(255)    NOT NULL DEFAULT '',
+            address    TEXT            NOT NULL,
+            phone      VARCHAR(60)     NOT NULL DEFAULT '',
+            latitude   DECIMAL(10,7)   NOT NULL DEFAULT 0.0000000,
+            longitude  DECIMAL(10,7)   NOT NULL DEFAULT 0.0000000,
+            group_id   BIGINT UNSIGNED          DEFAULT NULL,
+            slug       VARCHAR(255)    NOT NULL DEFAULT '',
+            created_at DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id),
+            KEY group_id (group_id),
+            KEY city (city)
+        ) {$charset};" );
+
+        // If a prior interrupted upgrade left both table sets, copy legacy data only
+        // when the corresponding new table is empty. Keep legacy tables as a safety net.
+        self::copy_legacy_table_if_new_is_empty(
+            $legacy_groups,
+            $groups_table,
+            [ 'id', 'name', 'slug', 'color', 'created_at' ]
+        );
+        self::copy_legacy_table_if_new_is_empty(
+            $legacy_branches,
+            $branches_table,
+            [ 'id', 'name', 'city', 'address', 'phone', 'latitude', 'longitude', 'group_id', 'slug', 'created_at' ]
+        );
+
+        update_option( self::DB_VERSION_KEY, self::DB_VERSION );
+        delete_option( 'bl_db_version' );
+    }
+
+    private static function table_exists( string $table ): bool {
+        global $wpdb;
+
+        // Schema discovery targets this plugin's custom tables and is not cacheable.
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Required to safely detect custom table existence.
+        $found = $wpdb->get_var(
+            $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table ) )
+        );
+
+        return $found === $table;
+    }
+
+    private static function rename_legacy_table( string $legacy, string $target ): void {
+        global $wpdb;
+
+        if ( self::table_exists( $legacy ) && ! self::table_exists( $target ) ) {
+            // Table names are derived exclusively from the trusted WordPress prefix and constants.
+            // Identifiers are generated from the trusted WordPress prefix and fixed suffixes.
+            $wpdb->query( "RENAME TABLE `{$legacy}` TO `{$target}`" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Dynamic identifiers cannot be passed as SQL value placeholders.
+        }
+    }
+
+    private static function copy_legacy_table_if_new_is_empty( string $legacy, string $target, array $columns ): void {
+        global $wpdb;
+
+        if ( ! self::table_exists( $legacy ) || ! self::table_exists( $target ) ) {
+            return;
+        }
+
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Trusted custom table identifier; query is used only during schema migration.
+        $target_count = (int) $wpdb->get_var( "SELECT COUNT(*) FROM `{$target}`" );
+        if ( 0 !== $target_count ) {
+            return;
+        }
+
+        // Table and column names are SQL identifiers, not values, so they cannot use
+        // ordinary %s placeholders. Validate every identifier before quoting it.
+        $quoted_target = self::quote_identifier( $target );
+        $quoted_legacy = self::quote_identifier( $legacy );
+        $quoted_columns = array_map( [ self::class, 'quote_identifier' ], $columns );
+
+        if ( '' === $quoted_target || '' === $quoted_legacy || in_array( '', $quoted_columns, true ) ) {
+            return;
+        }
+
+        $column_list = implode( ', ', $quoted_columns );
+        $query       = sprintf(
+            'INSERT IGNORE INTO %s (%s) SELECT %s FROM %s',
+            $quoted_target,
+            $column_list,
+            $column_list,
+            $quoted_legacy
+        );
+
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Identifiers are strictly validated against an allowlist-compatible pattern and quoted; SQL value placeholders cannot represent identifiers.
+        $wpdb->query( $query );
+    }
+
+    /**
+     * Validate and quote a SQL identifier used by this plugin's schema migration.
+     *
+     * @param string $identifier Identifier derived from the WordPress prefix or a fixed column allowlist.
+     * @return string Quoted identifier, or an empty string when invalid.
+     */
+    private static function quote_identifier( string $identifier ): string {
+        if ( ! preg_match( '/\A[a-zA-Z0-9_]+\z/', $identifier ) ) {
+            return '';
+        }
+
+        return '`' . $identifier . '`';
+    }
+
+    public static function deactivate(): void {}
+}

@@ -1,0 +1,4 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+?>
+<div class="bl-branch-card-single"><div class="bl-card-head"><h3 class="bl-card-title"><?php echo esc_html($branch->name); ?></h3><?php if ( ! empty($branch->group_name) ) : ?><span class="bl-fe-badge" style="background:<?php echo esc_attr($branch->group_color ?: '#0a6b70'); ?>"><?php echo esc_html($branch->group_name); ?></span><?php endif; ?></div><div class="bl-card-grid"><div><strong><?php esc_html_e('City','kashida-branch-locator'); ?></strong><span><?php echo esc_html($branch->city ?: '—'); ?></span></div><div><strong><?php esc_html_e('Phone','kashida-branch-locator'); ?></strong><span><?php echo esc_html($branch->phone ?: '—'); ?></span></div><div class="bl-full"><strong><?php esc_html_e('Address','kashida-branch-locator'); ?></strong><span><?php echo esc_html($branch->address ?: '—'); ?></span></div></div></div>

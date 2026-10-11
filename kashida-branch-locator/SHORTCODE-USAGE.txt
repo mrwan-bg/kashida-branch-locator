@@ -1,0 +1,62 @@
+KASHIDA BRANCH LOCATOR SHORTCODE USAGE — v2.3.1
+
+Default directory:
+[kashida_branch_locator]
+
+Layouts:
+[kashida_branch_locator layout="table"]
+[kashida_branch_locator layout="cards"]
+[kashida_branch_locator layout="accordion"]
+[kashida_branch_locator layout="list"]
+[kashida_branch_locator layout="map"]
+[kashida_branch_locator layout="map-table" search="true" pagination="true"]
+
+Visitor controls:
+[kashida_branch_locator search="true" pagination="true" sorting="true" city_filter="true" group_filter="true"]
+
+Filters:
+[kashida_branch_locator group="grp_xxxxxxxx"]
+[kashida_branch_locator city="Tripoli"]
+[kashida_branch_locator branch="br_xxxxxxxx"]
+[kashida_branch_locator groups="grp_xxxxxxxx,grp_yyyyyyyy" layout="cards"]
+[kashida_branch_locator branches="br_xxxxxxxx,br_yyyyyyyy" layout="map-table"]
+
+Dedicated group map:
+[kashida_branch_group_map group="grp_xxxxxxxx" zoom="6" height="600"]
+
+Notes:
+- Use a Shortcode block/widget or classic editor content.
+- The frontend inherits the active theme font and direction.
+- Map assets load only when the locator shortcode is rendered.
+- Maps use OpenStreetMap tiles with local, lightweight map code and required attribution.
+
+
+== Display Builder ==
+
+The Groups screen includes a Display Builder. Select the layout and the information/options to show, then copy the generated shortcode.
+
+Supported display fields include branch name, city, address, phone, and group. Search, pagination, call and directions buttons, results per page, map height, and map zoom can also be configured.
+
+
+Bulk selection:
+- In Groups, select multiple groups to generate one combined shortcode or delete them together.
+- In Branches, select multiple branches to generate one combined shortcode or delete them together.
+- Combined group shortcode uses `groups="slug1,slug2"`.
+- Combined branch shortcode uses `branches="slug1,slug2"`.
+
+
+Display Builder preview:
+- The Display Builder includes a live visual preview of the selected layout and options.
+- The preview is illustrative; the generated shortcode is the final configuration used on the frontend.
+
+Map notes:
+- Map and Map + Table skip branches that do not have valid non-zero coordinates.
+- A clear message is shown when no valid coordinates are available.
+
+Behavior:
+- Visitors can search immediately without reloading the page.
+- Sortable table headings show an arrow and can be clicked to change the sort order.
+- Search, filters, sorting, and pagination work together.
+- Map and map-table layouts update visible markers when search or filters change.
+- Clicking a map marker selects the matching branch in the table when available.
+- Small-screen tables switch to a compact card-style presentation.
