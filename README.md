@@ -1,30 +1,86 @@
 <p align="center">
-  <img src="assets/banner-772x250.png" alt="Kashida Branch Locator" width="772">
+  <img src="assets/banner-772x250.png" alt="Kashida Branch Locator banner" width="772">
 </p>
 
 # Kashida Branch Locator
 
-A lightweight WordPress branch and location directory with groups, CSV/XLSX import, responsive layouts, and interactive OpenStreetMap maps.
+**Kashida Branch Locator** is a lightweight WordPress plugin for managing and displaying branches, offices, stores, service centers, and other locations.
+
+It provides organized branch directories with groups, searchable listings, city and group filters, sorting, pagination, and interactive maps. The built-in **Display Builder** helps you select branches or groups, choose a layout, configure the information shown to visitors, enable search and filters, preview the result, and generate a shortcode—without writing code.
 
 <p align="center">
   <img src="assets/icon-256x256.png" alt="Kashida Branch Locator icon" width="128">
 </p>
 
-**Current release:** `v2.5.22`  
-**Developer:** Kashida Media Services — Mrwan elGobee  
-**License:** GPL-2.0-or-later
+<p align="center">
+  <strong>Current release: v2.5.22</strong><br>
+  <a href="https://github.com/mrwan-bg/kashida-branch-locator/releases">Download</a> ·
+  <a href="https://github.com/mrwan-bg/kashida-branch-locator/issues">Report an issue</a> ·
+  <a href="https://kashida.ly/">Kashida Media Services</a>
+</p>
 
 ## Features
 
-- Manage branches and locations from the WordPress dashboard.
-- Organize locations into optional groups with custom colors.
-- Display locations as tables, cards, lists, accordions, maps, or map-and-table layouts.
-- Search, filter by city/group, sort table columns, and paginate results.
-- Import CSV and XLSX files with preview and optional updates to existing branches.
-- Responsive frontend layouts, RTL support, and theme typography inheritance.
-- Interactive maps using OpenStreetMap tiles; marker selection stays synchronized with visible results.
-- User-initiated Google Maps directions links.
-- Administrative nonce and capability checks, plus input and coordinate validation.
+### Six responsive display layouts
+
+- **Table** — Structured branch listings with sortable columns.
+- **Cards** — Card-based branch information.
+- **List** — Compact layout for quick browsing.
+- **Accordion** — Branches organized into expandable groups.
+- **Map** — Branch locations on an interactive map.
+- **Map + Table** — A connected branch list and map; visitors can select a branch from either view.
+
+### Search, filters, and sorting
+
+- Live branch search.
+- City and group filters.
+- Sortable table columns.
+- Pagination.
+- Results update without a full page reload.
+
+### Interactive OpenStreetMap maps
+
+- Branch location markers and information popups.
+- Map and list synchronization.
+- Call buttons and directions links where configured.
+- Responsive mobile map interaction.
+- No Google Maps API key is required for the built-in map. Visitors can choose to open directions in Google Maps.
+
+### Branch and group management
+
+Manage branches and reusable groups from the WordPress dashboard. Depending on the display configuration, you can show individual branches, selected groups, multiple groups, or combined branch listings using shortcodes.
+
+### CSV and Excel import
+
+Import branch data from **CSV** and **XLSX** files. Supported fields include:
+
+- Branch name
+- City and address
+- Phone
+- Latitude and longitude
+- Group
+
+The importer supports file validation, data preview, coordinate validation, warnings, and error reporting to help identify problems in imported data.
+
+### Display Builder and shortcodes
+
+Use the visual **Display Builder** to select branches or groups, choose a layout, configure visible fields and visitor options, preview the display, and generate the shortcode. Paste the generated shortcode into a WordPress page, post, or another shortcode-enabled area.
+
+Example shortcodes (available options depend on the selected layout and configuration):
+
+```text
+[kashida_branch_locator]
+[kashida_branch_locator layout="table"]
+[kashida_branch_locator layout="cards"]
+[kashida_branch_locator layout="accordion"]
+[kashida_branch_locator layout="list"]
+[kashida_branch_locator layout="map"]
+[kashida_branch_locator layout="map-table" search="true" pagination="true"]
+[kashida_branch_locator city="Tripoli"]
+[kashida_branch_locator group="grp_xxxxxxxx"]
+```
+
+See [`SHORTCODE-USAGE.txt`](kashida-branch-locator/SHORTCODE-USAGE.txt) for additional examples.
 
 ## Screenshots
 
@@ -36,7 +92,7 @@ A lightweight WordPress branch and location directory with groups, CSV/XLSX impo
 
 ![Group management](assets/screenshot-2.png)
 
-### Import workflow
+### CSV/XLSX import
 
 ![Import interface](assets/screenshot-3.png)
 
@@ -44,46 +100,42 @@ A lightweight WordPress branch and location directory with groups, CSV/XLSX impo
 
 ![Frontend display](assets/screenshot-4.png)
 
-## Requirements
-
-- WordPress 5.8 or later
-- PHP 8.0 or later
-- CSV and XLSX imports are supported. Legacy XLS files require PhpSpreadsheet to be available on the server.
-
-## Download
-
-Download the ready-to-install ZIP from the [GitHub Releases](https://github.com/mrwan-bg/kashida-branch-locator/releases) page. Choose the `kashida-branch-locator-v2.5.22.zip` release asset rather than GitHub's automatically generated **Source code** archives.
-
 ## Installation
 
-1. Download the plugin ZIP from GitHub Releases.
+1. Download `kashida-branch-locator-v2.5.22.zip` from the [GitHub Releases](https://github.com/mrwan-bg/kashida-branch-locator/releases) page. Select the attached plugin ZIP, not GitHub's automatically generated **Source code** archives.
 2. In WordPress, open **Plugins → Add New Plugin → Upload Plugin**.
 3. Upload the ZIP, install it, and activate **Kashida Branch Locator**.
-4. Add branch records or import a CSV/XLSX file.
-5. Add a shortcode to a page. For example:
+4. Open **Branch Locator** in the WordPress administration menu.
+5. Create groups if needed, then add branches manually or import a CSV/XLSX file.
+6. Add latitude and longitude coordinates for branches that should appear on the map.
+7. Open **Display Builder**, choose the branches or groups, select a layout, and configure the display.
+8. Generate and copy the shortcode, then paste it into a page, post, or other shortcode-enabled area.
+9. Publish or update the page.
 
-   ```text
-   [kashida_branch_locator]
-   ```
+## Requirements
 
-## Shortcode examples
+- **WordPress:** 5.8 or later
+- **PHP:** 8.0 or later
+- **Import:** CSV and XLSX supported. Legacy XLS files may require PhpSpreadsheet to be available on the server.
 
-```text
-[kashida_branch_locator layout="table"]
-[kashida_branch_locator layout="cards"]
-[kashida_branch_locator layout="accordion"]
-[kashida_branch_locator layout="list"]
-[kashida_branch_locator layout="map"]
-[kashida_branch_locator layout="map-table" search="true" pagination="true"]
-[kashida_branch_locator city="Tripoli"]
-[kashida_branch_locator group="grp_xxxxxxxx"]
-```
+## Plugin information
 
-See [`SHORTCODE-USAGE.txt`](kashida-branch-locator/SHORTCODE-USAGE.txt) for more examples.
+| Property | Value |
+|---|---|
+| Plugin version | 2.5.22 |
+| Text domain | `kashida-branch-locator` |
+| License | GPL-2.0-or-later |
+| Map provider | OpenStreetMap |
+| Import formats | CSV and XLSX |
+| Coordinates | Latitude / longitude |
+| Translation | WordPress gettext; `.po`/`.mo` files; multilingual workflows including Polylang |
+| Tracking / telemetry | None included |
+
+**Tested up to:** WordPress 7.1. This value should be kept aligned with the version actually tested before each release.
 
 ## External services and privacy
 
-Map layouts load map tiles from OpenStreetMap when used. A visitor's browser requests those tiles directly, so OpenStreetMap may receive the visitor's IP address and normal HTTP request information. The plugin also offers a user-initiated Google Maps directions link. It does not include analytics, advertising, telemetry, licensing checks, or automatic tracking, and does not contact Kashida servers for normal operation.
+Map layouts load tiles from OpenStreetMap when visitors use the map. The visitor's browser requests those tiles directly, so OpenStreetMap may receive the visitor's IP address and normal HTTP request information. If a visitor chooses the directions feature, the plugin can open Google Maps. Branch and group data are stored on the WordPress website; the plugin does not send branch data to Kashida servers. The plugin does not include analytics, advertising, telemetry, licensing checks, or automatic tracking.
 
 - [OpenStreetMap](https://www.openstreetmap.org/)
 - [OpenStreetMap tile usage and copyright](https://www.openstreetmap.org/copyright)
@@ -94,7 +146,7 @@ Map layouts load map tiles from OpenStreetMap when used. A visitor's browser req
 
 - Plugin source: [`kashida-branch-locator/`](kashida-branch-locator/)
 - Changelog: [`CHANGELOG.md`](CHANGELOG.md)
-- Contributing: [`CONTRIBUTING.md`](CONTRIBUTING.md)
+- Contributing guidelines: [`CONTRIBUTING.md`](CONTRIBUTING.md)
 - License: [`LICENSE`](LICENSE)
 
 ## Support and contributions
@@ -103,7 +155,9 @@ Map layouts load map tiles from OpenStreetMap when used. A visitor's browser req
 - [Request a feature](https://github.com/mrwan-bg/kashida-branch-locator/issues/new?template=feature_request.md)
 - [View releases](https://github.com/mrwan-bg/kashida-branch-locator/releases)
 
-## Credits
+## Contributors and developers
 
-Designed and developed by **Kashida Media Services**.  
-Website: https://kashida.ly/
+**Developer:** Mrwan elGobee  
+**Organization:** Kashida Media Services  
+**Website:** [https://kashida.ly/](https://kashida.ly/)  
+**Behance:** [Mrwan elGobee](https://www.behance.net/Mrwan_elgobee)
