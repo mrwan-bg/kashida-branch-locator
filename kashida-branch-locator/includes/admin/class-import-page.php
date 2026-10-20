@@ -4,8 +4,7 @@ namespace Kashida\BranchLocator\Admin;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Import_Page {
-    public function __construct() { $this->render(); }
-    private function render(): void {
+    public function render(): void {
         ?>
         <div class="wrap bl-admin-wrap">
             <h1><?php esc_html_e('Import Branches','kashida-branch-locator'); ?></h1>
