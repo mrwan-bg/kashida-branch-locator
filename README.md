@@ -14,7 +14,7 @@ It provides organized branch directories with groups, searchable listings, city 
 
 <p align="center">
   <strong>Current release: v2.5.31</strong><br>
-  <a href="https://github.com/mrwan-bg/kashida-branch-locator/releases">Download</a> ·
+  <a href="https://github.com/mrwan-bg/kashida-branch-locator/releases/tag/v2.5.31">Download v2.5.31</a> ·
   <a href="https://github.com/mrwan-bg/kashida-branch-locator/issues">Report an issue</a> ·
   <a href="https://kashida.ly/">Kashida Media Services</a>
 </p>
@@ -86,6 +86,10 @@ Example shortcodes (available options depend on the selected layout and configur
 ```
 
 See [`SHORTCODE-USAGE.txt`](kashida-branch-locator/SHORTCODE-USAGE.txt) for additional examples.
+
+## Release notes
+
+See [Release Notes for v2.5.31](RELEASE-NOTES-2.5.31.md) for the feature list, compatibility notes, and validation checklist.
 
 ## Screenshots
 
