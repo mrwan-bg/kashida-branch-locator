@@ -4,7 +4,7 @@ Tags: branches, locations, map, store locator, directory
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 2.5.22
+Stable tag: 2.5.31
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,6 +20,9 @@ The plugin is designed to remain lightweight and does not require a page builder
 
 * Branch management from the WordPress dashboard.
 * Optional groups with custom colors.
+* Display Builder controls for Cards column count and displaying branch cards under group headings.
+* City and group filtering, including an all-groups option where enabled.
+* Configurable Call, Directions, and Website buttons with independent colors.
 * Live search, city and group filters, sortable columns, result counts, reset controls, and pagination.
 * Table, cards, list, accordion, map, and map-table layouts.
 * CSV and XLSX import with preview and optional update of existing branches.
@@ -27,6 +30,7 @@ The plugin is designed to remain lightweight and does not require a page builder
 * Frontend typography and direction inherited from the active theme.
 * Interactive maps using OpenStreetMap tiles without loading third-party JavaScript or CSS libraries. Filtered map markers stay synchronized with table results, and selecting a marker highlights its matching branch.
 * Google Maps directions link for each branch.
+* Optional second phone number and website URL for each branch; website URLs are presented through a configurable button.
 * RTL support and mobile-friendly table cards.
 * Nonce and capability checks for administrative AJAX actions.
 * Coordinate and group validation.
@@ -137,6 +141,17 @@ Yes. XLSX is supported directly. Legacy XLS files require PhpSpreadsheet on the 
 = Does the plugin track visitors? =
 
 No. The plugin does not include analytics or tracking. OpenStreetMap and Google Maps are external services and are contacted only for the documented map functionality.
+
+== 2.5.31 ==
+* Added a second phone number and website URL to branch records and forms.
+* Added a configurable website button instead of displaying a long raw website URL on branch cards.
+* Added independent button color controls for Call, Directions, and Website.
+* Improved the Display Builder layout and responsive settings/preview arrangement.
+* Added Cards column-count controls and group headings for grouped branch cards.
+* Improved city and group filtering controls, including the all-groups option.
+* Expanded Arabic translations for administration screens, buttons, frontend labels, results count, and help content.
+* Improved WordPress 5.8 compatibility by replacing unsupported string-prefix helpers.
+* Synchronized release version metadata and Stable Tag.
 
 == 2.5.16 ==
 * Strengthened plugin-specific namespaces and WordPress identifiers to reduce naming collisions.
