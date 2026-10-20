@@ -186,7 +186,7 @@ class Admin {
             <form method="post">
                 <?php wp_nonce_field( 'kbl_save_color_settings' ); ?>
                 <table class="form-table" role="presentation">
-                    <tr><th><label for="kbl-default-group-color"><?php esc_html_e( 'Default Group Color', 'kashida-branch-locator' ); ?></label></th><td><input class="kbl-color-picker" type="text" id="kbl-default-group-color" name="default_group_color" value="<?php echo esc_attr( $group_color ); ?>" data-default-color="#0a6b70"></td></tr>
+                    <tr><td><label for="kbl-default-group-color"><?php esc_html_e( 'Default Group Color', 'kashida-branch-locator' ); ?></label></td><td><input class="kbl-color-picker" type="text" id="kbl-default-group-color" name="default_group_color" value="<?php echo esc_attr( $group_color ); ?>" data-default-color="#0a6b70"></td></tr>
                 </table>
                 <?php submit_button( __( 'Save Settings', 'kashida-branch-locator' ), 'primary', 'kbl_save_color_settings' ); ?>
             </form>
