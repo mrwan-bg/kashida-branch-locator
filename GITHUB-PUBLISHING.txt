@@ -1,8 +1,11 @@
 GitHub publishing notes
 
-- Upload the CONTENTS of this repository bundle to the root of the GitHub repository, including the hidden .github directory.
-- Create a GitHub Release tagged v2.5.22.
-- Attach the original ready-to-install archive: kashida-branch-locator-v2.5.22.zip.
+- Keep the plugin source folder and documentation synchronized with the release archive before publishing.
+- Ensure the plugin header version, KASHIDA_BRANCH_LOCATOR_VERSION constant, readme.txt Stable tag, README version, and release tag all match.
+- Create a GitHub Release tagged v2.5.31.
+- Attach the ready-to-install archive: kashida-branch-locator-v2.5.31.zip.
+- Use the detailed release notes in RELEASE-NOTES-2.5.31.md as the basis for the GitHub Release description.
 - Do not use GitHub's auto-generated Source code ZIP as the WordPress install package.
+- Run WordPress Plugin Check and test install/upgrade, admin forms, import/export, all display layouts, filters, website/call/directions buttons, and Arabic localization before production deployment.
 - The README release link assumes the repository URL https://github.com/mrwan-bg/kashida-branch-locator. Change that URL if the repository name differs.
-- PHP syntax workflow included; PHPCS is intentionally omitted to avoid failing on style-only issues until separately configured and reviewed.
+- Keep automated PHP syntax checks enabled. Run PHPCS separately after its ruleset is configured and reviewed.
