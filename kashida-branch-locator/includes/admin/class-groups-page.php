@@ -5,8 +5,7 @@ use Kashida\BranchLocator\Models\Group;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Groups_Page {
-    public function __construct() { $this->render(); }
-    private function render(): void {
+    public function render(): void {
         $groups = Group::all();
         ?>
         <div class="wrap bl-admin-wrap">
