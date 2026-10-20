@@ -19,17 +19,16 @@ The plugin is designed to remain lightweight and does not require a page builder
 = Features =
 
 * Branch management from the WordPress dashboard.
-* Optional groups with custom colors and a configurable default color for newly created groups.
+* Optional groups with custom colors.
 * Display Builder controls for Cards column count and displaying branch cards under group headings.
 * City and group filtering, including an all-groups option where enabled.
 * Configurable Call, Directions, and Website buttons with independent colors.
-* Live search, city and group filters, sortable columns, result counts, reset controls, pagination, and infinite-scroll loading when enabled.
+* Live search, city and group filters, sortable columns, result counts, reset controls, and pagination.
 * Table, cards, list, accordion, map, and map-table layouts.
 * CSV and XLSX import with preview and optional update of existing branches.
 * Responsive frontend output with language-aware RTL/LTR direction and English left-to-right alignment.
 * Frontend typography and direction inherited from the active theme.
 * Interactive maps using OpenStreetMap tiles without loading third-party JavaScript or CSS libraries. Filtered map markers stay synchronized with table results, and selecting a marker highlights its matching branch.
-* Separate clickable links for multiple phone numbers, with the Call button using the primary phone number.
 * Google Maps directions link for each branch.
 * Optional second phone number and website URL for each branch; website URLs are presented through a configurable button.
 * RTL support and mobile-friendly table cards.
