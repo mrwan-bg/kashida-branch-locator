@@ -167,10 +167,10 @@ class Admin {
         }
     }
 
-    public function page_branches(): void { new Branches_Page(); }
-    public function page_groups(): void { new Groups_Page(); }
-    public function page_import(): void { new Import_Page(); }
-    public function page_help(): void { new Help_Page(); }
+    public function page_branches(): void { ( new Branches_Page() )->render(); }
+    public function page_groups(): void { ( new Groups_Page() )->render(); }
+    public function page_import(): void { ( new Import_Page() )->render(); }
+    public function page_help(): void { ( new Help_Page() )->render(); }
 
     public function page_settings(): void {
         if ( ! current_user_can( 'manage_options' ) ) return;
