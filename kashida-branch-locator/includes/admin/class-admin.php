@@ -41,41 +41,39 @@ class Admin {
             [ $this, 'page_branches' ]
         );
 
-        add_submenu_page(
-            'kashida-branch-locator',
-            __( 'Groups', 'kashida-branch-locator' ),
-            __( 'Groups', 'kashida-branch-locator' ),
-            'manage_options',
-            'kashida-branch-locator-groups',
-            [ $this, 'page_groups' ]
-        );
+        $submenus = [
+            [
+                'title'    => __( 'Groups', 'kashida-branch-locator' ),
+                'slug'     => 'kashida-branch-locator-groups',
+                'callback' => 'page_groups',
+            ],
+            [
+                'title'    => __( 'Import', 'kashida-branch-locator' ),
+                'slug'     => 'kashida-branch-locator-import',
+                'callback' => 'page_import',
+            ],
+            [
+                'title'    => __( 'Settings', 'kashida-branch-locator' ),
+                'slug'     => 'kashida-branch-locator-settings',
+                'callback' => 'page_settings',
+            ],
+            [
+                'title'    => __( 'Help', 'kashida-branch-locator' ),
+                'slug'     => 'kashida-branch-locator-help',
+                'callback' => 'page_help',
+            ],
+        ];
 
-        add_submenu_page(
-            'kashida-branch-locator',
-            __( 'Import', 'kashida-branch-locator' ),
-            __( 'Import', 'kashida-branch-locator' ),
-            'manage_options',
-            'kashida-branch-locator-import',
-            [ $this, 'page_import' ]
-        );
-
-        add_submenu_page(
-            'kashida-branch-locator',
-            __( 'Settings', 'kashida-branch-locator' ),
-            __( 'Settings', 'kashida-branch-locator' ),
-            'manage_options',
-            'kashida-branch-locator-settings',
-            [ $this, 'page_settings' ]
-        );
-
-        add_submenu_page(
-            'kashida-branch-locator',
-            __( 'Help', 'kashida-branch-locator' ),
-            __( 'Help', 'kashida-branch-locator' ),
-            'manage_options',
-            'kashida-branch-locator-help',
-            [ $this, 'page_help' ]
-        );
+        foreach ( $submenus as $submenu ) {
+            add_submenu_page(
+                'kashida-branch-locator',
+                $submenu['title'],
+                $submenu['title'],
+                'manage_options',
+                $submenu['slug'],
+                [ $this, $submenu['callback'] ]
+            );
+        }
     }
 
     public function enqueue_assets( string $hook ): void {
