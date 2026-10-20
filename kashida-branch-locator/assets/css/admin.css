@@ -202,3 +202,7 @@
   .bl-bulk-toolbar .button{flex:1}
   .bl-admin-wrap>.wp-list-table{display:block;overflow-x:auto;white-space:nowrap}
 }
+
+
+/* Color HEX input pairing */
+.bl-color-input-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.bl-color-input-row input[type=color]{width:48px;height:36px;padding:2px}.bl-color-input-row .bl-hex-color{max-width:130px;font-family:monospace;text-transform:uppercase}
