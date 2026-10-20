@@ -3,7 +3,7 @@
  * Plugin Name: Kashida Branch Locator
  * Plugin URI:  https://kashida.ly/
  * Description: Lightweight branch and location directory with groups, CSV/XLSX import, responsive layouts, and interactive OpenStreetMap maps.
- * Version:     2.5.22
+ * Version:     2.5.31
  * Author:      Mrwan elGobee - Kashida Media Services
  * Author URI:  https://kashida.ly/
  * License:     GPL-2.0-or-later
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'KASHIDA_BRANCH_LOCATOR_VERSION' ) ) {
-    define( 'KASHIDA_BRANCH_LOCATOR_VERSION', '2.5.22' );
+    define( 'KASHIDA_BRANCH_LOCATOR_VERSION', '2.5.31' );
 }
 if ( ! defined( 'KASHIDA_BRANCH_LOCATOR_FILE' ) ) {
     define( 'KASHIDA_BRANCH_LOCATOR_FILE', __FILE__ );
