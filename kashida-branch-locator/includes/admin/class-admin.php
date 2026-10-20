@@ -14,6 +14,7 @@ class Admin {
         add_action( 'wp_ajax_kashida_branch_locator_save_branch', [ $this, 'ajax_save_branch' ] );
         add_action( 'wp_ajax_kashida_branch_locator_delete_branch',[ $this, 'ajax_delete_branch' ] );
         add_action( 'wp_ajax_kashida_branch_locator_bulk_delete_branches', [ $this, 'ajax_bulk_delete_branches' ] );
+        add_action( 'wp_ajax_kashida_branch_locator_select_all_branches', [ $this, 'ajax_select_all_branches' ] );
         add_action( 'wp_ajax_kashida_branch_locator_bulk_delete_groups', [ $this, 'ajax_bulk_delete_groups' ] );
         add_action( 'wp_ajax_kashida_branch_locator_save_group',  [ $this, 'ajax_save_group' ] );
         add_action( 'wp_ajax_kashida_branch_locator_delete_group',[ $this, 'ajax_delete_group' ] );
@@ -101,6 +102,10 @@ class Admin {
                 'groups'         => __( 'groups', 'kashida-branch-locator' ),
                 'confirm_bulk_delete' => __( 'Are you sure you want to delete all selected items?', 'kashida-branch-locator' ),
                 'delete_selected' => __( 'Delete Selected', 'kashida-branch-locator' ),
+                'clear_selection' => __( 'Clear Selection', 'kashida-branch-locator' ),
+                'select_all_results' => __( 'Select all matching results', 'kashida-branch-locator' ),
+                'selecting_results' => __( 'Selecting matching branches…', 'kashida-branch-locator' ),
+                'selected_all_results' => __( 'All matching branches have been selected.', 'kashida-branch-locator' ),
                 /* translators: %d: number of selected branches. */
                 'confirm_bulk_delete_branches' => __( 'Delete %d selected branches? This action cannot be undone.', 'kashida-branch-locator' ),
                 /* translators: %d: number of selected groups. */
@@ -227,6 +232,40 @@ class Admin {
         }
         $new_id = \Kashida\BranchLocator\Models\Branch::insert( $data );
         wp_send_json_success( [ 'message' => __( 'Branch created.', 'kashida-branch-locator' ), 'id' => $new_id ] );
+    }
+
+    public function ajax_select_all_branches(): void {
+        $this->verify_nonce();
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- verify_nonce() validates this AJAX request before reading POST data.
+        $post = isset( $_POST ) && is_array( $_POST ) ? wp_unslash( $_POST ) : [];
+        $search = sanitize_text_field( $post['search'] ?? '' );
+        $city = sanitize_text_field( $post['city'] ?? '' );
+        $group_id = absint( $post['group_id'] ?? 0 );
+        $selected = [];
+        $page = 1;
+        $per_page = 100;
+        do {
+            $result = \\Kashida\\BranchLocator\\Models\\Branch::query( [
+                'search' => $search,
+                'city' => $city,
+                'group_id' => $group_id,
+                'page' => $page,
+                'per_page' => $per_page,
+            ] );
+            foreach ( (array) ( $result['items'] ?? [] ) as $branch ) {
+                $selected[] = [
+                    'id' => (string) absint( $branch->id ),
+                    'slug' => sanitize_text_field( (string) $branch->slug ),
+                ];
+            }
+            $total = (int) ( $result['total'] ?? 0 );
+            $page++;
+        } while ( ( $page - 1 ) * $per_page < $total );
+
+        wp_send_json_success( [
+            'items' => $selected,
+            'count' => count( $selected ),
+        ] );
     }
 
     public function ajax_bulk_delete_branches(): void {
