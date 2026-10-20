@@ -36,6 +36,8 @@ class Branches_Page {
             </div>
             <div class="bl-bulk-toolbar" data-page-type="branches">
                 <label class="bl-select-all-label"><input type="checkbox" class="bl-select-all"> <?php esc_html_e('Select all on this page','kashida-branch-locator'); ?></label>
+                <button type="button" class="button bl-select-all-results"><?php esc_html_e('Select all matching results','kashida-branch-locator'); ?></button>
+                <button type="button" class="button bl-clear-selection"><?php esc_html_e('Clear Selection','kashida-branch-locator'); ?></button>
                 <span class="bl-selected-count"></span>
                 <button type="button" class="button bl-bulk-display" disabled><?php esc_html_e('Create Display Code','kashida-branch-locator'); ?></button>
                 <button type="button" class="button button-link-delete bl-bulk-delete" disabled><?php esc_html_e('Delete Selected','kashida-branch-locator'); ?></button>
