@@ -6,9 +6,7 @@ use Kashida\BranchLocator\Models\Group;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Branches_Page {
-    public function __construct() { $this->render(); }
-
-    private function render(): void {
+    public function render(): void {
         $groups = Group::all();
         $cities = Branch::get_cities();
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin list filter; no state-changing action is performed.

@@ -42,32 +42,39 @@ class Admin {
             [ $this, 'page_branches' ]
         );
 
-        add_submenu_page(
-            'kashida-branch-locator',
-            __( 'Groups', 'kashida-branch-locator' ),
-            __( 'Groups', 'kashida-branch-locator' ),
-            'manage_options',
-            'kashida-branch-locator-groups',
-            [ $this, 'page_groups' ]
-        );
+        $submenus = [
+            [
+                'title'    => __( 'Groups', 'kashida-branch-locator' ),
+                'slug'     => 'kashida-branch-locator-groups',
+                'callback' => 'page_groups',
+            ],
+            [
+                'title'    => __( 'Import', 'kashida-branch-locator' ),
+                'slug'     => 'kashida-branch-locator-import',
+                'callback' => 'page_import',
+            ],
+            [
+                'title'    => __( 'Settings', 'kashida-branch-locator' ),
+                'slug'     => 'kashida-branch-locator-settings',
+                'callback' => 'page_settings',
+            ],
+            [
+                'title'    => __( 'Help', 'kashida-branch-locator' ),
+                'slug'     => 'kashida-branch-locator-help',
+                'callback' => 'page_help',
+            ],
+        ];
 
-        add_submenu_page(
-            'kashida-branch-locator',
-            __( 'Import', 'kashida-branch-locator' ),
-            __( 'Import', 'kashida-branch-locator' ),
-            'manage_options',
-            'kashida-branch-locator-import',
-            [ $this, 'page_import' ]
-        );
-
-        add_submenu_page(
-            'kashida-branch-locator',
-            __( 'Help', 'kashida-branch-locator' ),
-            __( 'Help', 'kashida-branch-locator' ),
-            'manage_options',
-            'kashida-branch-locator-help',
-            [ $this, 'page_help' ]
-        );
+        foreach ( $submenus as $submenu ) {
+            add_submenu_page(
+                'kashida-branch-locator',
+                $submenu['title'],
+                $submenu['title'],
+                'manage_options',
+                $submenu['slug'],
+                [ $this, $submenu['callback'] ]
+            );
+        }
     }
 
     public function enqueue_assets( string $hook ): void {
@@ -75,6 +82,8 @@ class Admin {
             return;
         }
 
+        wp_enqueue_style( 'wp-color-picker' );
+        wp_enqueue_script( 'wp-color-picker' );
         wp_enqueue_style( 'kashida-branch-locator-admin', KASHIDA_BRANCH_LOCATOR_ASSETS_URL . 'css/admin.css', [], KASHIDA_BRANCH_LOCATOR_VERSION );
         wp_enqueue_script( 'kashida-branch-locator-admin', KASHIDA_BRANCH_LOCATOR_ASSETS_URL . 'js/admin.js', [ 'jquery' ], KASHIDA_BRANCH_LOCATOR_VERSION, true );
         wp_localize_script( 'kashida-branch-locator-admin', 'KashidaBranchLocatorAdmin', [
@@ -161,10 +170,32 @@ class Admin {
         }
     }
 
-    public function page_branches(): void { new Branches_Page(); }
-    public function page_groups(): void { new Groups_Page(); }
-    public function page_import(): void { new Import_Page(); }
-    public function page_help(): void { new Help_Page(); }
+    public function page_branches(): void { ( new Branches_Page() )->render(); }
+    public function page_groups(): void { ( new Groups_Page() )->render(); }
+    public function page_import(): void { ( new Import_Page() )->render(); }
+    public function page_help(): void { ( new Help_Page() )->render(); }
+
+    public function page_settings(): void {
+        if ( ! current_user_can( 'manage_options' ) ) return;
+        if ( isset( $_POST['kbl_save_color_settings'] ) ) {
+            check_admin_referer( 'kbl_save_color_settings' );
+            update_option( 'kashida_branch_locator_default_group_color', sanitize_hex_color( wp_unslash( $_POST['default_group_color'] ?? '' ) ) ?: '#0a6b70' );
+            echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Settings saved.', 'kashida-branch-locator' ) . '</p></div>';
+        }
+        $group_color = get_option( 'kashida_branch_locator_default_group_color', '#0a6b70' );
+        ?>
+        <div class="wrap bl-admin-wrap">
+            <h1><?php esc_html_e( 'Kashida Branch Locator Settings', 'kashida-branch-locator' ); ?></h1>
+            <form method="post">
+                <?php wp_nonce_field( 'kbl_save_color_settings' ); ?>
+                <table class="form-table" role="presentation">
+                    <tr><td><label for="kbl-default-group-color"><?php esc_html_e( 'Default Group Color', 'kashida-branch-locator' ); ?></label></td><td><input class="kbl-color-picker" type="text" id="kbl-default-group-color" name="default_group_color" value="<?php echo esc_attr( $group_color ); ?>" data-default-color="#0a6b70"></td></tr>
+                </table>
+                <?php submit_button( __( 'Save Settings', 'kashida-branch-locator' ), 'primary', 'kbl_save_color_settings' ); ?>
+            </form>
+        </div>
+        <?php
+    }
 
     private function verify_nonce(): void {
         if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'kashida_branch_locator_admin_nonce' ) || ! current_user_can( 'manage_options' ) ) {

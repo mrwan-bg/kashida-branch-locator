@@ -5,8 +5,7 @@ use Kashida\BranchLocator\Models\Group;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Groups_Page {
-    public function __construct() { $this->render(); }
-    private function render(): void {
+    public function render(): void {
         $groups = Group::all();
         ?>
         <div class="wrap bl-admin-wrap">
@@ -76,7 +75,7 @@ class Groups_Page {
                 <form id="bl-group-form" class="bl-modal-form">
                     <input type="hidden" id="bl-group-id" name="id" value="">
                     <div class="bl-form-row"><label for="bl-g-name"><?php esc_html_e('Group Name *','kashida-branch-locator'); ?></label><input type="text" id="bl-g-name" name="name" required></div>
-                    <div class="bl-form-row"><label for="bl-g-color"><?php esc_html_e('Color','kashida-branch-locator'); ?></label><input type="color" id="bl-g-color" name="color" value="#0a6b70"></div>
+                    <div class="bl-form-row"><label for="bl-g-color"><?php esc_html_e('Color','kashida-branch-locator'); ?></label><div class="bl-color-input-row"><input type="color" id="bl-g-color" name="color" value="<?php echo esc_attr( get_option( 'kashida_branch_locator_default_group_color', '#0a6b70' ) ); ?>"><input type="text" id="bl-g-color-hex" class="regular-text bl-hex-color" value="<?php echo esc_attr( get_option( 'kashida_branch_locator_default_group_color', '#0a6b70' ) ); ?>" maxlength="7" pattern="^#[0-9A-Fa-f]{6}$" aria-label="<?php esc_attr_e('HEX color value','kashida-branch-locator'); ?>" placeholder="#0A6B70"></div></div>
                     <div class="bl-modal-footer"><button type="submit" class="button button-primary"><?php esc_html_e('Save','kashida-branch-locator'); ?></button><button type="button" class="button bl-modal-close"><?php esc_html_e('Cancel','kashida-branch-locator'); ?></button></div>
                 </form>
             </div>

@@ -30,7 +30,8 @@ class Group {
     public static function insert( array $data ): int|false {
         global $wpdb;
         $name  = sanitize_text_field( $data['name'] ?? '' );
-        $color = sanitize_hex_color( $data['color'] ?? '' ) ?: '#0a6b70';
+        $default_color = sanitize_hex_color( get_option( 'kashida_branch_locator_default_group_color', '#0a6b70' ) ) ?: '#0a6b70';
+        $color = sanitize_hex_color( $data['color'] ?? '' ) ?: $default_color;
         $slug  = self::generate_code( 'grp' );
         return $wpdb->insert( self::table(), [ 'name' => $name, 'slug' => $slug, 'color' => $color ] ) ? (int) $wpdb->insert_id : false;
     }
