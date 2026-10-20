@@ -13,7 +13,7 @@ It provides organized branch directories with groups, searchable listings, city 
 </p>
 
 <p align="center">
-  <strong>Current release: v2.5.22</strong><br>
+  <strong>Current release: v2.5.31</strong><br>
   <a href="https://github.com/mrwan-bg/kashida-branch-locator/releases">Download</a> ·
   <a href="https://github.com/mrwan-bg/kashida-branch-locator/issues">Report an issue</a> ·
   <a href="https://kashida.ly/">Kashida Media Services</a>
@@ -24,7 +24,7 @@ It provides organized branch directories with groups, searchable listings, city 
 ### Six responsive display layouts
 
 - **Table** — Structured branch listings with sortable columns.
-- **Cards** — Card-based branch information.
+- **Cards** — Card-based branch information with configurable column count, optional group headings, and independently styled action buttons.
 - **List** — Compact layout for quick browsing.
 - **Accordion** — Branches organized into expandable groups.
 - **Map** — Branch locations on an interactive map.
@@ -48,7 +48,11 @@ It provides organized branch directories with groups, searchable listings, city 
 
 ### Branch and group management
 
-Manage branches and reusable groups from the WordPress dashboard. Depending on the display configuration, you can show individual branches, selected groups, multiple groups, or combined branch listings using shortcodes.
+Manage branches and reusable groups from the WordPress dashboard. Branch records support a primary phone number, an optional second phone number, and an optional website URL. The website is shown as a button, not a long raw URL, and its color can be configured separately from Call and Directions.
+
+### Display customization
+
+The Display Builder supports Cards column-count selection, grouped branch cards under group headings, city filtering, and group filtering with an all-groups choice. Its settings and live preview use a responsive layout. Depending on the display configuration, you can show individual branches, selected groups, multiple groups, or combined branch listings using shortcodes.
 
 ### CSV and Excel import
 
@@ -56,7 +60,8 @@ Import branch data from **CSV** and **XLSX** files. Supported fields include:
 
 - Branch name
 - City and address
-- Phone
+- Primary and optional secondary phone numbers
+- Optional website URL shown as a configurable button
 - Latitude and longitude
 - Group
 
@@ -102,7 +107,7 @@ See [`SHORTCODE-USAGE.txt`](kashida-branch-locator/SHORTCODE-USAGE.txt) for addi
 
 ## Installation
 
-1. Download `kashida-branch-locator-v2.5.22.zip` from the [GitHub Releases](https://github.com/mrwan-bg/kashida-branch-locator/releases) page. Select the attached plugin ZIP, not GitHub's automatically generated **Source code** archives.
+1. Download `kashida-branch-locator-v2.5.31.zip` from the [GitHub Releases](https://github.com/mrwan-bg/kashida-branch-locator/releases) page. Select the attached plugin ZIP, not GitHub's automatically generated **Source code** archives.
 2. In WordPress, open **Plugins → Add New Plugin → Upload Plugin**.
 3. Upload the ZIP, install it, and activate **Kashida Branch Locator**.
 4. Open **Branch Locator** in the WordPress administration menu.
@@ -122,7 +127,7 @@ See [`SHORTCODE-USAGE.txt`](kashida-branch-locator/SHORTCODE-USAGE.txt) for addi
 
 | Property | Value |
 |---|---|
-| Plugin version | 2.5.22 |
+| Plugin version | 2.5.31 |
 | Text domain | `kashida-branch-locator` |
 | License | GPL-2.0-or-later |
 | Map provider | OpenStreetMap |
