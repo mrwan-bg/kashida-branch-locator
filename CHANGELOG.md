@@ -2,13 +2,13 @@
 
 ## Unreleased
 
-- Added a configurable default color for newly created groups.
-- Added synchronized HEX entry alongside the group color picker.
-- Added a small settings page for the default group color; existing group colors remain unchanged.
 - Added selection persistence across admin pages for branches and groups.
 - Added the option to select all branches matching the current search and city/group filters across every page.
 - Updated the plugin header description and readme feature documentation.
 - Kept the release version at 2.5.31; these changes are prepared for review before merging.
+- Added a configurable default color for newly created groups.
+- Added synchronized HEX entry alongside the group color picker.
+- Added a small settings page for the default group color; existing group colors remain unchanged.
 
 All notable releases of Kashida Branch Locator are listed here. For full historical details, see the version history in [`kashida-branch-locator/readme.txt`](kashida-branch-locator/readme.txt) and the [GitHub Releases](https://github.com/mrwan-bg/kashida-branch-locator/releases) page.
 

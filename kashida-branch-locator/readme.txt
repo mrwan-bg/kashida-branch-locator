@@ -8,7 +8,7 @@ Stable tag: 2.5.31
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A lightweight branch and location directory for WordPress with groups, CSV/XLSX import, responsive layouts, and interactive OpenStreetMap maps.
+Manage branches and groups, import location data, and display searchable locations in responsive layouts and maps.
 
 == Description ==
 
@@ -26,12 +26,13 @@ The plugin is designed to remain lightweight and does not require a page builder
 * Live search, city and group filters, sortable columns, result counts, reset controls, and pagination.
 * Table, cards, list, accordion, map, and map-table layouts.
 * CSV and XLSX import with preview and optional update of existing branches.
-* Responsive frontend output.
+* Responsive frontend output with language-aware RTL/LTR direction and English left-to-right alignment.
 * Frontend typography and direction inherited from the active theme.
 * Interactive maps using OpenStreetMap tiles without loading third-party JavaScript or CSS libraries. Filtered map markers stay synchronized with table results, and selecting a marker highlights its matching branch.
 * Google Maps directions link for each branch.
 * Optional second phone number and website URL for each branch; website URLs are presented through a configurable button.
 * RTL support and mobile-friendly table cards.
+* Multi-select branches and groups with selections preserved across admin pages; select all branches matching current search and filters across pages.
 * Nonce and capability checks for administrative AJAX actions.
 * Coordinate and group validation.
 
@@ -143,6 +144,8 @@ Yes. XLSX is supported directly. Legacy XLS files require PhpSpreadsheet on the 
 No. The plugin does not include analytics or tracking. OpenStreetMap and Google Maps are external services and are contacted only for the documented map functionality.
 
 == 2.5.31 ==
+* Added cross-page branch selection and select-all-matching-search results in the admin interface.
+* Updated plugin description and feature documentation for current display, filtering, and phone-link behavior.
 * Added a second phone number and website URL to branch records and forms.
 * Added a configurable website button instead of displaying a long raw website URL on branch cards.
 * Added independent button color controls for Call, Directions, and Website.
