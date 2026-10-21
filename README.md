@@ -13,8 +13,8 @@ It provides organized branch directories with groups, searchable listings, city 
 </p>
 
 <p align="center">
-  <strong>Current release: v2.5.31</strong><br>
-  <a href="https://github.com/mrwan-bg/kashida-branch-locator/releases/tag/v2.5.31">Download v2.5.31</a> ·
+  <strong>Current release: v2.5.32</strong><br>
+  <a href="https://github.com/mrwan-bg/kashida-branch-locator/releases/tag/v2.5.32">Download v2.5.31</a> ·
   <a href="https://github.com/mrwan-bg/kashida-branch-locator/issues">Report an issue</a> ·
   <a href="https://kashida.ly/">Kashida Media Services</a>
 </p>
@@ -89,7 +89,7 @@ See [`SHORTCODE-USAGE.txt`](kashida-branch-locator/SHORTCODE-USAGE.txt) for addi
 
 ## Release notes
 
-See [Release Notes for v2.5.31](RELEASE-NOTES-2.5.31.md) for the feature list, compatibility notes, and validation checklist.
+See [Release Notes for v2.5.32](RELEASE-NOTES-2.5.32.md) for the feature list, compatibility notes, and validation checklist.
 
 ## Screenshots
 
@@ -111,7 +111,7 @@ See [Release Notes for v2.5.31](RELEASE-NOTES-2.5.31.md) for the feature list, c
 
 ## Installation
 
-1. Download `kashida-branch-locator-v2.5.31.zip` from the [GitHub Releases](https://github.com/mrwan-bg/kashida-branch-locator/releases) page. Select the attached plugin ZIP, not GitHub's automatically generated **Source code** archives.
+1. Download `kashida-branch-locator-v2.5.32.zip` from the [GitHub Releases](https://github.com/mrwan-bg/kashida-branch-locator/releases) page. Select the attached plugin ZIP, not GitHub's automatically generated **Source code** archives.
 2. In WordPress, open **Plugins → Add New Plugin → Upload Plugin**.
 3. Upload the ZIP, install it, and activate **Kashida Branch Locator**.
 4. Open **Branch Locator** in the WordPress administration menu.
@@ -131,7 +131,7 @@ See [Release Notes for v2.5.31](RELEASE-NOTES-2.5.31.md) for the feature list, c
 
 | Property | Value |
 |---|---|
-| Plugin version | 2.5.31 |
+| Plugin version | 2.5.32 |
 | Text domain | `kashida-branch-locator` |
 | License | GPL-2.0-or-later |
 | Map provider | OpenStreetMap |
@@ -150,6 +150,10 @@ Map layouts load tiles from OpenStreetMap when visitors use the map. The visitor
 - [OpenStreetMap tile usage and copyright](https://www.openstreetmap.org/copyright)
 - [OpenStreetMap Foundation Privacy Policy](https://osmfoundation.org/wiki/Privacy_Policy)
 - [Google Maps Privacy Policy](https://policies.google.com/privacy)
+
+## Source code and development
+
+Readable JavaScript source copies are included in `kashida-branch-locator/assets/src/js/` and documented in the WordPress readme. The production assets remain in `assets/js/` and are the files loaded by WordPress. When updating JavaScript, keep the readable source copies and production assets synchronized and test the affected workflows.
 
 ## Project files
 

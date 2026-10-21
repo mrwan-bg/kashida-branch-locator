@@ -4,7 +4,7 @@ Tags: branches, locations, map, store locator, directory
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 2.5.31
+Stable tag: 2.5.32
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,16 @@ Legacy `.xls` files require PhpSpreadsheet to be available on the server. CSV or
 
 The maximum upload size accepted by the plugin is 10 MB.
 
+== JavaScript Source Code ==
+
+Readable JavaScript source copies are included in `assets/src/js/` for review and maintenance:
+
+* `assets/src/js/frontend.js` corresponds to the production file `assets/js/frontend.js`.
+* `assets/src/js/admin.js` corresponds to the production file `assets/js/admin.js`.
+* `assets/src/js/import.js` corresponds to the production file `assets/js/import.js`.
+
+The production files in `assets/js/` are enqueued by WordPress. The source copies in `assets/src/js/` are not enqueued. They preserve the production code while adding line breaks at statement boundaries for readability; no build step is required to install the plugin. Keep source and production files synchronized when making JavaScript changes.
+
 == External Services ==
 
 This plugin uses the following external services only when the related frontend functionality is used:
@@ -142,6 +152,11 @@ Yes. XLSX is supported directly. Legacy XLS files require PhpSpreadsheet on the 
 = Does the plugin track visitors? =
 
 No. The plugin does not include analytics or tracking. OpenStreetMap and Google Maps are external services and are contacted only for the documented map functionality.
+
+== 2.5.32 ==
+* Added readable JavaScript source copies and documented their locations.
+* Lowered the top-level admin menu position to better fit WordPress admin conventions.
+* Refined the Import and Settings admin page layouts.
 
 == 2.5.31 ==
 * Added cross-page branch selection and select-all-matching-search results in the admin interface.

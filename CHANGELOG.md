@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.5.32
+
+- Added readable JavaScript source copies for frontend, admin, and import scripts.
+- Documented source file locations and maintenance guidance in the plugin readme.
+- Lowered the top-level admin menu position from 25 to 80.
+- Refined the Import and Settings admin page layouts.
+- Updated plugin version metadata and release documentation.
+
+
 ## Unreleased
 
 - Added selection persistence across admin pages for branches and groups.
