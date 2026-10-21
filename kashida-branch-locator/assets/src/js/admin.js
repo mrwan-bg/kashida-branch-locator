@@ -1,0 +1,277 @@
+(function($){'use strict';
+var AI=(window.KashidaBranchLocatorAdmin&&KashidaBranchLocatorAdmin.i18n)||{};
+function at(k,d){return AI[k]||d;
+}var modal=$('#bl-branch-modal'),groupMod=$('#bl-group-modal');
+function openModal(m){m.show();
+$('body').addClass('bl-modal-open')}function closeModal(m){m.hide();
+$('body').removeClass('bl-modal-open')}function notify(msg,type){var cls=type==='error'?'notice-error':'notice-success';
+var n=$('<div class="notice '+cls+' is-dismissible"><p>'+msg+'</p></div>');
+$('.wp-header-end').after(n);
+setTimeout(function(){n.fadeOut(400,function(){n.remove()})},4000)}$(document).on('click','.bl-btn-add-branch',function(){$('#bl-modal-title').text('Add Branch');
+$('#bl-branch-form')[0].reset();
+$('#bl-branch-id').val('');
+openModal(modal)});
+$(document).on('click','.bl-edit-branch',function(){var d=$(this).data();
+$('#bl-modal-title').text('Edit Branch');
+$('#bl-branch-id').val(d.id);
+$('#bl-f-name').val(d.name);
+$('#bl-f-city').val(d.city);
+$('#bl-f-phone').val(d.phone);
+$('#bl-f-address').val(d.address);
+$('#bl-f-lat').val(d.lat);
+$('#bl-f-lng').val(d.lng);
+$('#bl-f-group').val(d.group||'');
+openModal(modal)});
+$(document).on('click','.bl-modal-close',function(){closeModal(modal);
+closeModal(groupMod);
+closeModal($('#bl-display-builder-modal'))});
+$(document).on('click','.bl-modal-overlay',function(){closeModal(modal);
+closeModal(groupMod);
+closeModal($('#bl-display-builder-modal'))});
+$('#bl-branch-form').on('submit',function(e){e.preventDefault();
+var btn=$(this).find('[type=submit]').prop('disabled',true).text(KashidaBranchLocatorAdmin.i18n.saving);
+$.post(KashidaBranchLocatorAdmin.ajax_url,{action:'kashida_branch_locator_save_branch',nonce:KashidaBranchLocatorAdmin.nonce,id:$('#bl-branch-id').val(),name:$('#bl-f-name').val(),city:$('#bl-f-city').val(),phone:$('#bl-f-phone').val(),address:$('#bl-f-address').val(),latitude:$('#bl-f-lat').val(),longitude:$('#bl-f-lng').val(),group_id:$('#bl-f-group').val()}).done(function(r){if(r.success){closeModal(modal);
+notify(r.data.message);
+location.reload()}else{notify(r.data.message,'error')}}).always(function(){btn.prop('disabled',false).text(KashidaBranchLocatorAdmin.i18n.save)})});
+$(document).on('click','.bl-delete-branch',function(){if(!confirm($(this).hasClass('bl-delete-branch')?(KashidaBranchLocatorAdmin.i18n.confirm_delete_branch||KashidaBranchLocatorAdmin.i18n.confirm_delete):(KashidaBranchLocatorAdmin.i18n.confirm_delete_group||KashidaBranchLocatorAdmin.i18n.confirm_delete)))return;
+var btn=$(this).prop('disabled',true).text(KashidaBranchLocatorAdmin.i18n.deleting),row=$(this).closest('tr');
+$.post(KashidaBranchLocatorAdmin.ajax_url,{action:'kashida_branch_locator_delete_branch',nonce:KashidaBranchLocatorAdmin.nonce,id:$(this).data('id')}).done(function(r){if(r.success){row.fadeOut(300,function(){row.remove()});
+notify(r.data.message)}else{notify(r.data.message,'error');
+btn.prop('disabled',false).text(KashidaBranchLocatorAdmin.i18n.delete)}})});
+function syncGroupColorHex(value){var v=String(value||'').trim();
+if(/^#[0-9a-fA-F]{6}$/.test(v)){$('#bl-g-color').val(v);
+$('#bl-g-color-hex').val(v);
+}}
+$(document).on('input change','#bl-g-color',function(){syncGroupColorHex($(this).val());
+});
+
+$(document).on('input change','#bl-g-color-hex',function(){var v=$(this).val().trim();
+if(/^#[0-9a-fA-F]{6}$/.test(v))$('#bl-g-color').val(v);
+});
+
+$(document).on('click','.bl-btn-add-group',function(){$('#bl-group-modal-title').text('Add Group');
+$('#bl-group-form')[0].reset();
+$('#bl-group-id').val('');
+syncGroupColorHex($('#bl-g-color').val());
+openModal(groupMod)});
+$(document).on('click','.bl-edit-group',function(){var d=$(this).data();
+$('#bl-group-modal-title').text('Edit Group');
+$('#bl-group-id').val(d.id);
+$('#bl-g-name').val(d.name);
+$('#bl-g-color').val(d.color);
+syncGroupColorHex(d.color);
+openModal(groupMod)});
+$('#bl-group-form').on('submit',function(e){e.preventDefault();
+var btn=$(this).find('[type=submit]').prop('disabled',true).text(KashidaBranchLocatorAdmin.i18n.saving);
+$.post(KashidaBranchLocatorAdmin.ajax_url,{action:'kashida_branch_locator_save_group',nonce:KashidaBranchLocatorAdmin.nonce,id:$('#bl-group-id').val(),name:$('#bl-g-name').val(),color:$('#bl-g-color-hex').val()}).done(function(r){if(r.success){closeModal(groupMod);
+notify(r.data.message);
+location.reload()}else{notify(r.data.message,'error')}}).always(function(){btn.prop('disabled',false).text(KashidaBranchLocatorAdmin.i18n.save)})});
+$(document).on('click','.bl-delete-group',function(){if(!confirm(KashidaBranchLocatorAdmin.i18n.confirm_delete))return;
+var row=$(this).closest('tr');
+$.post(KashidaBranchLocatorAdmin.ajax_url,{action:'kashida_branch_locator_delete_group',nonce:KashidaBranchLocatorAdmin.nonce,id:$(this).data('id')}).done(function(r){if(r.success){row.fadeOut(300,function(){row.remove()});
+notify(r.data.message)}else{notify(r.data.message,'error')}})});
+$(document).on('click','.bl-copy-shortcode',function(){var btn=$(this),value=btn.attr('data-shortcode')||'';
+if(!value)return;
+var done=function(){var original=btn.text();
+btn.text(KashidaBranchLocatorAdmin.i18n.copied);
+setTimeout(function(){btn.text(original)},1400)};
+if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(value).then(done).catch(function(){fallbackCopy(value,done)})}else{fallbackCopy(value,done)}});
+function fallbackCopy(value,done){var ta=document.createElement('textarea');
+ta.value=value;
+ta.setAttribute('readonly','');
+ta.style.position='fixed';
+ta.style.opacity='0';
+document.body.appendChild(ta);
+ta.select();
+try{document.execCommand('copy');
+done()}finally{document.body.removeChild(ta)}}$(document).on('click','.bl-open-display-builder',function(){var btn=$(this),m=$('#bl-display-builder-modal'),branch=String(btn.data('branch')||'');
+if(branch){m.data('selection-type','branch').data('selection-values',branch).data('group','').data('group-name',btn.data('branch-name')||'');
+m.find('.bl-builder-group-name').text(btn.data('branch-name')||'');
+}else{m.data('selection-type','group').data('selection-values',String(btn.data('group')||'')).data('group',String(btn.data('group')||'')).data('group-name',btn.data('group-name'));
+m.find('.bl-builder-group-name').text(btn.data('group-name'));
+}resetBuilder();
+updateGeneratedShortcode();
+openModal(m);
+});
+
+$(document).on('click','.bl-bulk-display',function(){var toolbar=$(this).closest('.bl-bulk-toolbar'),type=toolbar.data('page-type')==='branches'?'branch':'group',selection=getSelection(toolbar),values=[];
+Object.keys(selection).forEach(function(id){if(selection[id])values.push(String(selection[id]));
+});
+if(!values.length)return;
+var m=$('#bl-display-builder-modal');
+m.data('selection-type',type).data('selection-values',values.join(',')).data('group','').data('group-name','');
+m.find('.bl-builder-group-name').text(values.length+' '+(type==='branch'?((KashidaBranchLocatorAdmin&&KashidaBranchLocatorAdmin.i18n&&KashidaBranchLocatorAdmin.i18n.branches)||'branches'):((KashidaBranchLocatorAdmin&&KashidaBranchLocatorAdmin.i18n&&KashidaBranchLocatorAdmin.i18n.groups)||'groups')));
+resetBuilder();
+updateGeneratedShortcode();
+openModal(m);
+});
+
+function resetBuilder(){var m=$('#bl-display-builder-modal');
+m.find('input[name="bl-builder-layout"][value="table"]').prop('checked',true);
+m.find('[data-builder-field="name"],[data-builder-field="city"],[data-builder-field="address"],[data-builder-field="phone"]').prop('checked',true);
+m.find('[data-builder-field="group"]').prop('checked',false);
+m.find('[data-builder-option="search"],[data-builder-option="pagination"],[data-builder-option="sorting"],[data-builder-option="city_filter"],[data-builder-option="group_filter"],[data-builder-option="call"],[data-builder-option="directions"]').prop('checked',true);
+m.find('[data-builder-option="per_page"]').val(15);
+m.find('[data-builder-option="height"]').val(520);
+m.find('[data-builder-option="zoom"]').val(6);
+}
+function updateGeneratedShortcode(){var m=$('#bl-display-builder-modal'),type=m.data('selection-type')||'group',values=String(m.data('selection-values')||'').split(',').filter(Boolean),group=m.data('group')||'',layout=m.find('input[name="bl-builder-layout"]:checked').val()||'table',a=[];
+if(type==='branch'){a.push(values.length>1?'branches="'+values.join(',')+'"':'branch="'+(values[0]||'')+'"');
+}else{a.push(values.length>1?'groups="'+values.join(',')+'"':'group="'+(values[0]||group)+'"');
+}if(layout!=='table')a.push('layout="'+layout+'"');
+['name','city','address','phone','group'].forEach(function(k){var c=m.find('[data-builder-field="'+k+'"]').prop('checked');
+if(!c)a.push('show_'+k+'="false"');
+else if(k==='group')a.push('show_group="true"');
+});
+['search','pagination','sorting','city_filter','group_filter'].forEach(function(k){if(!m.find('[data-builder-option="'+k+'"]').prop('checked'))a.push(k+'="false"');
+});
+['call','directions'].forEach(function(k){if(!m.find('[data-builder-option="'+k+'"]').prop('checked'))a.push('show_'+k+'="false"');
+});
+var per=parseInt(m.find('[data-builder-option="per_page"]').val(),10)||15,height=parseInt(m.find('[data-builder-option="height"]').val(),10)||520,zoom=parseInt(m.find('[data-builder-option="zoom"]').val(),10)||6;
+if(per!==15)a.push('per_page="'+Math.max(1,Math.min(100,per))+'"');
+if(height!==520)a.push('height="'+Math.max(300,Math.min(1200,height))+'"');
+if(zoom!==6)a.push('zoom="'+Math.max(1,Math.min(18,zoom))+'"');
+m.find('#bl-generated-shortcode').text('[kashida_branch_locator '+a.join(' ')+']');
+renderBuilderPreview(m,layout);
+}
+function renderBuilderPreview(m,layout){var p=m.find('#bl-builder-preview');
+if(!p.length)return;
+var name=m.find('[data-builder-field="name"]').prop('checked'),city=m.find('[data-builder-field="city"]').prop('checked'),address=m.find('[data-builder-field="address"]').prop('checked'),phone=m.find('[data-builder-field="phone"]').prop('checked'),group=m.find('[data-builder-field="group"]').prop('checked'),call=m.find('[data-builder-option="call"]').prop('checked'),directions=m.find('[data-builder-option="directions"]').prop('checked'),search=m.find('[data-builder-option="search"]').prop('checked'),sorting=m.find('[data-builder-option="sorting"]').prop('checked'),cityFilter=m.find('[data-builder-option="city_filter"]').prop('checked'),groupFilter=m.find('[data-builder-option="group_filter"]').prop('checked'),pagination=m.find('[data-builder-option="pagination"]').prop('checked');
+var title=m.find('.bl-builder-group-name').text()||at('selected_locations','Selected locations');
+var toolbar='';
+if(search)toolbar+='<span class="bl-preview-search" title="'+at('search','Search')+'">⌕</span>';
+if(cityFilter)toolbar+='<span class="bl-preview-filter">'+at('city','City')+' ▾</span>';
+if(groupFilter)toolbar+='<span class="bl-preview-filter">'+at('group','Group')+' ▾</span>';
+var badge=group?'<span class="bl-preview-badge">'+at('group','Group')+'</span>':'';
+var fields='';
+if(city)fields+='<span><b>'+at('city','City')+'</b> '+at('sample_city','Sample City')+'</span>';
+if(address)fields+='<span><b>'+at('address','Address')+'</b> '+at('sample_address','Sample address')+'</span>';
+if(phone)fields+='<span><b>'+at('phone','Phone')+'</b> +218 00 000 0000</span>';
+var actions='';
+if(call)actions+='<button type="button">'+at('call','Call')+'</button>';
+if(directions)actions+='<button type="button">'+at('directions','Directions')+'</button>';
+var card='<div class="bl-preview-card">'+(name?'<h4>'+at('sample_branch','Sample Branch')+'</h4>':'')+badge+'<div class="bl-preview-fields">'+fields+'</div><div class="bl-preview-actions">'+actions+'</div></div>';
+var controls=toolbar?'<div class="bl-preview-toolbar">'+toolbar+'</div>':'';
+var resultMeta='<div class="bl-preview-meta">'+at('results_count_preview','12 results')+'</div>';
+var body='';
+if(layout==='map'||layout==='map-table'){body='<div class="bl-preview-map"><span>'+at('map_preview','Map preview')+'</span><i></i><i></i><i></i></div>'+(layout==='map-table'?'<div class="bl-preview-table"><b>'+at('sample_branch','Sample Branch')+'</b><span>'+at('sample_city','Sample City')+'</span><span>'+at('sample_address','Sample address')+'</span></div>':'');
+}else if(layout==='table')body='<div class="bl-preview-table"><b>'+at('sample_branch','Sample Branch')+'</b><span>'+at('sample_city','Sample City')+'</span><span>'+at('sample_address','Sample address')+'</span><span>+218 00 000 0000</span></div>';
+else if(layout==='accordion')body='<div class="bl-preview-accordion">'+card+'</div>';
+else body=card;
+var page=pagination?'<div class="bl-preview-pagination">1 2 3 …</div>':'';
+p.html(controls+resultMeta+body+page);
+p.attr('aria-label',title);
+}
+$(document).on('change input','#bl-display-builder-modal input',updateGeneratedShortcode);
+
+function selectionKey(toolbar){return 'kblAdminSelection_'+String(toolbar.data('page-type')||'items');
+}
+function getSelection(toolbar){try{return JSON.parse(sessionStorage.getItem(selectionKey(toolbar))||'{}')||{};
+}catch(e){return {};
+}}
+function saveSelection(toolbar,selection){try{sessionStorage.setItem(selectionKey(toolbar),JSON.stringify(selection));
+}catch(e){}}
+function syncCurrentChecks(toolbar,selection){toolbar.closest('.wrap').find('.bl-row-select').each(function(){this.checked=Object.prototype.hasOwnProperty.call(selection,String(this.value));
+});
+}
+function refreshBulkToolbar(toolbar){var root=toolbar.closest('.wrap'),checks=root.find('.bl-row-select'),selection=getSelection(toolbar),ids=Object.keys(selection);
+syncCurrentChecks(toolbar,selection);
+var visibleChecked=checks.filter(':checked').length;
+toolbar.find('.bl-selected-count').text(ids.length?((KashidaBranchLocatorAdmin.i18n.selected||'%d selected').replace('%d',ids.length)):'');
+toolbar.find('.bl-bulk-display,.bl-bulk-delete').prop('disabled',ids.length===0);
+toolbar.find('.bl-clear-selection').prop('disabled',ids.length===0);
+toolbar.find('.bl-select-all').prop('checked',checks.length>0&&visibleChecked===checks.length);
+}
+$(document).on('change','.bl-row-select',function(){var toolbar=$(this).closest('.wrap').find('.bl-bulk-toolbar'),selection=getSelection(toolbar),id=String(this.value);
+if(this.checked){selection[id]=String($(this).data('slug')||'');
+}else{delete selection[id];
+}saveSelection(toolbar,selection);
+refreshBulkToolbar(toolbar);
+});
+
+$(document).on('change','.bl-select-all',function(){var toolbar=$(this).closest('.bl-bulk-toolbar'),selection=getSelection(toolbar),checked=this.checked;
+toolbar.closest('.wrap').find('.bl-row-select').each(function(){var id=String(this.value);
+if(checked){selection[id]=String($(this).data('slug')||'');
+}else{delete selection[id];
+}});
+saveSelection(toolbar,selection);
+refreshBulkToolbar(toolbar);
+});
+
+$(document).on('click','.bl-clear-selection',function(){var toolbar=$(this).closest('.bl-bulk-toolbar');
+saveSelection(toolbar,{});
+refreshBulkToolbar(toolbar);
+});
+
+$(document).on('click','.bl-select-all-results',function(){var btn=$(this),toolbar=btn.closest('.bl-bulk-toolbar'),form=$('.bl-filter-form'),oldText=btn.text();
+btn.prop('disabled',true).text(KashidaBranchLocatorAdmin.i18n.selecting_results||'Selecting matching branches…');
+$.post(KashidaBranchLocatorAdmin.ajax_url,{action:'kashida_branch_locator_select_all_branches',nonce:KashidaBranchLocatorAdmin.nonce,search:form.find('[name="s"]').val()||'',city:form.find('[name="city"]').val()||'',group_id:form.find('[name="group_id"]').val()||''}).done(function(r){if(!r.success||!r.data||!Array.isArray(r.data.items)){notify((r.data&&r.data.message)||KashidaBranchLocatorAdmin.i18n.request_failed,'error');
+return;
+}var selection=getSelection(toolbar);
+r.data.items.forEach(function(item){selection[String(item.id)]=String(item.slug||'');
+});
+saveSelection(toolbar,selection);
+refreshBulkToolbar(toolbar);
+notify((KashidaBranchLocatorAdmin.i18n.selected_all_results||'All matching branches have been selected.')+' '+(KashidaBranchLocatorAdmin.i18n.selected||'%d selected').replace('%d',Object.keys(selection).length));
+}).fail(function(){notify(KashidaBranchLocatorAdmin.i18n.request_failed,'error');
+}).always(function(){btn.prop('disabled',false).text(oldText);
+});
+});
+
+$(function(){$('.bl-bulk-toolbar').each(function(){refreshBulkToolbar($(this));
+});
+if($.fn.wpColorPicker){$('.kbl-color-picker').wpColorPicker();
+}});
+
+$(document).on('click','.bl-bulk-delete',function(){var btn=$(this),toolbar=btn.closest('.bl-bulk-toolbar'),type=toolbar.data('page-type')==='branches'?'branches':'groups',selection=getSelection(toolbar),ids=Object.keys(selection);
+if(!ids.length)return;
+var msg=type==='branches'?(KashidaBranchLocatorAdmin.i18n.confirm_bulk_delete_branches||KashidaBranchLocatorAdmin.i18n.confirm_bulk_delete):(KashidaBranchLocatorAdmin.i18n.confirm_bulk_delete_groups||KashidaBranchLocatorAdmin.i18n.confirm_bulk_delete);
+msg=msg.replace('%d',ids.length);
+if(!confirm(msg))return;
+btn.prop('disabled',true).text(KashidaBranchLocatorAdmin.i18n.deleting);
+$.post(KashidaBranchLocatorAdmin.ajax_url,{action:type==='branches'?'kashida_branch_locator_bulk_delete_branches':'kashida_branch_locator_bulk_delete_groups',nonce:KashidaBranchLocatorAdmin.nonce,ids:ids}).done(function(r){if(r.success){ids.forEach(function(id){delete selection[id];
+toolbar.closest('.wrap').find('.bl-row-select[value="'+id+'"]').closest('tr').remove();
+});
+saveSelection(toolbar,selection);
+notify(r.data.message);
+refreshBulkToolbar(toolbar);
+}else{notify(r.data.message,'error');
+refreshBulkToolbar(toolbar);
+}}).fail(function(){notify(KashidaBranchLocatorAdmin.i18n.request_failed,'error');
+refreshBulkToolbar(toolbar);
+}).always(function(){btn.text(KashidaBranchLocatorAdmin.i18n.delete_selected);
+});
+});
+
+$(document).on('click','.bl-copy-generated-shortcode',function(){var value=$('#bl-generated-shortcode').text();
+if(!value)return;
+var btn=$(this),done=function(){var old=btn.text();
+btn.text(KashidaBranchLocatorAdmin.i18n.copied);
+setTimeout(function(){btn.text(old)},1400)};
+if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(value).then(done).catch(function(){fallbackCopy(value,done)})}else{fallbackCopy(value,done)}});
+
+})(jQuery);
+
+$(document).on('click', '.bl-help-copy', function(){
+  var btn=$(this), code=btn.data('shortcode')||'';
+
+  var done=function(){var old=btn.text();
+btn.text((window.KashidaBranchLocatorAdmin&&KashidaBranchLocatorAdmin.i18n&&KashidaBranchLocatorAdmin.i18n.copied)||'Copied');
+setTimeout(function(){btn.text(old);
+},1400);
+};
+
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(code).then(done);
+return;
+}
+  var ta=document.createElement('textarea');
+ta.value=code;
+ta.style.position='fixed';
+ta.style.opacity='0';
+document.body.appendChild(ta);
+ta.select();
+try{document.execCommand('copy');
+done();
+}finally{document.body.removeChild(ta);
+}
+});
