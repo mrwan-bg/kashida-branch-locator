@@ -14,7 +14,7 @@ It provides organized branch directories with groups, searchable listings, city 
 
 <p align="center">
   <strong>Current release: v2.5.32</strong><br>
-  <a href="https://github.com/mrwan-bg/kashida-branch-locator/releases/tag/v2.5.32">Download v2.5.31</a> ·
+  <a href="https://github.com/mrwan-bg/kashida-branch-locator/releases/tag/v2.5.32">Download v2.5.32</a> ·
   <a href="https://github.com/mrwan-bg/kashida-branch-locator/issues">Report an issue</a> ·
   <a href="https://kashida.ly/">Kashida Media Services</a>
 </p>
@@ -153,7 +153,13 @@ Map layouts load tiles from OpenStreetMap when visitors use the map. The visitor
 
 ## Source code and development
 
-Readable JavaScript source copies are included in `kashida-branch-locator/assets/src/js/` and documented in the WordPress readme. The production assets remain in `assets/js/` and are the files loaded by WordPress. When updating JavaScript, keep the readable source copies and production assets synchronized and test the affected workflows.
+WordPress.org review transparency updates are included in v2.5.32. Readable JavaScript source copies are provided alongside the production assets:
+
+- `kashida-branch-locator/assets/src/js/frontend.js` — source copy for `assets/js/frontend.js`
+- `kashida-branch-locator/assets/src/js/admin.js` — source copy for `assets/js/admin.js`
+- `kashida-branch-locator/assets/src/js/import.js` — source copy for `assets/js/import.js`
+
+The production files in `assets/js/` are loaded by WordPress; the files in `assets/src/js/` are provided for code review and maintenance and are not enqueued. The source files are formatted for readability and are intended to stay synchronized with their corresponding production assets. See [the source README](kashida-branch-locator/assets/src/README.md) and the plugin [readme.txt](kashida-branch-locator/readme.txt) for details.
 
 ## Project files
 
