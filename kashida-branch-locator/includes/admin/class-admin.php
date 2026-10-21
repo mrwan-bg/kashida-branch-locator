@@ -30,7 +30,7 @@ class Admin {
             'kashida-branch-locator',
             [ $this, 'page_branches' ],
             'dashicons-location-alt',
-            25
+            80
         );
 
         add_submenu_page(
