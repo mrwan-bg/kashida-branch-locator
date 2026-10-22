@@ -13,10 +13,19 @@ It provides organized branch directories with groups, searchable listings, city 
 </p>
 
 <p align="center">
+  <a href="https://wordpress.org/plugins/kashida-branch-locator/">
+    <img src="https://img.shields.io/badge/WordPress-View%20Plugin-21759B?logo=wordpress&logoColor=white" alt="View plugin on WordPress.org">
+  </a>
+  &nbsp;
+  <a href="https://kashida.ly/wp-plugins/kashida-branch-locator/">
+    <img src="https://img.shields.io/badge/Kashida-View%20Plugin-6B4EFF?logo=wordpress&logoColor=white" alt="View plugin on Kashida website">
+  </a>
+</p>
+
+<p align="center">
   <strong>Current release: v2.5.32</strong><br>
   <a href="https://github.com/mrwan-bg/kashida-branch-locator/releases/tag/v2.5.32">Download v2.5.32</a> ·
-  <a href="https://github.com/mrwan-bg/kashida-branch-locator/issues">Report an issue</a> ·
-  <a href="https://kashida.ly/">Kashida Media Services</a>
+  <a href="https://github.com/mrwan-bg/kashida-branch-locator/issues">Report an issue</a>
 </p>
 
 ## Features
