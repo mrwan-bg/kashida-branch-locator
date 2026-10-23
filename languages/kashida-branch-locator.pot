@@ -1,0 +1,848 @@
+msgid ""
+msgstr "Project-Id-Version: Kashida Branch Locator 2.5.32\nPOT-Creation-Date: 2026-10-10 00:00+0000\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Domain: kashida-branch-locator\n"
+
+msgid "%d branches inserted"
+msgstr ""
+
+msgid "%d branches updated"
+msgstr ""
+
+msgid "%d rows skipped"
+msgstr ""
+
+msgid "%s branch"
+msgid_plural "%s branches"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Accepted formats: .xlsx, .csv (legacy .xls requires PhpSpreadsheet)"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Add Branch"
+msgstr ""
+
+msgid "Add Group"
+msgstr ""
+
+msgid "Add New"
+msgstr ""
+
+msgid "Address"
+msgstr ""
+
+msgid "All Cities"
+msgstr ""
+
+msgid "All Groups"
+msgstr ""
+
+msgid "Are you sure you want to delete this?"
+msgstr ""
+
+msgid "Branch"
+msgstr ""
+
+msgid "Kashida Branch Locator"
+msgstr ""
+
+msgid "Kashida Branch Locator is designed and developed by Kashida Media Services."
+msgstr ""
+
+msgid "Branch Name *"
+msgstr ""
+
+msgid "Branch created."
+msgstr ""
+
+msgid "Branch deleted."
+msgstr ""
+
+msgid "Branch updated."
+msgstr ""
+
+msgid "Branches"
+msgstr ""
+
+msgid "Browse File"
+msgstr ""
+
+msgid "Call"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Cannot open XLSX file."
+msgstr ""
+
+msgid "Cannot initialize WordPress filesystem."
+msgstr ""
+
+msgid "Cannot open file."
+msgstr ""
+
+msgid "Cannot read sheet data."
+msgstr ""
+
+msgid "City"
+msgstr ""
+
+msgid "City A-Z"
+msgstr ""
+
+msgid "City Z-A"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Color"
+msgstr ""
+
+msgid "Coordinates"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Deleting…"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Directions"
+msgstr ""
+
+msgid "Drag & drop your file here, or click to browse"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Errors:"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "Group"
+msgstr ""
+
+msgid "Group Name *"
+msgstr ""
+
+msgid "Group created."
+msgstr ""
+
+msgid "Group deleted."
+msgstr ""
+
+msgid "Group updated."
+msgstr ""
+
+msgid "Groups"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "How to use"
+msgstr ""
+
+msgid "Import"
+msgstr ""
+
+msgid "Import Branches"
+msgstr ""
+
+msgid "Import Complete"
+msgstr ""
+
+msgid "Import Failed"
+msgstr ""
+
+msgid "Importing…"
+msgstr ""
+
+msgid "Invalid ID."
+msgstr ""
+
+msgid "Invalid coordinates."
+msgstr ""
+
+msgid "Invalid group."
+msgstr ""
+
+msgid "Invalid request."
+msgstr ""
+
+msgid "Invalid upload."
+msgstr ""
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Legacy XLS files require PhpSpreadsheet on the server. Please use CSV or XLSX."
+msgstr ""
+
+msgid "Legacy XLS requires PhpSpreadsheet. Please use XLSX or CSV."
+msgstr ""
+
+msgid "Loading…"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
+
+msgid "Marker"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Name A-Z"
+msgstr ""
+
+msgid "Name Z-A"
+msgstr ""
+
+msgid "Name is required."
+msgstr ""
+
+msgid "Newest"
+msgstr ""
+
+msgid "No branches found."
+msgstr ""
+
+msgid "No data returned."
+msgstr ""
+
+msgid "No groups yet."
+msgstr ""
+
+msgid "Notes"
+msgstr ""
+
+msgid "Oldest"
+msgstr ""
+
+msgid "Only .xlsx, .xls, and .csv files are accepted."
+msgstr ""
+
+msgid "Only CSV and Excel files are supported."
+msgstr ""
+
+msgid "Permission denied."
+msgstr ""
+
+msgid "Phone"
+msgstr ""
+
+msgid "Please select a file."
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
+msgid "Preview Import"
+msgstr ""
+
+msgid "Request failed."
+msgstr ""
+
+msgid "Row %d: Coordinates out of range, set to 0,0."
+msgstr ""
+
+msgid "Row %d: Invalid location format \"%s\"."
+msgstr ""
+
+msgid "Row %d: Name is required."
+msgstr ""
+
+msgid "Run Import"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Saving…"
+msgstr ""
+
+msgid "Search branches..."
+msgstr ""
+
+msgid "Search branches…"
+msgstr ""
+
+msgid "Selected: %s"
+msgstr ""
+
+msgid "Shortcode"
+msgstr ""
+
+msgid "Slug"
+msgstr ""
+
+msgid "Slug Code"
+msgstr ""
+
+msgid "The file is too large. Maximum size is 10 MB."
+msgstr ""
+
+msgid "The table below lists the available shortcodes and explains how to use each one. Copy the shortcode you need into a Shortcode block or shortcode element in your page builder."
+msgstr ""
+
+msgid "The uploaded file could not be processed."
+msgstr ""
+
+msgid "Unsupported file type."
+msgstr ""
+
+msgid "Update existing branches (matched by name)"
+msgstr ""
+
+msgid "Upload an Excel (.xlsx) or CSV file. Required columns: Name, City, Add, Tel, Location, Group."
+msgstr ""
+
+msgid "Use a Shortcode block or a shortcode element in your page builder. The frontend inherits the active theme typography and direction automatically. Maps use OpenStreetMap map tiles and are loaded only when the shortcode is used. The plugin does not load third-party JavaScript or CSS libraries."
+msgstr ""
+
+msgid "Zoom in"
+msgstr ""
+
+msgid "Zoom out"
+msgstr ""
+
+msgid "— No Group —"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Copy shortcode"
+msgstr ""
+
+msgid "Copied"
+msgstr ""
+
+msgid "Display"
+msgstr ""
+
+msgid "Display Builder"
+msgstr ""
+
+msgid "Display Layout"
+msgstr ""
+
+msgid "Information to Show"
+msgstr ""
+
+msgid "Branch name"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Pagination"
+msgstr ""
+
+msgid "Call button"
+msgstr ""
+
+msgid "Directions button"
+msgstr ""
+
+msgid "Results per page"
+msgstr ""
+
+msgid "Map height"
+msgstr ""
+
+msgid "Map zoom"
+msgstr ""
+
+msgid "Generated Shortcode"
+msgstr ""
+
+msgid "Copy Shortcode"
+msgstr ""
+
+msgid "Copy this shortcode and paste it into any WordPress page, post, or widget."
+msgstr ""
+
+msgid "Table"
+msgstr ""
+
+msgid "A clean tabular view for structured branch data."
+msgstr ""
+
+msgid "Cards"
+msgstr ""
+
+msgid "Modern responsive cards with optional actions."
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+msgid "A compact list for simple directories."
+msgstr ""
+
+msgid "Accordion"
+msgstr ""
+
+msgid "Expandable branch details that save space."
+msgstr ""
+
+msgid "Map"
+msgstr ""
+
+msgid "Interactive map with clickable branch markers."
+msgstr ""
+
+msgid "Map + Table"
+msgstr ""
+
+msgid "Interactive map linked to the branch table."
+msgstr ""
+
+msgid "All branches"
+msgstr ""
+
+msgid "Specific group"
+msgstr ""
+
+msgid "Map + table"
+msgstr ""
+
+msgid "Specific city"
+msgstr ""
+
+msgid "Specific branch"
+msgstr ""
+
+msgid "A simple way to manage branches, groups, maps, and responsive location directories."
+msgstr ""
+
+msgid "Open Groups"
+msgstr ""
+
+msgid "Add your data"
+msgstr ""
+
+msgid "Create groups and branches manually, or import them from XLSX or CSV."
+msgstr ""
+
+msgid "Build the display"
+msgstr ""
+
+msgid "Open Display from a group, choose the layout and fields, then generate the shortcode."
+msgstr ""
+
+msgid "Paste and publish"
+msgstr ""
+
+msgid "Paste the generated shortcode into any WordPress page, post, widget, or builder shortcode element."
+msgstr ""
+
+msgid "Recommended workflow"
+msgstr ""
+
+msgid "No shortcode knowledge required"
+msgstr ""
+
+msgid "The recommended method is to open Groups → Display. Select a layout, choose the information and actions you want, adjust map settings when needed, then copy the generated shortcode."
+msgstr ""
+
+msgid "Choose layout"
+msgstr ""
+
+msgid "Choose fields"
+msgstr ""
+
+msgid "Set options"
+msgstr ""
+
+msgid "Layouts"
+msgstr ""
+
+msgid "Choose the right presentation"
+msgstr ""
+
+msgid "Shortcodes"
+msgstr ""
+
+msgid "Ready-to-use examples"
+msgstr ""
+
+msgid "Maps"
+msgstr ""
+
+msgid "Map and Map + Table require valid latitude and longitude values for each branch. Clicking a marker selects the matching branch; clicking a branch selects its marker. Map tiles are provided by OpenStreetMap."
+msgstr ""
+
+msgid "For XLSX or CSV, use columns such as Name, City, Address, Phone, Lat, Lng, and Group. Preview the import before running it."
+msgstr ""
+
+msgid "Open Import"
+msgstr ""
+
+msgid "Designed and developed by Kashida Media Services."
+msgstr ""
+
+msgid "branches"
+msgstr ""
+
+msgid "groups"
+msgstr ""
+
+msgid "Please select at least one branch."
+msgstr ""
+
+msgid "Please select at least one group."
+msgstr ""
+
+msgid "Are you sure you want to delete all selected items?"
+msgstr ""
+
+msgid "Delete Selected"
+msgstr ""
+
+msgid "Create Display Code"
+msgstr ""
+
+msgid "Select all on this page"
+msgstr ""
+
+msgid "Select all groups"
+msgstr ""
+
+msgid "%d selected"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Select %s"
+msgstr ""
+
+msgid "%d branch deleted."
+msgstr ""
+
+msgid "%d branches deleted."
+msgstr ""
+
+msgid "%d group deleted."
+msgstr ""
+
+msgid "%d groups deleted."
+msgstr ""
+
+msgid "Open Display"
+msgstr ""
+
+msgid "Bulk tools"
+msgstr ""
+
+msgid "Select and combine"
+msgstr ""
+
+msgid "New in v2.0.4"
+msgstr ""
+
+msgid "Select items"
+msgstr ""
+
+msgid "Create display code"
+msgstr ""
+
+msgid "Choose layout and fields"
+msgstr ""
+
+msgid "Copy and publish"
+msgstr ""
+
+msgid "Multiple groups"
+msgstr ""
+
+#: includes/admin/class-help-page.php
+msgid "Download sample file"
+msgstr ""
+
+msgid "Delete %d selected branches? This action cannot be undone."
+msgstr ""
+
+msgid "Delete %d selected groups? Their branches will be unassigned. This action cannot be undone."
+msgstr ""
+
+msgid "Delete this branch? This action cannot be undone."
+msgstr ""
+
+msgid "Delete this group? Its branches will be unassigned. This action cannot be undone."
+msgstr ""
+
+msgid "Preview only"
+msgstr ""
+
+msgid "Map preview"
+msgstr ""
+
+msgid "rows total"
+msgstr ""
+
+msgid "showing first"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Warning"
+msgstr ""
+
+msgid "Ready"
+msgstr ""
+
+msgid "Warnings:"
+msgstr ""
+
+msgid "No valid coordinates are available for these branches."
+msgstr ""
+
+msgid "Prepare your file"
+msgstr ""
+
+msgid "Use the template as a reference. It contains column instructions only and no sample locations."
+msgstr ""
+
+msgid "Download Import Template"
+msgstr ""
+
+msgid "Download Error Report"
+msgstr ""
+
+msgid "Coordinate validation"
+msgstr ""
+
+msgid "Common issues"
+msgstr ""
+
+msgid "Troubleshooting"
+msgstr ""
+
+msgid "A branch does not appear on the map"
+msgstr ""
+
+msgid "Check that both Lat and Lng are valid decimal coordinates. Branches without valid coordinates remain available in non-map layouts but are skipped on the map."
+msgstr ""
+
+msgid "The import preview shows an error"
+msgstr ""
+
+msgid "Review the row message in the Status column. The most common causes are a missing Name, invalid coordinates, or an incorrectly formatted Location value."
+msgstr ""
+
+msgid "How do I combine branches or groups?"
+msgstr ""
+
+msgid "Select the required branches or groups in their table, choose Create Display Code, then configure the combined display in Display Builder."
+msgstr ""
+
+msgid "Do map layouts require an API key?"
+msgstr ""
+
+msgid "No. The plugin uses OpenStreetMap tiles and does not require a Google Maps API key. Directions open Google Maps only after the visitor chooses the Directions button."
+msgstr ""
+
+msgid "Sample Branch"
+msgstr ""
+
+msgid "Sample City"
+msgstr ""
+
+msgid "Sample address"
+msgstr ""
+
+msgid "Live Preview"
+msgstr ""
+
+msgid "Preview only — your selected settings will be used in the generated shortcode."
+msgstr ""
+
+msgid "Add New Branch"
+msgstr ""
+
+msgid "Add New Group"
+msgstr ""
+
+msgid "Selected locations"
+msgstr ""
+
+msgid "Sorting"
+msgstr ""
+
+msgid "City filter"
+msgstr ""
+
+msgid "Group filter"
+msgstr ""
+
+msgid "Sort by"
+msgstr ""
+
+msgid "Ascending"
+msgstr ""
+
+msgid "Descending"
+msgstr ""
+
+msgid "Visitor controls"
+msgstr ""
+
+msgid "Search, filter, and sort"
+msgstr ""
+
+msgid "Use Display Builder to enable live search, city and group filters, and sorting. On tables, visitors can also click sortable column headers to switch between ascending and descending order. These controls work with pagination and update the displayed results without reloading the page."
+msgstr ""
+
+msgid "Click to sort"
+msgstr ""
+
+msgid "You can click City or Group to sort the results."
+msgstr ""
+
+msgid "Clear search"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Showing %1$d of %2$d results."
+msgstr ""
+
+msgid "Page"
+msgstr ""
+
+msgid "Go to page"
+msgstr ""
+
+msgid "Use Display Builder to enable live search, city and group filters, and sorting. On tables, visitors can click sortable column headers to switch between ascending and descending order. The result count, reset control, and pagination update immediately. In map and map-table layouts, filtering and searching also update the visible markers, and selecting a marker highlights the matching branch in the table. On small screens, tables switch to a compact card-like presentation."
+msgstr ""
+
+msgid "12 results"
+msgstr ""
+
+msgid "Use two fingers to move the map"
+msgstr ""
+
+msgid "Show sort control"
+msgstr ""
+
+msgid "Use Display Builder to enable live search, city and group filters, and sorting. You can also choose whether to show the visitor sorting control; in table layouts, visitors can still click sortable column headers when sorting is enabled. The result count, reset control, and pagination update immediately. In map and map-table layouts, filtering and searching also update the visible markers, and selecting a marker highlights the matching branch in the table. On small screens, tables switch to a compact card-like presentation."
+msgstr ""
+
+msgid "Table and map stay connected"
+msgstr ""
+
+msgid "In Map + Table, clicking a branch row centers the map on that branch and opens its marker. Clicking a map marker selects and highlights the matching row; when pagination is enabled, the table moves to the page containing that branch. Search and filters update the visible markers at the same time."
+msgstr ""
+
+msgid "Filter or search"
+msgstr ""
+
+msgid "Select a row or marker"
+msgstr ""
+
+msgid "Inspect the location"
+msgstr ""
+
+msgid "Table is best for comparing many fields at once. Cards give each branch a more spacious visual block. List is a compact horizontal directory for larger branch sets. Accordion saves space by revealing details on demand. Map focuses on geography, while Map + Table combines the map with the data table."
+msgstr ""
+
+msgid "Mobile map controls"
+msgstr ""
+
+msgid "On desktop, drag the map with the mouse. On touch screens, one finger is reserved for normal page scrolling; use two fingers to move the map. Zoom controls remain available on the map."
+msgstr ""
+
+msgid "Performance"
+msgstr ""
+
+msgid "For large branch directories, use pagination and only enable the fields, filters, and map features you need. Map layouts use valid coordinates only, while search, sorting, and filtering run on the loaded branch data without a page reload."
+msgstr ""
+
+msgid "How does the table search work?"
+msgstr ""
+
+msgid "Click the search icon in the table header to open the search field. Search matches branch name, city, address, phone, and group. The field stays focused while you type and can be cleared with the × button."
+msgstr ""
+
+msgid "How do I sort a table?"
+msgstr ""
+
+msgid "When sorting is enabled, click the Branch, City, or Group column heading. The arrow shows the active direction. There is no separate sorting control in the visitor interface."
+msgstr ""
+
+msgid "Select multiple branches or groups from their tables. You can delete the selected items at once, or open Display Builder to generate one shortcode that combines all selected items."
+msgstr ""
+
+msgid "Use Display Builder to enable live search, city and group filters, and sorting. In table layouts, visitors sort directly by clicking sortable column headers; there is no separate sorting box. The search button opens the search field without leaving the table header. Result counts, reset, and pagination update immediately without reloading the page."
+msgstr ""
+
+msgid "Map interaction"
+msgstr ""
+
+msgid "For XLSX or CSV, use columns such as Name, City, Address, Phone, Lat, Lng, and Group. The downloadable XLSX template contains column instructions and no sample locations. Preview the import before running it."
+msgstr ""
+
+msgid "Cannot parse worksheet data."
+msgstr ""
+
+msgid "Cannot read shared strings."
+msgstr ""
+
+msgid "Developed by"
+msgstr ""
+
+msgid "Kashida Branch Locator stores branch, address, phone, coordinate, and group information entered by site administrators in the WordPress database. The plugin does not send this data to Kashida servers. When map layouts are used, visitors' browsers request map tiles from OpenStreetMap. When a visitor chooses Directions, the browser opens Google Maps. Site owners should review the privacy policies of those services for their own sites."
+msgstr ""
+
+msgid "Manage locations, groups, coordinates and display codes."
+msgstr ""
+
+msgid "Organize branches into groups and create reusable display codes."
+msgstr ""
+
+msgid "Row %d: Coordinates are out of range. This branch will not appear on the map until valid coordinates are provided."
+msgstr ""
+
+msgid "Row %1$d: Invalid Location format \"%2$s\". Use latitude,longitude or separate Lat and Lng columns."
+msgstr ""
+
+msgid "Row %d: Latitude and longitude must be numeric. This branch will not appear on the map until valid coordinates are provided."
+msgstr ""
+
+msgid "The uploaded file type could not be verified. Please use CSV or XLSX."
+msgstr ""
+
+msgid "Upload an Excel (.xlsx) or CSV file. Columns: Name, City, Address, Phone, Lat, Lng, Group. Location (lat,lng) is also supported."
+msgstr ""
+
+msgid "Multiple branches"
+msgstr ""
+
+msgid "Website button color"
+msgstr ""
+
+msgid "Visit website"
+msgstr ""

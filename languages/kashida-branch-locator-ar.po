@@ -1,0 +1,394 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Kashida Branch Locator 2.5.32\n"
+"Language: ar\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+msgid "Table"
+msgstr "جدول"
+
+msgid "Cards"
+msgstr "بطاقات"
+
+msgid "List"
+msgstr "قائمة"
+
+msgid "Accordion"
+msgstr "قائمة قابلة للطي"
+
+msgid "Map"
+msgstr "خريطة"
+
+msgid "Map + Table"
+msgstr "خريطة + جدول"
+
+msgid "A clean tabular view for structured branch data."
+msgstr "عرض جدولي منظم لبيانات الفروع."
+
+msgid "Modern responsive cards with optional actions."
+msgstr "بطاقات حديثة ومتجاوبة مع إمكانية إضافة أزرار الإجراءات."
+
+msgid "A compact list for simple directories."
+msgstr "قائمة مختصرة لعرض الفروع بطريقة بسيطة."
+
+msgid "Expandable branch details that save space."
+msgstr "تفاصيل فروع قابلة للفتح لتوفير المساحة."
+
+msgid "Interactive map with clickable branch markers."
+msgstr "خريطة تفاعلية تحتوي على علامات قابلة للنقر للفروع."
+
+msgid "Interactive map linked to the branch table."
+msgstr "خريطة تفاعلية مرتبطة بجدول الفروع."
+
+msgid "All branches"
+msgstr "كل الفروع"
+
+msgid "Specific group"
+msgstr "مجموعة محددة"
+
+msgid "Map + table"
+msgstr "خريطة + جدول"
+
+msgid "Specific city"
+msgstr "مدينة محددة"
+
+msgid "Specific branch"
+msgstr "فرع محدد"
+
+msgid "Getting started"
+msgstr "البدء"
+
+msgid "Branch directory"
+msgstr "دليل الفروع"
+
+msgid "Manage branches, group locations, and publish a searchable directory using a shortcode."
+msgstr "أدر الفروع ومجموعات المواقع وانشر دليلًا قابلًا للبحث باستخدام رمز قصير."
+
+msgid "Add your branches"
+msgstr "أضف فروعك"
+
+msgid "Create branch records with a name, city, address, phone, coordinates, and optional group."
+msgstr "أنشئ سجلات الفروع متضمنة الاسم والمدينة والعنوان والهاتف والإحداثيات والمجموعة الاختيارية."
+
+msgid "Organize with groups"
+msgstr "نظّم الفروع باستخدام المجموعات"
+
+msgid "Create groups to categorize branches and give each group its own color."
+msgstr "أنشئ مجموعات لتصنيف الفروع وتخصيص لون لكل مجموعة."
+
+msgid "Publish the directory"
+msgstr "انشر دليل الفروع"
+
+msgid "Paste the generated shortcode into any WordPress page, post, widget, or builder shortcode element."
+msgstr "ألصق الرمز القصير المُنشأ في أي صفحة أو تدوينة أو ودجت أو عنصر رموز قصيرة في أداة بناء الصفحات."
+
+msgid "Recommended workflow"
+msgstr "سير العمل الموصى به"
+
+msgid "Display Builder"
+msgstr "منشئ العرض"
+
+msgid "No shortcode knowledge required"
+msgstr "لا حاجة إلى معرفة الرموز القصيرة"
+
+msgid "The recommended method is to open Groups → Display. Select a layout, choose the information and actions you want, adjust map settings when needed, then copy the generated shortcode."
+msgstr "الطريقة الموصى بها هي فتح «المجموعات ← العرض»، ثم اختيار التخطيط والمعلومات والإجراءات المطلوبة، وضبط إعدادات الخريطة عند الحاجة، ثم نسخ الرمز القصير المُنشأ."
+
+msgid "Choose layout"
+msgstr "اختر التخطيط"
+
+msgid "Choose fields"
+msgstr "اختر الحقول"
+
+msgid "Set options"
+msgstr "اضبط الخيارات"
+
+msgid "Copy shortcode"
+msgstr "انسخ الرمز القصير"
+
+msgid "Bulk tools"
+msgstr "أدوات جماعية"
+
+msgid "Select and combine"
+msgstr "تحديد ودمج"
+
+msgid "Select multiple branches or groups from their tables. You can delete the selected items at once, or open Display Builder to generate one shortcode that combines all selected items."
+msgstr "حدد عدة فروع أو مجموعات من الجداول. يمكنك حذف العناصر المحددة دفعة واحدة أو فتح منشئ العرض لإنشاء رمز قصير واحد يجمعها."
+
+msgid "Select items"
+msgstr "حدد العناصر"
+
+msgid "Create display code"
+msgstr "أنشئ رمز العرض"
+
+msgid "Choose layout and fields"
+msgstr "اختر التخطيط والحقول"
+
+msgid "Copy and publish"
+msgstr "انسخ وانشر"
+
+msgid "Multiple groups"
+msgstr "مجموعات متعددة"
+
+msgid "Multiple branches"
+msgstr "فروع متعددة"
+
+msgid "Visitor controls"
+msgstr "أدوات الزائر"
+
+msgid "Search, filter, and sort"
+msgstr "البحث والتصفية والترتيب"
+
+msgid "Use Display Builder to enable live search, city and group filters, and sorting. In table layouts, visitors sort directly by clicking sortable column headers; there is no separate sorting box. The search button opens the search field without leaving the table header. Result counts, reset, and pagination update immediately without reloading the page."
+msgstr "استخدم منشئ العرض لتفعيل البحث الفوري والتصفية حسب المدينة والمجموعة والترتيب. في تخطيط الجدول، يمكن للزوار الترتيب بالنقر على عناوين الأعمدة القابلة للترتيب. يفتح زر البحث حقل البحث داخل رأس الجدول، ويتم تحديث عدد النتائج وإعادة الضبط وترقيم الصفحات فورًا دون إعادة تحميل الصفحة."
+
+msgid "Map interaction"
+msgstr "التفاعل مع الخريطة"
+
+msgid "Table and map stay connected"
+msgstr "الجدول والخريطة مترابطان"
+
+msgid "In Map + Table, clicking a branch row centers the map on that branch and opens its marker. Clicking a map marker selects and highlights the matching row; when pagination is enabled, the table moves to the page containing that branch. Search and filters update the visible markers at the same time."
+msgstr "في تخطيط «خريطة + جدول»، يؤدي النقر على صف الفرع إلى توسيط الخريطة عليه وفتح علامته. يؤدي النقر على علامة الخريطة إلى تحديد الصف المطابق وإبرازه. وعند تفعيل ترقيم الصفحات، ينتقل الجدول إلى الصفحة التي تحتوي على الفرع. كما تحدّث عمليات البحث والتصفية العلامات الظاهرة بالتزامن."
+
+msgid "Filter or search"
+msgstr "صفِّ النتائج أو ابحث"
+
+msgid "Select a row or marker"
+msgstr "حدد صفًا أو علامة"
+
+msgid "Inspect the location"
+msgstr "استعرض الموقع"
+
+msgid "Layouts"
+msgstr "التخطيطات"
+
+msgid "Choose the right presentation"
+msgstr "اختر طريقة العرض المناسبة"
+
+msgid "Table is best for comparing many fields at once. Cards give each branch a more spacious visual block. List is a compact horizontal directory for larger branch sets. Accordion saves space by revealing details on demand. Map focuses on geography, while Map + Table combines the map with the data table."
+msgstr "يُناسب الجدول مقارنة عدة حقول معًا. وتمنح البطاقات كل فرع مساحة عرض أكبر. أما القائمة فهي دليل أفقي مختصر للمجموعات الكبيرة. ويوفر العرض القابل للطي مساحة بإظهار التفاصيل عند الطلب. تركز الخريطة على المواقع الجغرافية، بينما يجمع تخطيط «خريطة + جدول» بين الخريطة وبيانات الجدول."
+
+msgid "Shortcodes"
+msgstr "الرموز القصيرة"
+
+msgid "Ready-to-use examples"
+msgstr "أمثلة جاهزة للاستخدام"
+
+msgid "Copy"
+msgstr "نسخ"
+
+msgid "Mobile map controls"
+msgstr "التحكم بالخريطة على الهاتف"
+
+msgid "On desktop, drag the map with the mouse. On touch screens, one finger is reserved for normal page scrolling; use two fingers to move the map. Zoom controls remain available on the map."
+msgstr "على الكمبيوتر، اسحب الخريطة باستخدام الفأرة. وعلى الشاشات اللمسية، يُستخدم إصبع واحد للتمرير العادي للصفحة، وإصبعان لتحريك الخريطة. وتظل أدوات التكبير متاحة على الخريطة."
+
+msgid "Performance"
+msgstr "الأداء"
+
+msgid "For large branch directories, use pagination and only enable the fields, filters, and map features you need. Map layouts use valid coordinates only, while search, sorting, and filtering run on the loaded branch data without a page reload."
+msgstr "في أدلة الفروع الكبيرة، استخدم ترقيم الصفحات وفعّل الحقول وعوامل التصفية وميزات الخريطة التي تحتاج إليها فقط. تستخدم عروض الخرائط الإحداثيات الصحيحة فقط، بينما يعمل البحث والترتيب والتصفية على بيانات الفروع المحمّلة دون إعادة تحميل الصفحة."
+
+msgid "Troubleshooting"
+msgstr "استكشاف الأخطاء وإصلاحها"
+
+msgid "Common issues"
+msgstr "المشكلات الشائعة"
+
+msgid "A branch does not appear on the map"
+msgstr "لا يظهر أحد الفروع على الخريطة"
+
+msgid "Check that both Lat and Lng are valid decimal coordinates. Branches without valid coordinates remain available in non-map layouts but are skipped on the map."
+msgstr "تحقق من أن خط العرض وخط الطول إحداثيات عشرية صحيحة. تظل الفروع التي لا تحتوي على إحداثيات صحيحة متاحة في التخطيطات غير المعتمدة على الخريطة، لكنها لا تظهر عليها."
+
+msgid "The import preview shows an error"
+msgstr "تظهر رسالة خطأ في معاينة الاستيراد"
+
+msgid "Review the row message in the Status column. The most common causes are a missing Name, invalid coordinates, or an incorrectly formatted Location value."
+msgstr "راجع رسالة الصف في عمود الحالة. أكثر الأسباب شيوعًا هي غياب الاسم أو عدم صحة الإحداثيات أو تنسيق الموقع بصورة غير صحيحة."
+
+msgid "How do I combine branches or groups?"
+msgstr "كيف أدمج الفروع أو المجموعات؟"
+
+msgid "Select the required branches or groups in their table, choose Create Display Code, then configure the combined display in Display Builder."
+msgstr "حدد الفروع أو المجموعات المطلوبة في الجدول، واختر «إنشاء رمز العرض»، ثم اضبط العرض المدمج في منشئ العرض."
+
+msgid "Do map layouts require an API key?"
+msgstr "هل تتطلب تخطيطات الخرائط مفتاح API؟"
+
+msgid "No. The plugin uses OpenStreetMap tiles and does not require a Google Maps API key. Directions open Google Maps only after the visitor chooses the Directions button."
+msgstr "لا. تستخدم الإضافة خرائط OpenStreetMap ولا تحتاج إلى مفتاح Google Maps API. ولا تُفتح خرائط Google للاتجاهات إلا بعد اختيار الزائر زر الاتجاهات."
+
+msgid "How does the table search work?"
+msgstr "كيف يعمل البحث في الجدول؟"
+
+msgid "Click the search icon in the table header to open the search field. Search matches branch name, city, address, phone, and group. The field stays focused while you type and can be cleared with the × button."
+msgstr "انقر أيقونة البحث في رأس الجدول لفتح حقل البحث. يشمل البحث اسم الفرع والمدينة والعنوان والهاتف والمجموعة. يبقى الحقل نشطًا أثناء الكتابة ويمكن مسحه بزر ×."
+
+msgid "How do I sort a table?"
+msgstr "كيف أرتب الجدول؟"
+
+msgid "When sorting is enabled, click the Branch, City, or Group column heading. The arrow shows the active direction. There is no separate sorting control in the visitor interface."
+msgstr "عند تفعيل الترتيب، انقر عنوان عمود الفرع أو المدينة أو المجموعة. يشير السهم إلى اتجاه الترتيب الحالي. لا يوجد عنصر منفصل للتحكم بالترتيب في واجهة الزائر."
+
+msgid "Maps"
+msgstr "الخرائط"
+
+msgid "Map and Map + Table require valid latitude and longitude values for each branch. Clicking a marker selects the matching branch; clicking a branch selects its marker. Map tiles are provided by OpenStreetMap."
+msgstr "يتطلب تخطيطا الخريطة والخريطة مع الجدول قيمتي خط عرض وخط طول صحيحتين لكل فرع. يؤدي النقر على العلامة إلى تحديد الفرع المطابق، والنقر على الفرع إلى تحديد علامته. توفر OpenStreetMap مربعات الخريطة."
+
+msgid "Import"
+msgstr "الاستيراد"
+
+msgid "For XLSX or CSV, use columns such as Name, City, Address, Phone, Lat, Lng, and Group. The downloadable XLSX template contains column instructions and no sample locations. Preview the import before running it."
+msgstr "لملفات XLSX أو CSV، استخدم أعمدة مثل الاسم والمدينة والعنوان والهاتف وخط العرض وخط الطول والمجموعة. يحتوي قالب XLSX القابل للتنزيل على تعليمات الأعمدة دون مواقع تجريبية. عاين البيانات قبل تنفيذ الاستيراد."
+
+msgid "Open Import"
+msgstr "فتح الاستيراد"
+
+msgid "Download sample file"
+msgstr "تنزيل الملف النموذجي"
+
+msgid "Website button color"
+msgstr "لون زر الموقع الإلكتروني"
+
+msgid "Visit website"
+msgstr "زيارة الموقع الإلكتروني"
+
+msgid "Call button color"
+msgstr "لون زر الاتصال"
+
+msgid "Directions button color"
+msgstr "لون زر الاتجاهات"
+
+msgid "Group cards under group headings"
+msgstr "تجميع البطاقات تحت عناوين المجموعات"
+
+msgid "Website URL"
+msgstr "رابط الموقع الإلكتروني"
+
+msgid "Secondary phone"
+msgstr "رقم الهاتف الثاني"
+
+msgid "Showing %1$d of %2$d results."
+msgstr "عرض %1$d من أصل %2$d نتيجة."
+
+msgid "Organize branches into groups and create reusable display codes."
+msgstr "نظّم الفروع ضمن مجموعات وأنشئ رموز عرض قابلة لإعادة الاستخدام."
+
+msgid "Upload an Excel (.xlsx) or CSV file. Columns: Name, City, Address, Phone, Lat, Lng, Group. Location (lat,lng) is also supported."
+msgstr "ارفع ملف Excel بامتداد \u200e.xlsx\u200e أو ملف CSV. الأعمدة المطلوبة: الاسم، المدينة، العنوان، الهاتف، خط العرض، خط الطول، المجموعة. كما يمكن استخدام حقل الموقع بصيغة (خط العرض، خط الطول)."
+
+msgid "Use the template as a reference. It contains column instructions only and no sample locations."
+msgstr "استخدم القالب كمرجع؛ فهو يحتوي على تعليمات الأعمدة فقط ولا يتضمن مواقع تجريبية."
+
+msgid "Search branches"
+msgstr "ابحث عن الفروع"
+
+msgid "Search"
+msgstr "بحث"
+
+msgid "Search Branches"
+msgstr "ابحث عن الفروع"
+
+msgid "Add New Group"
+msgstr "إضافة مجموعة جديدة"
+
+msgid "Select all groups"
+msgstr "تحديد جميع المجموعات"
+
+msgid "Create Display Code"
+msgstr "إنشاء رمز العرض"
+
+msgid "Delete Selected"
+msgstr "حذف المحدد"
+
+msgid "Actions"
+msgstr "الإجراءات"
+
+msgid "Branches"
+msgstr "الفروع"
+
+msgid "Display"
+msgstr "عرض"
+
+msgid "Edit"
+msgstr "تعديل"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Add Group"
+msgstr "إضافة مجموعة"
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Import Branches"
+msgstr "استيراد الفروع"
+
+msgid "Prepare your file"
+msgstr "تجهيز الملف"
+
+msgid "Drag & drop your file here, or click to browse"
+msgstr "اسحب الملف وأفلته هنا، أو انقر لاختياره"
+
+msgid "Browse File"
+msgstr "اختيار ملف"
+
+msgid "Update existing branches (matched by name)"
+msgstr "تحديث الفروع الموجودة (حسب تطابق الاسم)"
+
+msgid "Preview Import"
+msgstr "معاينة الاستيراد"
+
+msgid "Preview"
+msgstr "معاينة"
+
+msgid "Run Import"
+msgstr "بدء الاستيراد"
+
+msgid "Download Error Report"
+msgstr "تنزيل تقرير الأخطاء"
+
+msgid "Add your data"
+msgstr "أضف بياناتك"
+
+msgid "Create groups and branches manually, or import them from XLSX or CSV."
+msgstr "أنشئ المجموعات والفروع يدويًا، أو استوردها من ملفات XLSX أو CSV."
+
+msgid "Build the display"
+msgstr "أنشئ طريقة العرض"
+
+msgid "Open Display from a group, choose the layout and fields, then generate the shortcode."
+msgstr "افتح «عرض» من إحدى المجموعات، واختر التخطيط والحقول، ثم أنشئ الرمز القصير."
+
+msgid "Paste and publish"
+msgstr "أدرج وانشر"
+
+msgid "Paste the generated shortcode into any WordPress page, post, or widget."
+msgstr "ألصق الرمز القصير الذي أنشأته في أي صفحة أو تدوينة أو ودجت في ووردبريس."
+
+msgid "A simple way to manage branches, groups, maps, and responsive location directories."
+msgstr "طريقة سهلة لإدارة الفروع والمجموعات والخرائط وأدلة المواقع المتجاوبة."
+
+msgid "Open Groups"
+msgstr "فتح المجموعات"
+
+msgid "Upload an Excel (.xlsx) or CSV file."
+msgstr "ارفع ملف Excel بامتداد \u200e.xlsx\u200e أو ملف CSV."
+
+msgid "All Groups"
+msgstr "كل المجموعات"
+
+msgid "All Cities"
+msgstr "كل المدن"
+
+msgid "Branch name, city, address or phone number"
+msgstr "اسم الفرع أو المدينة أو العنوان أو رقم الهاتف"
