@@ -23,8 +23,8 @@ It provides organized branch directories with groups, searchable listings, city 
 </p>
 
 <p align="center">
-  <strong>Current release: v2.5.32</strong><br>
-  <a href="https://github.com/mrwan-bg/kashida-branch-locator/releases/tag/v2.5.32">Download v2.5.32</a> ·
+  <strong>Current release: v2.5.33</strong><br>
+  <a href="https://github.com/mrwan-bg/kashida-branch-locator/releases/tag/v2.5.33">Download v2.5.33</a> ·
   <a href="https://github.com/mrwan-bg/kashida-branch-locator/issues">Report an issue</a>
 </p>
 
@@ -94,11 +94,11 @@ Example shortcodes (available options depend on the selected layout and configur
 [kashida_branch_locator group="grp_xxxxxxxx"]
 ```
 
-See [`SHORTCODE-USAGE.txt`](kashida-branch-locator/SHORTCODE-USAGE.txt) for additional examples.
+See [`SHORTCODE-USAGE.txt`](SHORTCODE-USAGE.txt) for additional examples.
 
 ## Release notes
 
-See [Release Notes for v2.5.32](RELEASE-NOTES-2.5.32.md) for the feature list, compatibility notes, and validation checklist.
+See [Release Notes for v2.5.33](RELEASE-NOTES-2.5.33.md) for the feature list, compatibility notes, and validation checklist.
 
 ## Screenshots
 
@@ -120,7 +120,7 @@ See [Release Notes for v2.5.32](RELEASE-NOTES-2.5.32.md) for the feature list, c
 
 ## Installation
 
-1. Download `kashida-branch-locator-v2.5.32.zip` from the [GitHub Releases](https://github.com/mrwan-bg/kashida-branch-locator/releases) page. Select the attached plugin ZIP, not GitHub's automatically generated **Source code** archives.
+1. Download `kashida-branch-locator-v2.5.33.zip` from the [GitHub Releases](https://github.com/mrwan-bg/kashida-branch-locator/releases) page. Select the attached plugin ZIP, not GitHub's automatically generated **Source code** archives.
 2. In WordPress, open **Plugins → Add New Plugin → Upload Plugin**.
 3. Upload the ZIP, install it, and activate **Kashida Branch Locator**.
 4. Open **Branch Locator** in the WordPress administration menu.
@@ -140,7 +140,7 @@ See [Release Notes for v2.5.32](RELEASE-NOTES-2.5.32.md) for the feature list, c
 
 | Property | Value |
 |---|---|
-| Plugin version | 2.5.32 |
+| Plugin version | 2.5.33 |
 | Text domain | `kashida-branch-locator` |
 | License | GPL-2.0-or-later |
 | Map provider | OpenStreetMap |
@@ -162,17 +162,11 @@ Map layouts load tiles from OpenStreetMap when visitors use the map. The visitor
 
 ## Source code and development
 
-WordPress.org review transparency updates are included in v2.5.32. Readable JavaScript source copies are provided alongside the production assets:
-
-- `kashida-branch-locator/assets/src/js/frontend.js` — source copy for `assets/js/frontend.js`
-- `kashida-branch-locator/assets/src/js/admin.js` — source copy for `assets/js/admin.js`
-- `kashida-branch-locator/assets/src/js/import.js` — source copy for `assets/js/import.js`
-
-The production files in `assets/js/` are loaded by WordPress; the files in `assets/src/js/` are provided for code review and maintenance and are not enqueued. The source files are formatted for readability and are intended to stay synchronized with their corresponding production assets. See [the source README](kashida-branch-locator/assets/src/README.md) and the plugin [readme.txt](kashida-branch-locator/readme.txt) for details.
+The production files in `assets/js/` are loaded by WordPress. The plugin readme is available at [`readme.txt`](readme.txt).
 
 ## Project files
 
-- Plugin source: [`kashida-branch-locator/`](kashida-branch-locator/)
+- Plugin source: files in the repository root.
 - Changelog: [`CHANGELOG.md`](CHANGELOG.md)
 - Contributing guidelines: [`CONTRIBUTING.md`](CONTRIBUTING.md)
 - License: [`LICENSE`](LICENSE)
