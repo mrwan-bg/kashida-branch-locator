@@ -33,7 +33,10 @@ class Help_Page {
                         <p><?php esc_html_e('A simple way to manage branches, groups, maps, and responsive location directories.','kashida-branch-locator'); ?></p>
                     </div>
                 </div>
-                <a class="button button-primary" href="<?php echo esc_url( admin_url('admin.php?page=kashida-branch-locator-groups') ); ?>"><?php esc_html_e('Open Groups','kashida-branch-locator'); ?></a>
+                <div class="bl-help-actions">
+                    <a class="button button-primary" href="<?php echo esc_url( admin_url('admin.php?page=kashida-branch-locator-groups') ); ?>"><?php esc_html_e('Open Groups','kashida-branch-locator'); ?></a>
+                    <a class="button" href="https://kashida.ly/wp-plugins/kashida-branch-locator/" target="_blank" rel="noopener noreferrer"><?php esc_html_e('View plugin on Kashida','kashida-branch-locator'); ?></a>
+                </div>
             </div>
 
             <div class="bl-help-grid bl-help-grid-3">

@@ -4,7 +4,7 @@ Tags: branches, locations, map, store locator, directory
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 2.5.32
+Stable tag: 2.5.33
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -177,6 +177,10 @@ No. The plugin does not include analytics or tracking. OpenStreetMap and Google 
 * Tightened list layout spacing and alignment.
 
 == Changelog ==
+
+= 2.5.33 =
+* Added a button on the plugin Help page linking to the Kashida Branch Locator page on the Kashida website.
+* Updated plugin version metadata.
 
 = 2.5.32 =
 * Added readable JavaScript source files and documented their locations in this readme.

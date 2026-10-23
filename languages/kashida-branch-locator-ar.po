@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Kashida Branch Locator 2.5.32\n"
+"Project-Id-Version: Kashida Branch Locator 2.5.33\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -392,3 +392,6 @@ msgstr "كل المدن"
 
 msgid "Branch name, city, address or phone number"
 msgstr "اسم الفرع أو المدينة أو العنوان أو رقم الهاتف"
+
+msgid "View plugin on Kashida"
+msgstr "عرض الإضافة على موقع كشيدة"
