@@ -846,3 +846,6 @@ msgstr ""
 
 msgid "Visit website"
 msgstr ""
+
+msgid "View plugin on Kashida"
+msgstr ""

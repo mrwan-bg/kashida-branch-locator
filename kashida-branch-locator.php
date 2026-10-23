@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Kashida Branch Locator
  * Description: Manage branches and groups, import CSV/XLSX data, and display searchable, filterable locations in responsive layouts or maps.
- * Version:     2.5.32
+ * Version:     2.5.33
  * Author:      Mrwan elGobee - Kashida Media Services
  * Author URI:  https://kashida.ly/
  * License:     GPL-2.0-or-later
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'KASHIDA_BRANCH_LOCATOR_VERSION' ) ) {
-    define( 'KASHIDA_BRANCH_LOCATOR_VERSION', '2.5.32' );
+    define( 'KASHIDA_BRANCH_LOCATOR_VERSION', '2.5.33' );
 }
 if ( ! defined( 'KASHIDA_BRANCH_LOCATOR_FILE' ) ) {
     define( 'KASHIDA_BRANCH_LOCATOR_FILE', __FILE__ );
