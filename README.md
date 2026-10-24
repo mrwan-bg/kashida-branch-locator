@@ -4,7 +4,16 @@
   <img src="assets/screens/banner.png" alt="Kashida Branch Locator — Find and showcase every location" width="100%">
 </p>
 
-**Find and showcase every location.** Kashida Branch Locator helps you manage company branches, offices, stores, service centers, and other locations, then display them on your WordPress website using flexible, customizable layouts.
+<p align="center">
+  <strong>Find and showcase every location.</strong><br>
+  Manage company branches, offices, stores, service centers, and other locations, then display them on your WordPress website using flexible, customizable layouts.
+</p>
+
+<p align="center">
+  <a href="https://kashida.ly/wp-plugins/kashida-branch-locator/"><strong>View Plugin on Kashida</strong></a>
+  &nbsp; • &nbsp;
+  <a href="https://github.com/mrwan-bg/kashida-branch-locator/archive/refs/heads/main.zip"><strong>Download from GitHub</strong></a>
+</p>
 
 <p align="center">
   <strong>Interactive maps · Live search · City and group filters · CSV/XLSX import · RTL support</strong>
