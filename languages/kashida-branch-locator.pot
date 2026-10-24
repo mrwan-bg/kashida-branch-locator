@@ -849,3 +849,69 @@ msgstr ""
 
 msgid "View plugin on Kashida"
 msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Configure default group colors and how branch results are displayed."
+msgstr ""
+
+msgid "Group Appearance"
+msgstr ""
+
+msgid "Choose the initial color used for newly created groups."
+msgstr ""
+
+msgid "Default group color"
+msgstr ""
+
+msgid "This color is applied when a new group is created. You can customize each group later."
+msgstr ""
+
+msgid "Branch Display"
+msgstr ""
+
+msgid "Control how branch results load on the public-facing locator."
+msgstr ""
+
+msgid "Branch Display Mode"
+msgstr ""
+
+msgid "Show navigation controls between result pages."
+msgstr ""
+
+msgid "Infinite Scroll"
+msgstr ""
+
+msgid "Load more branches as visitors scroll down."
+msgstr ""
+
+msgid "Save Changes"
+msgstr ""
+
+msgid "Changes apply to the branch locator display and newly created groups."
+msgstr ""
+
+msgid "File Requirements"
+msgstr ""
+
+msgid "Supported Formats"
+msgstr ""
+
+msgid "Excel (.xlsx) or CSV (.csv)."
+msgstr ""
+
+msgid "Legacy .xls files require PhpSpreadsheet."
+msgstr ""
+
+msgid "Supported Columns"
+msgstr ""
+
+msgid "Name, City, Address, Phone, Lat, Lng, Group, and Location (lat,lng)."
+msgstr ""
+
+msgid "Tip"
+msgstr ""
+
+msgid "Download the import template for column guidance before preparing your file."
+msgstr ""
