@@ -4,8 +4,8 @@ namespace Kashida\BranchLocator\Admin;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Import_Page {
-    public function __construct() { $this->render(); }
-    private function render(): void {
+    public function __construct() {}
+    public function render(): void {
         ?>
         <div class="wrap bl-admin-wrap">
             <h1><?php esc_html_e('Import Branches','kashida-branch-locator'); ?></h1>
@@ -16,6 +16,7 @@ class Import_Page {
                 <div class="bl-import-upload-box" id="bl-drop-zone">
                     <div class="bl-drop-icon">📂</div>
                     <p><?php esc_html_e('Drag & drop your file here, or click to browse','kashida-branch-locator'); ?></p>
+                    <label class="screen-reader-text" for="bl-import-file"><?php esc_html_e('Choose import file','kashida-branch-locator'); ?></label>
                     <input type="file" id="bl-import-file" accept=".xlsx,.csv,.xls" style="display:none">
                     <button class="button button-primary" id="bl-browse-btn"><?php esc_html_e('Browse File','kashida-branch-locator'); ?></button>
                     <p class="bl-accepted"><?php esc_html_e('Accepted formats: .xlsx, .csv (legacy .xls requires PhpSpreadsheet)','kashida-branch-locator'); ?></p>

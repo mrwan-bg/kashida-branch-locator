@@ -402,7 +402,7 @@ $(document).on('click', '.bl-help-copy', function () {
  }, 1400);
  };
     if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(code).then(done);
+        navigator.clipboard.writeText(code).then(done).catch(function () { btn.text('Copy failed'); });
         return;
     }
     var ta = document.createElement('textarea');

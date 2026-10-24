@@ -38,6 +38,6 @@ $(document).on('input change','#bl-g-color',syncGroupColorHex);$(document).on('i
 $(document).on('click', '.bl-help-copy', function(){
   var btn=$(this), code=btn.data('shortcode')||'';
   var done=function(){var old=btn.text();btn.text((window.KashidaBranchLocatorAdmin&&KashidaBranchLocatorAdmin.i18n&&KashidaBranchLocatorAdmin.i18n.copied)||'Copied');setTimeout(function(){btn.text(old);},1400);};
-  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(code).then(done);return;}
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(code).then(done).catch(function () { btn.text('Copy failed'); });return;}
   var ta=document.createElement('textarea');ta.value=code;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}finally{document.body.removeChild(ta);}
 });

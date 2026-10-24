@@ -4,6 +4,8 @@ namespace Kashida\BranchLocator;
 if ( ! defined( 'ABSPATH' ) ) exit;
 final class Plugin {
     private static ?self $instance = null;
+    private ?\Kashida\BranchLocator\Shortcodes\Branch_Locator_Shortcode $shortcode = null;
+    private ?\Kashida\BranchLocator\Admin\Admin $admin = null;
     public static function instance(): self {
         if ( null === self::$instance ) self::$instance = new self();
         return self::$instance;
@@ -13,8 +15,10 @@ final class Plugin {
         // Arabic fallback translations for the complete plugin UI. This supplements the PO/MO catalog so labels remain localized even when the catalog is incomplete.
         add_filter( 'gettext_kashida-branch-locator', [ $this, 'translate_arabic_ui' ], 20, 3 );
         add_filter( 'ngettext_kashida-branch-locator', [ $this, 'translate_arabic_ui_plural' ], 20, 5 );
-        new \Kashida\BranchLocator\Shortcodes\Branch_Locator_Shortcode();
-        if ( is_admin() ) new \Kashida\BranchLocator\Admin\Admin();
+        $this->shortcode = new \Kashida\BranchLocator\Shortcodes\Branch_Locator_Shortcode();
+        if ( is_admin() ) {
+            $this->admin = new \Kashida\BranchLocator\Admin\Admin();
+        }
     }
 
     public function translate_arabic_ui( string $translation, string $text, string $domain ): string {
