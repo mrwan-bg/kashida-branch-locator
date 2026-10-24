@@ -470,4 +470,3 @@ msgstr "نصيحة"
 
 msgid "Download the import template for column guidance before preparing your file."
 msgstr "نزّل قالب الاستيراد لمعرفة الأعمدة المطلوبة قبل تجهيز ملفك."
-
