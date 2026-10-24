@@ -75,9 +75,9 @@
         html += '</ul>';
         var resultHeading = $('<h3>').text('✓ ' + t('import_complete', 'Import Complete'));
         var resultList = $('<ul>');
-        $('<li>').append($('<strong>').text(Number(d.inserted || 0))).append(document.createTextNode(' ' + tf('branches_inserted', '%d branches inserted', Number(d.inserted || 0))).textContent).appendTo(resultList);
-        $('<li>').append($('<strong>').text(Number(d.updated || 0))).append(document.createTextNode(' ' + tf('branches_updated', '%d branches updated', Number(d.updated || 0))).textContent).appendTo(resultList);
-        $('<li>').append($('<strong>').text(Number(d.skipped || 0))).append(document.createTextNode(' ' + tf('rows_skipped', '%d rows skipped', Number(d.skipped || 0))).textContent).appendTo(resultList);
+        $('<li>').append($('<strong>').text(Number(d.inserted || 0))).append(document.createTextNode(' ' + tf('branches_inserted', '%d branches inserted', Number(d.inserted || 0)))).appendTo(resultList);
+        $('<li>').append($('<strong>').text(Number(d.updated || 0))).append(document.createTextNode(' ' + tf('branches_updated', '%d branches updated', Number(d.updated || 0)))).appendTo(resultList);
+        $('<li>').append($('<strong>').text(Number(d.skipped || 0))).append(document.createTextNode(' ' + tf('rows_skipped', '%d rows skipped', Number(d.skipped || 0)))).appendTo(resultList);
         if (d.errors && d.errors.length) {
             var errorsItem = $('<li>').append($('<strong>').text(t('errors', 'Errors:')));
             var errorsList = $('<ul>').appendTo(errorsItem);
