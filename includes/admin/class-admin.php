@@ -240,10 +240,10 @@ class Admin {
         <?php
     }
 
-    public function page_branches(): void { new Branches_Page(); }
-    public function page_groups(): void { new Groups_Page(); }
-    public function page_import(): void { new Import_Page(); }
-    public function page_help(): void { new Help_Page(); }
+    public function page_branches(): void { $page = new Branches_Page(); $page->render(); }
+    public function page_groups(): void { $page = new Groups_Page(); $page->render(); }
+    public function page_import(): void { $page = new Import_Page(); $page->render(); }
+    public function page_help(): void { $page = new Help_Page(); $page->render(); }
 
     private function verify_nonce(): void {
         if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'kashida_branch_locator_admin_nonce' ) || ! current_user_can( 'manage_options' ) ) {

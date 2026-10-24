@@ -202,7 +202,7 @@ function paginate($el,page,total,c){
   $el.html(h);
 }
 
-function Map(el,c,app){
+function MapView(el,c,app){
   this.el=el;this.c=c;this.app=app;this.center=[27,17];this.zoom=c.zoom||6;this.markers={};this.popup=null;this.tile=256;
   this.el.classList.add('kbl-map');
   this.el.innerHTML='<div class="kbl-map-viewport"><div class="kbl-map-tiles"></div><div class="kbl-map-markers"></div><div class="kbl-map-popup-layer"></div></div><div class="kbl-map-controls"><button type="button" class="kbl-zi" aria-label="'+esc(LBL('zoom_in','Zoom in'))+'" title="'+esc(LBL('zoom_in','Zoom in'))+'">+</button><button type="button" class="kbl-zo" aria-label="'+esc(LBL('zoom_out','Zoom out'))+'" title="'+esc(LBL('zoom_out','Zoom out'))+'">−</button></div><div class="kbl-map-attribution">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors</div>';
@@ -212,7 +212,7 @@ function Map(el,c,app){
   var self=this;this.el.querySelector('.kbl-zi').onclick=function(){self.setZoom(self.zoom+1)};this.el.querySelector('.kbl-zo').onclick=function(){self.setZoom(self.zoom-1)};window.addEventListener('resize',function(){self.draw();});
   this.bindPan();
 }
-Map.prototype.bindPan=function(){
+MapView.prototype.bindPan=function(){
   var self=this;
   this.viewport.addEventListener('mousedown',function(e){
     if(e.button!==0)return;
@@ -252,16 +252,16 @@ Map.prototype.bindPan=function(){
   },{passive:true});
   this.viewport.addEventListener('touchcancel',function(){self.touchActive=false;self.touchStart=null;},{passive:true});
 };
-Map.prototype.touchMidpoint=function(touches){return{x:(touches[0].clientX+touches[1].clientX)/2,y:(touches[0].clientY+touches[1].clientY)/2};};
-Map.prototype.project=function(lat,lng,z){var s=this.tile*Math.pow(2,z),x=(lng+180)/360*s,r=Math.max(-85.05112878,Math.min(85.05112878,lat))*Math.PI/180,y=(1-Math.log(Math.tan(r)+1/Math.cos(r))/Math.PI)/2*s;return{x:x,y:y};};
-Map.prototype.unproject=function(x,y,z){var s=this.tile*Math.pow(2,z),lng=x/s*360-180,n=Math.PI-2*Math.PI*y/s,lat=180/Math.PI*Math.atan(.5*(Math.exp(n)-Math.exp(-n)));return[lat,lng];};
-Map.prototype.setZoom=function(z){this.zoom=Math.max(1,Math.min(18,z));this.draw();};
-Map.prototype.fit=function(points){if(!points.length){this.center=[27,17];this.zoom=6;this.draw();return;}var minLa=90,maxLa=-90,minLn=180,maxLn=-180;points.forEach(function(p){minLa=Math.min(minLa,p[0]);maxLa=Math.max(maxLa,p[0]);minLn=Math.min(minLn,p[1]);maxLn=Math.max(maxLn,p[1]);});this.center=[(minLa+maxLa)/2,(minLn+maxLn)/2];if(points.length===1)this.zoom=Math.max(6,this.c.zoom||6);else this.zoom=Math.min(this.c.zoom||6,10);this.draw();};
-Map.prototype.add=function(b){var self=this,el=document.createElement('button');el.type='button';el.className='kbl-marker';el.title=b.name;el.setAttribute('aria-label',b.name);el.innerHTML='<span></span>';el.onclick=function(e){e.stopPropagation();self.app.select(b.id,true);};this.layer.appendChild(el);this.markers[String(b.id)]={b:b,el:el};};
-Map.prototype.clear=function(){this.layer.innerHTML='';this.popupLayer.innerHTML='';this.markers={};this.popup=null;};
-Map.prototype.open=function(b){var m=this.markers[String(b.id)];if(!m)return;this.close();var p=document.createElement('div');p.className='kbl-map-popup';p.innerHTML=info(b,this.c)+'<button class="kbl-close" type="button" aria-label="'+esc(LBL('close','Close'))+'" title="'+esc(LBL('close','Close'))+'">×</button>';p.querySelector('.kbl-close').onclick=this.close.bind(this);this.popupLayer.appendChild(p);this.popup={b:b,el:p};this.draw();};
-Map.prototype.close=function(){if(this.popup&&this.popup.el)this.popup.el.remove();this.popup=null;};
-Map.prototype.draw=function(){if(!this.el.clientWidth||!this.el.clientHeight)return;var w=this.el.clientWidth,h=this.el.clientHeight,cp=this.project(this.center[0],this.center[1],this.zoom),startX=Math.floor((cp.x-w/2)/256)-1,endX=Math.floor((cp.x+w/2)/256)+1,startY=Math.floor((cp.y-h/2)/256)-1,endY=Math.floor((cp.y+h/2)/256)+1,n=Math.pow(2,this.zoom);this.tiles.innerHTML='';for(var y=startY;y<=endY;y++){if(y<0||y>=n)continue;for(var x=startX;x<=endX;x++){var wx=((x%n)+n)%n,img=document.createElement('img');img.src='https://tile.openstreetmap.org/'+this.zoom+'/'+wx+'/'+y+'.png';img.alt='';img.className='kbl-tile';img.style.left=(x*256-cp.x+w/2)+'px';img.style.top=(y*256-cp.y+h/2)+'px';this.tiles.appendChild(img);}}var self=this;Object.keys(this.markers).forEach(function(id){var m=self.markers[id],p=self.project(m.b.latitude,m.b.longitude,self.zoom);m.el.style.left=(p.x-cp.x+w/2-11)+'px';m.el.style.top=(p.y-cp.y+h/2-28)+'px';});if(this.popup){var p=this.project(this.popup.b.latitude,this.popup.b.longitude,this.zoom);this.popup.el.style.left=(p.x-cp.x+w/2-150)+'px';this.popup.el.style.top=(p.y-cp.y+h/2-185)+'px';}};
+MapView.prototype.touchMidpoint=function(touches){return{x:(touches[0].clientX+touches[1].clientX)/2,y:(touches[0].clientY+touches[1].clientY)/2};};
+MapView.prototype.project=function(lat,lng,z){var s=this.tile*Math.pow(2,z),x=(lng+180)/360*s,r=Math.max(-85.05112878,Math.min(85.05112878,lat))*Math.PI/180,y=(1-Math.log(Math.tan(r)+1/Math.cos(r))/Math.PI)/2*s;return{x:x,y:y};};
+MapView.prototype.unproject=function(x,y,z){var s=this.tile*Math.pow(2,z),lng=x/s*360-180,n=Math.PI-2*Math.PI*y/s,lat=180/Math.PI*Math.atan(.5*(Math.exp(n)-Math.exp(-n)));return[lat,lng];};
+MapView.prototype.setZoom=function(z){this.zoom=Math.max(1,Math.min(18,z));this.draw();};
+MapView.prototype.fit=function(points){if(!points.length){this.center=[27,17];this.zoom=6;this.draw();return;}var minLa=90,maxLa=-90,minLn=180,maxLn=-180;points.forEach(function(p){minLa=Math.min(minLa,p[0]);maxLa=Math.max(maxLa,p[0]);minLn=Math.min(minLn,p[1]);maxLn=Math.max(maxLn,p[1]);});this.center=[(minLa+maxLa)/2,(minLn+maxLn)/2];if(points.length===1)this.zoom=Math.max(6,this.c.zoom||6);else this.zoom=Math.min(this.c.zoom||6,10);this.draw();};
+MapView.prototype.add=function(b){var self=this,el=document.createElement('button');el.type='button';el.className='kbl-marker';el.title=b.name;el.setAttribute('aria-label',b.name);el.innerHTML='<span></span>';el.onclick=function(e){e.stopPropagation();self.app.select(b.id,true);};this.layer.appendChild(el);this.markers[String(b.id)]={b:b,el:el};};
+MapView.prototype.clear=function(){this.layer.innerHTML='';this.popupLayer.innerHTML='';this.markers={};this.popup=null;};
+MapView.prototype.open=function(b){var m=this.markers[String(b.id)];if(!m)return;this.close();var p=document.createElement('div');p.className='kbl-map-popup';p.innerHTML=info(b,this.c)+'<button class="kbl-close" type="button" aria-label="'+esc(LBL('close','Close'))+'" title="'+esc(LBL('close','Close'))+'">×</button>';p.querySelector('.kbl-close').onclick=this.close.bind(this);this.popupLayer.appendChild(p);this.popup={b:b,el:p};this.draw();};
+MapView.prototype.close=function(){if(this.popup&&this.popup.el)this.popup.el.remove();this.popup=null;};
+MapView.prototype.draw=function(){if(!this.el.clientWidth||!this.el.clientHeight)return;var w=this.el.clientWidth,h=this.el.clientHeight,cp=this.project(this.center[0],this.center[1],this.zoom),startX=Math.floor((cp.x-w/2)/256)-1,endX=Math.floor((cp.x+w/2)/256)+1,startY=Math.floor((cp.y-h/2)/256)-1,endY=Math.floor((cp.y+h/2)/256)+1,n=Math.pow(2,this.zoom);this.tiles.innerHTML='';for(var y=startY;y<=endY;y++){if(y<0||y>=n)continue;for(var x=startX;x<=endX;x++){var wx=((x%n)+n)%n,img=document.createElement('img');img.src='https://tile.openstreetmap.org/'+this.zoom+'/'+wx+'/'+y+'.png';img.alt='';img.className='kbl-tile';img.style.left=(x*256-cp.x+w/2)+'px';img.style.top=(y*256-cp.y+h/2)+'px';this.tiles.appendChild(img);}}var self=this;Object.keys(this.markers).forEach(function(id){var m=self.markers[id],p=self.project(m.b.latitude,m.b.longitude,self.zoom);m.el.style.left=(p.x-cp.x+w/2-11)+'px';m.el.style.top=(p.y-cp.y+h/2-28)+'px';});if(this.popup){var p=this.project(this.popup.b.latitude,this.popup.b.longitude,this.zoom);this.popup.el.style.left=(p.x-cp.x+w/2-150)+'px';this.popup.el.style.top=(p.y-cp.y+h/2-185)+'px';}};
 
 function App($root){
   this.$root=$root;this.root=$root[0];this.c=JSON.parse($root.attr('data-config')||'{}');
@@ -338,7 +338,7 @@ App.prototype.render=function(){
 };
 App.prototype.renderMap=function(items){
   var self=this;
-  if(!this.map){var el=this.$root.find('.kbl-map').get(0);if(!el)return;this.map=new Map(el,this.c,this);}
+  if(!this.map){var el=this.$root.find('.kbl-map').get(0);if(!el)return;this.map=new MapView(el,this.c,this);}
   this.map.clear();var pts=[];
   items.forEach(function(b){var lat=parseFloat(b.latitude),lng=parseFloat(b.longitude);if(!isFinite(lat)||!isFinite(lng)||lat===0&&lng===0)return;self.map.add(b);pts.push([lat,lng]);});
   this.map.fit(pts);
@@ -346,5 +346,5 @@ App.prototype.renderMap=function(items){
   if(!pts.length){if(!notice.length)this.$root.find('.kbl-map').append('<div class="kbl-map-empty">'+esc(LBL('no_coordinates','No valid coordinates are available for these branches.'))+'</div>');}
   else notice.remove();
 };
-$(function(){$('.kbl-locator-wrap').each(function(){new App($(this));});});
+$(function(){$('.kbl-locator-wrap').each(function(){$(this).data('kblApp', new App($(this)));});});
 })(jQuery);

@@ -4,9 +4,9 @@ namespace Kashida\BranchLocator\Admin;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Help_Page {
-    public function __construct() { $this->render(); }
+    public function __construct() {}
 
-    private function render(): void {
+    public function render(): void {
         $layouts = [
             ['icon'=>'▦','title'=>__('Table','kashida-branch-locator'),'desc'=>__('A clean tabular view for structured branch data.','kashida-branch-locator')],
             ['icon'=>'▤','title'=>__('Cards','kashida-branch-locator'),'desc'=>__('Modern responsive cards with optional actions.','kashida-branch-locator')],
