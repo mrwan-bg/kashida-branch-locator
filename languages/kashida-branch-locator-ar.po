@@ -280,10 +280,10 @@ msgid "Organize branches into groups and create reusable display codes."
 msgstr "نظّم الفروع ضمن مجموعات وأنشئ رموز عرض قابلة لإعادة الاستخدام."
 
 msgid "Upload an Excel (.xlsx) or CSV file. Columns: Name, City, Address, Phone, Lat, Lng, Group. Location (lat,lng) is also supported."
-msgstr "ارفع ملف Excel بامتداد \u200e.xlsx\u200e أو ملف CSV. الأعمدة المطلوبة: الاسم، المدينة، العنوان، الهاتف، خط العرض، خط الطول، المجموعة. كما يمكن استخدام حقل الموقع بصيغة (خط العرض، خط الطول)."
+msgstr "ارفع ملف Excel (.xlsx) أو CSV. الأعمدة: الاسم، المدينة، العنوان، الهاتف، خط العرض، خط الطول، المجموعة. كما يمكن استخدام حقل الموقع بصيغة (خط العرض، خط الطول)."
 
 msgid "Use the template as a reference. It contains column instructions only and no sample locations."
-msgstr "استخدم القالب كمرجع؛ فهو يحتوي على تعليمات الأعمدة فقط ولا يتضمن مواقع تجريبية."
+msgstr "استخدم القالب مرجعًا لتجهيز البيانات؛ فهو يحتوي على تعليمات الأعمدة فقط ولا يتضمن مواقع تجريبية."
 
 msgid "Search branches"
 msgstr "ابحث عن الفروع"
@@ -334,13 +334,13 @@ msgid "Import Branches"
 msgstr "استيراد الفروع"
 
 msgid "Prepare your file"
-msgstr "تجهيز الملف"
+msgstr "جهّز ملفك"
 
 msgid "Drag & drop your file here, or click to browse"
-msgstr "اسحب الملف وأفلته هنا، أو انقر لاختياره"
+msgstr "اسحب الملف وأفلته هنا، أو انقر لاستعراض الملفات"
 
 msgid "Browse File"
-msgstr "اختيار ملف"
+msgstr "استعراض الملفات"
 
 msgid "Update existing branches (matched by name)"
 msgstr "تحديث الفروع الموجودة (حسب تطابق الاسم)"
@@ -352,7 +352,7 @@ msgid "Preview"
 msgstr "معاينة"
 
 msgid "Run Import"
-msgstr "بدء الاستيراد"
+msgstr "تنفيذ الاستيراد"
 
 msgid "Download Error Report"
 msgstr "تنزيل تقرير الأخطاء"
@@ -395,3 +395,79 @@ msgstr "اسم الفرع أو المدينة أو العنوان أو رقم ا
 
 msgid "View plugin on Kashida"
 msgstr "عرض الإضافة على موقع كشيدة"
+
+msgid "Settings"
+msgstr "الإعدادات"
+
+msgid "Configure default group colors and how branch results are displayed."
+msgstr "اضبط الألوان الافتراضية للمجموعات وطريقة عرض نتائج الفروع."
+
+msgid "Group Appearance"
+msgstr "مظهر المجموعات"
+
+msgid "Choose the initial color used for newly created groups."
+msgstr "اختر اللون الافتراضي للمجموعات الجديدة."
+
+msgid "Default group color"
+msgstr "لون المجموعة الافتراضي"
+
+msgid "This color is applied when a new group is created. You can customize each group later."
+msgstr "يُطبّق هذا اللون عند إنشاء مجموعة جديدة، ويمكنك تخصيص لون كل مجموعة لاحقًا."
+
+msgid "Branch Display"
+msgstr "عرض الفروع"
+
+msgid "Control how branch results load on the public-facing locator."
+msgstr "تحكّم في طريقة تحميل نتائج الفروع في واجهة دليل الفروع."
+
+msgid "Branch Display Mode"
+msgstr "طريقة عرض الفروع"
+
+msgid "Pagination"
+msgstr "تقسيم الصفحات"
+
+msgid "Show navigation controls between result pages."
+msgstr "إظهار أدوات التنقل بين صفحات النتائج."
+
+msgid "Infinite Scroll"
+msgstr "التمرير اللانهائي"
+
+msgid "Load more branches as visitors scroll down."
+msgstr "تحميل المزيد من الفروع أثناء تمرير الزائر إلى أسفل الصفحة."
+
+msgid "Save Changes"
+msgstr "حفظ التغييرات"
+
+msgid "Changes apply to the branch locator display and newly created groups."
+msgstr "تُطبّق التغييرات على عرض الفروع والمجموعات الجديدة."
+
+msgid "Download Import Template"
+msgstr "تنزيل قالب الاستيراد"
+
+msgid "Accepted formats: .xlsx, .csv (legacy .xls requires PhpSpreadsheet)"
+msgstr "التنسيقات المقبولة: ‎.xlsx و‎.csv (تتطلب ملفات ‎.xls القديمة مكتبة PhpSpreadsheet)"
+
+msgid "File Requirements"
+msgstr "متطلبات الملف"
+
+msgid "Supported Formats"
+msgstr "التنسيقات المدعومة"
+
+msgid "Excel (.xlsx) or CSV (.csv)."
+msgstr "Excel (.xlsx) أو CSV (.csv)."
+
+msgid "Legacy .xls files require PhpSpreadsheet."
+msgstr "تتطلب ملفات ‎.xls القديمة مكتبة PhpSpreadsheet."
+
+msgid "Supported Columns"
+msgstr "الأعمدة المدعومة"
+
+msgid "Name, City, Address, Phone, Lat, Lng, Group, and Location (lat,lng)."
+msgstr "الاسم، المدينة، العنوان، الهاتف، خط العرض، خط الطول، المجموعة، وحقل الموقع (خط العرض، خط الطول)."
+
+msgid "Tip"
+msgstr "نصيحة"
+
+msgid "Download the import template for column guidance before preparing your file."
+msgstr "نزّل قالب الاستيراد لمعرفة الأعمدة المطلوبة قبل تجهيز ملفك."
+
