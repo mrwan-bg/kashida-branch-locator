@@ -36,7 +36,7 @@
  openModal(modal);
  });
     $(document).on('click', '.bl-edit-branch', function () { var d = $(this).data();
- $('#bl-modal-title').text('Edit Branch');
+ $('#bl-modal-title').text((KashidaBranchLocatorAdmin.i18n.edit_branch||'Edit Branch'));
  $('#bl-branch-id').val(d.id);
  $('#bl-f-name').val(d.name);
  $('#bl-f-city').val(d.city);
@@ -89,7 +89,7 @@
  openModal(groupMod);
  });
     $(document).on('click', '.bl-edit-group', function () { var d = $(this).data();
- $('#bl-group-modal-title').text('Edit Group');
+ $('#bl-group-modal-title').text((KashidaBranchLocatorAdmin.i18n.edit_group||'Edit Group'));
  $('#bl-group-id').val(d.id);
  $('#bl-g-name').val(d.name);
  $('#bl-g-color').val(d.color);
@@ -402,7 +402,7 @@ $(document).on('click', '.bl-help-copy', function () {
  }, 1400);
  };
     if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(code).then(done).catch(function () { btn.text('Copy failed'); });
+        navigator.clipboard.writeText(code).then(done);
         return;
     }
     var ta = document.createElement('textarea');

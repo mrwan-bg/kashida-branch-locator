@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Installer {
     const DB_VERSION_KEY = 'kashida_branch_locator_db_version';
-    const DB_VERSION     = '1.3';
+    const DB_VERSION     = '1.4';
 
     public static function maybe_upgrade(): void {
         global $wpdb;
@@ -45,7 +45,7 @@ class Installer {
             name       VARCHAR(255)    NOT NULL,
             slug       VARCHAR(255)    NOT NULL,
             color      VARCHAR(20)     NOT NULL DEFAULT '#0a6b70',
-            created_at DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            created_at TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (id),
             UNIQUE KEY slug (slug)
         ) {$charset};" );
@@ -62,11 +62,26 @@ class Installer {
             longitude  DECIMAL(10,7)   NOT NULL DEFAULT 0.0000000,
             group_id   BIGINT UNSIGNED          DEFAULT NULL,
             slug       VARCHAR(255)    NOT NULL DEFAULT '',
-            created_at DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            created_at TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (id),
             KEY group_id (group_id),
             KEY city (city)
         ) {$charset};" );
+
+        // Do not mark the schema as upgraded unless both tables and their required
+        // columns exist. This prevents a failed dbDelta() from being recorded as success.
+        $groups_required_columns = [ 'id', 'name', 'slug', 'color', 'created_at' ];
+        $branches_required_columns = [
+            'id', 'name', 'city', 'address', 'phone', 'phone2', 'website',
+            'latitude', 'longitude', 'group_id', 'slug', 'created_at'
+        ];
+
+        if (
+            ! self::table_has_columns( $groups_table, $groups_required_columns ) ||
+            ! self::table_has_columns( $branches_table, $branches_required_columns )
+        ) {
+            return;
+        }
 
         // If a prior interrupted upgrade left both table sets, copy legacy data only
         // when the corresponding new table is empty. Keep legacy tables as a safety net.
@@ -95,6 +110,33 @@ class Installer {
         );
 
         return $found === $table;
+    }
+
+    /**
+     * Confirm that a custom table exists and contains every required column.
+     *
+     * @param string   $table   Table name derived from the active WordPress prefix.
+     * @param string[] $columns Required column names.
+     */
+    private static function table_has_columns( string $table, array $columns ): bool {
+        global $wpdb;
+
+        if ( ! self::table_exists( $table ) ) {
+            return false;
+        }
+
+        // The table name is constructed internally from the active WordPress prefix and a fixed plugin suffix.
+        // Escape the identifier and keep the query restricted to this plugin's own tables.
+        $safe_table = '`' . str_replace( '`', '``', $table ) . '`';
+
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Required schema inspection after dbDelta(); this internally constructed and escaped table identifier cannot be passed as a value placeholder.
+        $existing_columns = $wpdb->get_col( "SHOW COLUMNS FROM {$safe_table}", 0 );
+
+        if ( ! is_array( $existing_columns ) || empty( $existing_columns ) ) {
+            return false;
+        }
+
+        return empty( array_diff( $columns, $existing_columns ) );
     }
 
     private static function rename_legacy_table( string $legacy, string $target ): void {

@@ -4,9 +4,9 @@ namespace Kashida\BranchLocator\Admin;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Help_Page {
-    public function __construct() {}
+    public function __construct() { $this->render(); }
 
-    public function render(): void {
+    private function render(): void {
         $layouts = [
             ['icon'=>'▦','title'=>__('Table','kashida-branch-locator'),'desc'=>__('A clean tabular view for structured branch data.','kashida-branch-locator')],
             ['icon'=>'▤','title'=>__('Cards','kashida-branch-locator'),'desc'=>__('Modern responsive cards with optional actions.','kashida-branch-locator')],
@@ -33,10 +33,7 @@ class Help_Page {
                         <p><?php esc_html_e('A simple way to manage branches, groups, maps, and responsive location directories.','kashida-branch-locator'); ?></p>
                     </div>
                 </div>
-                <div class="bl-help-actions">
-                    <a class="button button-primary" href="<?php echo esc_url( admin_url('admin.php?page=kashida-branch-locator-groups') ); ?>"><?php esc_html_e('Open Groups','kashida-branch-locator'); ?></a>
-                    <a class="button" href="https://kashida.ly/wp-plugins/kashida-branch-locator/" target="_blank" rel="noopener noreferrer"><?php esc_html_e('View plugin on Kashida','kashida-branch-locator'); ?></a>
-                </div>
+                <a class="button button-primary" href="<?php echo esc_url( admin_url('admin.php?page=kashida-branch-locator-groups') ); ?>"><?php esc_html_e('Open Groups','kashida-branch-locator'); ?></a>
             </div>
 
             <div class="bl-help-grid bl-help-grid-3">

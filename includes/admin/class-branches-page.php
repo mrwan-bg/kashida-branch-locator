@@ -6,9 +6,9 @@ use Kashida\BranchLocator\Models\Group;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Branches_Page {
-    public function __construct() {}
+    public function __construct() { $this->render(); }
 
-    public function render(): void {
+    private function render(): void {
         $groups = Group::all();
         $cities = Branch::get_cities();
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin list filter; no state-changing action is performed.
@@ -46,17 +46,14 @@ class Branches_Page {
             <form method="get" class="bl-filter-form">
                 <input type="hidden" name="page" value="kashida-branch-locator">
                 <div class="bl-filters">
-                    <label class="screen-reader-text" for="bl-branches-search"><?php esc_html_e('Search branches','kashida-branch-locator'); ?></label>
-                    <input type="search" id="bl-branches-search" name="s" value="<?php echo esc_attr($search); ?>" placeholder="<?php esc_attr_e('Search branches…','kashida-branch-locator'); ?>" class="bl-search-input">
-                    <label class="screen-reader-text" for="bl-branches-city"><?php esc_html_e('Filter by city','kashida-branch-locator'); ?></label>
-                    <select id="bl-branches-city" name="city">
+                    <input type="search" name="s" value="<?php echo esc_attr($search); ?>" placeholder="<?php esc_attr_e('Search branches…','kashida-branch-locator'); ?>" class="bl-search-input">
+                    <select name="city">
                         <option value=""><?php esc_html_e('All Cities','kashida-branch-locator'); ?></option>
                         <?php foreach($cities as $c): ?>
                             <option value="<?php echo esc_attr($c); ?>" <?php selected($city_f,$c); ?>><?php echo esc_html($c); ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <label class="screen-reader-text" for="bl-branches-group"><?php esc_html_e('Filter by group','kashida-branch-locator'); ?></label>
-                    <select id="bl-branches-group" name="group_id">
+                    <select name="group_id">
                         <option value=""><?php esc_html_e('All Groups','kashida-branch-locator'); ?></option>
                         <?php foreach($groups as $g): ?>
                             <option value="<?php echo esc_attr($g->id); ?>" <?php selected($group_f,$g->id); ?>><?php echo esc_html($g->name); ?></option>
@@ -254,6 +251,9 @@ class Branches_Page {
                             <label><span><?php esc_html_e('Results per page','kashida-branch-locator'); ?></span><input type="number" min="1" max="100" value="15" data-builder-option="per_page"></label>
                             <label><span><?php esc_html_e('Map height','kashida-branch-locator'); ?></span><input type="number" min="300" max="1200" value="520" data-builder-option="height"></label>
                             <label><span><?php esc_html_e('Map zoom','kashida-branch-locator'); ?></span><input type="number" min="1" max="18" value="6" data-builder-option="zoom"></label>
+                            <label data-layout-options="cards,accordion,list,table,map-table"><span><?php esc_html_e('Call button color','kashida-branch-locator'); ?></span><input type="color" value="#12b76a" data-builder-option="call_color"></label>
+                            <label data-layout-options="cards,accordion,list,table,map-table"><span><?php esc_html_e('Directions button color','kashida-branch-locator'); ?></span><input type="color" value="#1769e8" data-builder-option="directions_color"></label>
+                            <label data-layout-options="cards,accordion,list,table,map-table"><span><?php esc_html_e('Website button color','kashida-branch-locator'); ?></span><input type="color" value="#d85b00" data-builder-option="website_color"></label>
                         </div>
                     </div>
                     <div class="bl-builder-preview">
