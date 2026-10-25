@@ -178,6 +178,13 @@ No. The plugin does not include analytics or tracking. OpenStreetMap and Google 
 
 == Changelog ==
 
+= 2.5.33 =
+* Improved database schema compatibility by using a TIMESTAMP default for created_at in the branches and groups tables.
+* Increased the internal database schema version to 1.4 so existing installations run the schema upgrade.
+* Verify that both plugin tables and their required columns exist before recording the schema version.
+* Resolved the reported Plugin Check warnings in the installer’s schema inspection query.
+
+
 = 2.5.32 =
 * Added readable JavaScript source files and documented their locations in this readme.
 * Moved the top-level admin menu to a lower-priority position.
