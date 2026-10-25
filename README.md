@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://kashida.ly/wp-plugins/kashida-branch-locator/"><strong>View Plugin on Kashida</strong></a>
   &nbsp; • &nbsp;
-  <a href="https://github.com/mrwan-bg/kashida-branch-locator/archive/refs/heads/main.zip"><strong>Download from GitHub</strong></a>
+  <a href="https://github.com/mrwan-bg/kashida-branch-locator/releases/latest"><strong>Download from GitHub</strong></a>
 </p>
 
 <p align="center">
