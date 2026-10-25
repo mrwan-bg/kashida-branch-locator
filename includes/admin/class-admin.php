@@ -108,6 +108,8 @@ class Admin {
                 'confirm_bulk_delete' => __( 'Are you sure you want to delete all selected items?', 'kashida-branch-locator' ),
                 'delete_selected' => __( 'Delete Selected', 'kashida-branch-locator' ),
                 'select_all_results' => __( 'Select all matching results', 'kashida-branch-locator' ),
+                'edit_branch' => __( 'Edit Branch', 'kashida-branch-locator' ),
+                'edit_group' => __( 'Edit Group', 'kashida-branch-locator' ),
                 'selecting_results' => __( 'Selecting…', 'kashida-branch-locator' ),
                 'selected_all_results' => __( 'All matching results selected.', 'kashida-branch-locator' ),
                 /* translators: %d: number of selected branches. */
@@ -240,10 +242,10 @@ class Admin {
         <?php
     }
 
-    public function page_branches(): void { $page = new Branches_Page(); $page->render(); }
-    public function page_groups(): void { $page = new Groups_Page(); $page->render(); }
-    public function page_import(): void { $page = new Import_Page(); $page->render(); }
-    public function page_help(): void { $page = new Help_Page(); $page->render(); }
+    public function page_branches(): void { new Branches_Page(); }
+    public function page_groups(): void { new Groups_Page(); }
+    public function page_import(): void { new Import_Page(); }
+    public function page_help(): void { new Help_Page(); }
 
     private function verify_nonce(): void {
         if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'kashida_branch_locator_admin_nonce' ) || ! current_user_can( 'manage_options' ) ) {

@@ -1,9 +1,11 @@
-# Changelog
+## Database compatibility follow-up (plugin version remains 2.5.33)
+- Use TIMESTAMP for created_at defaults to improve compatibility with older supported MySQL versions.
+- Only save the schema version after verifying both tables and required columns.
 
 ## 2.5.33
+- Updated plugin version metadata; no feature changes.
 
-- Added a button on the plugin Help page linking to the Kashida Branch Locator page on the Kashida website.
-- Updated plugin version metadata.
+# Changelog
 
 ## 2.5.32
 

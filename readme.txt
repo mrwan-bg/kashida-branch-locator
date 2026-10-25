@@ -178,10 +178,6 @@ No. The plugin does not include analytics or tracking. OpenStreetMap and Google 
 
 == Changelog ==
 
-= 2.5.33 =
-* Added a button on the plugin Help page linking to the Kashida Branch Locator page on the Kashida website.
-* Updated plugin version metadata.
-
 = 2.5.32 =
 * Added readable JavaScript source files and documented their locations in this readme.
 * Moved the top-level admin menu to a lower-priority position.

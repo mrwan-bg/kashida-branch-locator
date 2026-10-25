@@ -272,3 +272,11 @@
 .bl-import-requirement small{color:#667085;font-size:12px;line-height:1.5}
 @media(max-width:900px){.bl-import-requirements-grid{grid-template-columns:1fr}.bl-import-requirement+.bl-import-requirement{border-left:0;border-top:1px solid #e7edf5}.bl-import-requirement{padding:16px 20px}}
 @media(max-width:782px){.bl-settings-wrap{margin-right:10px}.bl-settings-field{align-items:flex-start;flex-direction:column;padding:17px}.bl-settings-field-control{min-width:0;width:100%}.bl-settings-mode-options{grid-template-columns:1fr;padding:16px}.bl-settings-card-heading{padding:16px}.bl-settings-actions{align-items:flex-start;flex-direction:column;gap:8px}.bl-settings-actions .button{width:auto}.bl-import-upload-box{min-height:220px;padding:30px 16px}.bl-import-guide{align-items:flex-start}.bl-import-guide .button{width:100%;text-align:center}}
+
+/* Display Builder: layout-specific controls and faithful preview variants */
+#bl-display-builder-modal [data-layout-options][style*="display: none"],#bl-display-builder-modal label[style*="display: none"]{display:none!important}
+#bl-builder-preview .bl-preview-cards-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#bl-builder-preview .bl-preview-list .bl-preview-card{border-radius:4px;box-shadow:none;border-inline-start:3px solid #1769e8}
+#bl-builder-preview .bl-preview-accordion-title{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#f3f6fb;border:1px solid #d8e2f0;border-radius:6px;font-weight:600}
+#bl-builder-preview .bl-preview-accordion>.bl-preview-card{margin-top:6px}
+#bl-builder-preview .bl-preview-actions button{color:#fff}
