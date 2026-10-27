@@ -14,12 +14,23 @@
   &nbsp; • &nbsp;
   <a href="https://kashida.ly/wp-plugins/kashida-branch-locator/"><strong>View Plugin on Kashida</strong></a>
   &nbsp; • &nbsp;
-  <a href="https://github.com/mrwan-bg/kashida-branch-locator/releases/latest"><strong>Download from GitHub</strong></a>
+  <a href="https://github.com/mrwan-bg/kashida-branch-locator/releases/latest"><strong>Download Latest Release</strong></a>
+  &nbsp; • &nbsp;
+  <a href="https://github.com/mrwan-bg/kashida-branch-locator/archive/refs/heads/main.zip"><strong>Download Source ZIP</strong></a>
 </p>
 
 <p align="center">
   <strong>Interactive maps · Live search · City and group filters · CSV/XLSX import · RTL support</strong>
 </p>
+
+
+## Release and compatibility
+
+The current repository metadata identifies the plugin as **v2.5.33**. The plugin header and the WordPress readme stable tag should remain aligned with that version for this release.
+
+For installation, use the [WordPress.org plugin page](https://wordpress.org/plugins/kashida-branch-locator/) or download the [latest published GitHub release](https://github.com/mrwan-bg/kashida-branch-locator/releases/latest). The **Source ZIP** link above downloads the current `main` branch snapshot; it is not necessarily the same as a tagged release package.
+
+The WordPress.org directory artwork is managed separately from images embedded in this GitHub README. This README uses the repository files under `assets/screens/` for its icon, banner, and screenshots.
 
 ## Features
 
