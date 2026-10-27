@@ -6,7 +6,7 @@ function LBL(k,d){ return labels()[k] || d; }
 function esc(v){ return String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function mapsUrl(b){ return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(b.latitude+','+b.longitude); }
 function splitPhoneNumbers(v){
-  return String(v==null?'':v).split(/\s+[-–—]\s+|\s*[,;]\s*/).map(function(n){return n.trim();}).filter(Boolean);
+  return String(v==null?'':v).split(/\s+[-–—]\s+|[,;]\s*/).map(function(n){return n.trim();}).filter(Boolean);
 }
 function phone(v){
   var numbers=splitPhoneNumbers(v);
@@ -202,7 +202,7 @@ function paginate($el,page,total,c){
   $el.html(h);
 }
 
-function Map(el,c,app){
+function BranchLocatorMap(el,c,app){
   this.el=el;this.c=c;this.app=app;this.center=[27,17];this.zoom=c.zoom||6;this.markers={};this.popup=null;this.tile=256;
   this.el.classList.add('kbl-map');
   this.el.innerHTML='<div class="kbl-map-viewport"><div class="kbl-map-tiles"></div><div class="kbl-map-markers"></div><div class="kbl-map-popup-layer"></div></div><div class="kbl-map-controls"><button type="button" class="kbl-zi" aria-label="'+esc(LBL('zoom_in','Zoom in'))+'" title="'+esc(LBL('zoom_in','Zoom in'))+'">+</button><button type="button" class="kbl-zo" aria-label="'+esc(LBL('zoom_out','Zoom out'))+'" title="'+esc(LBL('zoom_out','Zoom out'))+'">−</button></div><div class="kbl-map-attribution">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors</div>';
@@ -294,7 +294,7 @@ App.prototype.bind=function(){
   this.$root.on('change','.kbl-filter-group',function(){self.c.groupValue=$(this).val()||'';self.page=1;self.render();});
   this.$root.on('click','.kbl-sort-th',function(){var k=$(this).data('sort-key');if(self.c.sortKey===k)self.c.sortOrder=self.c.sortOrder==='DESC'?'ASC':'DESC';else{self.c.sortKey=k;self.c.sortOrder='ASC';}self.page=1;self.render();});
   this.$root.on('click','.kbl-reset-controls',function(){self.c.searchValue='';self.c.searchOpen=false;self.c.cityValue='';self.c.groupValue='';self.c.sortKey='name';self.c.sortOrder='ASC';self.c.searchOpen=true;self.page=1;self.render();});
-  this.$root.on('click','.kbl-page',function(){self.page=parseInt($(this).data('page'),10)||1;self.render();});
+  this.$root.on('click','.kbl-page',function(){self.page=Number.parseInt($(this).data('page'),10)||1;self.render();});
   $(window).on('scroll.kblInfinite'+(this.root.id||Math.random().toString(36).slice(2)),function(){
     if(self.c.display_mode!=='infinite_scroll'||!self.c.pagination||self.loadingMore)return;
     var items=visibleRows(self.all,self.c),pages=Math.max(1,Math.ceil(items.length/Math.max(1,self.c.per_page||15)));
@@ -317,7 +317,7 @@ App.prototype.select=function(id,fromMarker){
   this.$root.find('.kbl-row[data-id="'+id+'"]').addClass('active');
   if(this.map){
     Object.keys(this.map.markers).forEach(function(k){self.map.markers[k].el.classList.toggle('active',String(k)===String(id));});
-    if(isFinite(parseFloat(b.latitude))&&isFinite(parseFloat(b.longitude))){self.map.center=[b.latitude,b.longitude];self.map.open(b);self.map.draw();}
+    if(Number.isFinite(Number.parseFloat(b.latitude))&&Number.isFinite(Number.parseFloat(b.longitude))){self.map.center=[b.latitude,b.longitude];self.map.open(b);self.map.draw();}
     if(!fromMarker){var r=this.$root.find('.kbl-row[data-id="'+id+'"]').get(0);if(r)r.scrollIntoView({behavior:'smooth',block:'nearest'});}
   }
 };
@@ -338,9 +338,9 @@ App.prototype.render=function(){
 };
 App.prototype.renderMap=function(items){
   var self=this;
-  if(!this.map){var el=this.$root.find('.kbl-map').get(0);if(!el)return;this.map=new Map(el,this.c,this);}
+  if(!this.map){var el=this.$root.find('.kbl-map').get(0);if(!el)return;this.map=new BranchLocatorMap(el,this.c,this);}
   this.map.clear();var pts=[];
-  items.forEach(function(b){var lat=parseFloat(b.latitude),lng=parseFloat(b.longitude);if(!isFinite(lat)||!isFinite(lng)||lat===0&&lng===0)return;self.map.add(b);pts.push([lat,lng]);});
+  items.forEach(function(b){var lat=Number.parseFloat(b.latitude),lng=Number.parseFloat(b.longitude);if(!Number.isFinite(lat)||!Number.isFinite(lng)||lat===0&&lng===0)return;self.map.add(b);pts.push([lat,lng]);});
   this.map.fit(pts);
   var notice=this.$root.find('.kbl-map-empty');
   if(!pts.length){if(!notice.length)this.$root.find('.kbl-map').append('<div class="kbl-map-empty">'+esc(LBL('no_coordinates','No valid coordinates are available for these branches.'))+'</div>');}
