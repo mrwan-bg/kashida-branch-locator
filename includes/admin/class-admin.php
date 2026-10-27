@@ -7,6 +7,9 @@ use Kashida\BranchLocator\Import\Importer;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Admin {
+    /** @var array<int, object> Page controllers render during construction. */
+    private array $page_instances = [];
+
     public function __construct() {
         add_action( 'admin_menu',             [ $this, 'register_menus' ] );
         add_action( 'admin_enqueue_scripts',  [ $this, 'enqueue_assets' ] );
@@ -242,10 +245,10 @@ class Admin {
         <?php
     }
 
-    public function page_branches(): void { new Branches_Page(); }
-    public function page_groups(): void { new Groups_Page(); }
-    public function page_import(): void { new Import_Page(); }
-    public function page_help(): void { new Help_Page(); }
+    public function page_branches(): void { $this->page_instances[] = new Branches_Page(); }
+    public function page_groups(): void { $this->page_instances[] = new Groups_Page(); }
+    public function page_import(): void { $this->page_instances[] = new Import_Page(); }
+    public function page_help(): void { $this->page_instances[] = new Help_Page(); }
 
     private function verify_nonce(): void {
         if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'kashida_branch_locator_admin_nonce' ) || ! current_user_can( 'manage_options' ) ) {
