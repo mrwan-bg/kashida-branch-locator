@@ -16,6 +16,8 @@ class Import_Page {
                 <div class="bl-import-upload-box" id="bl-drop-zone">
                     <div class="bl-drop-icon">📂</div>
                     <p><?php esc_html_e('Drag & drop your file here, or click to browse','kashida-branch-locator'); ?></p>
+                    <label class="screen-reader-text" for="bl-import-file"><?php esc_html_e('Import file','kashida-branch-locator'); ?></label>
+                    <label class="screen-reader-text" for="bl-import-file"><?php esc_html_e('Import file','kashida-branch-locator'); ?></label>
                     <input type="file" id="bl-import-file" accept=".xlsx,.csv,.xls" style="display:none">
                     <button class="button button-primary" id="bl-browse-btn"><?php esc_html_e('Browse File','kashida-branch-locator'); ?></button>
                     <p class="bl-accepted"><?php esc_html_e('Accepted formats: .xlsx, .csv (legacy .xls requires PhpSpreadsheet)','kashida-branch-locator'); ?></p>
