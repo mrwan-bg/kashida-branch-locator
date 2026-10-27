@@ -208,7 +208,7 @@
  ['call', 'directions'].forEach(function (k) { if (!m.find('[data-builder-option="' + k + '"]').prop('checked'))
         a.push('show_' + k + '="false"');
  });
- var per = parseInt(m.find('[data-builder-option="per_page"]').val(), 10) || 15, height = parseInt(m.find('[data-builder-option="height"]').val(), 10) || 520, zoom = parseInt(m.find('[data-builder-option="zoom"]').val(), 10) || 6, columns = parseInt(m.find('[data-builder-option="columns"]').val(), 10) || 3, groupCards = m.find('[data-builder-option="group_cards"]').prop('checked'), callColor = m.find('[data-builder-option="call_color"]').val() || '#12b76a', directionsColor = m.find('[data-builder-option="directions_color"]').val() || '#1769e8', websiteColor = m.find('[data-builder-option="website_color"]').val() || '#d85b00';
+ var per = Number.parseInt(m.find('[data-builder-option="per_page"]').val(), 10) || 15, height = Number.parseInt(m.find('[data-builder-option="height"]').val(), 10) || 520, zoom = Number.parseInt(m.find('[data-builder-option="zoom"]').val(), 10) || 6, columns = Number.parseInt(m.find('[data-builder-option="columns"]').val(), 10) || 3, groupCards = m.find('[data-builder-option="group_cards"]').prop('checked'), callColor = m.find('[data-builder-option="call_color"]').val() || '#12b76a', directionsColor = m.find('[data-builder-option="directions_color"]').val() || '#1769e8', websiteColor = m.find('[data-builder-option="website_color"]').val() || '#d85b00';
  if (layout === 'cards' && columns !== 3)
         a.push('columns="' + Math.max(1, Math.min(6, columns)) + '"');
  if (groupCards)
