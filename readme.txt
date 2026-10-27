@@ -176,6 +176,13 @@ No. The plugin does not include analytics or tracking. OpenStreetMap and Google 
 * Fixed table content overflow and action buttons clipping.
 * Tightened list layout spacing and alignment.
 
+== Screenshots ==
+
+1. Display Builder: configure branch layouts, fields, filters, and shortcode output.
+2. Search, filters, and sorting: help visitors find branches by keyword, city, or group.
+3. Synchronized table and map: selecting a branch highlights its location on the map.
+4. Frontend layouts: examples of Table, Cards, List, Accordion, Map, and Map + Table views.
+
 == Changelog ==
 
 = 2.5.33 =
