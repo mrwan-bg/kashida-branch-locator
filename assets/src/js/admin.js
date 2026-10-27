@@ -402,7 +402,7 @@ $(document).on('click', '.bl-help-copy', function () {
  }, 1400);
  };
     if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(code).then(done);
+        navigator.clipboard.writeText(code).then(done).catch(function () {\n            var fallback = document.createElement('textarea');\n            fallback.value = code;\n            fallback.style.position = 'fixed';\n            fallback.style.opacity = '0';\n            document.body.appendChild(fallback);\n            fallback.select();\n            var copied = false;\n            try { copied = document.execCommand('copy'); } catch (e) { copied = false; }\n            fallback.remove();\n            if (copied) done();\n        });
         return;
     }
     var ta = document.createElement('textarea');
