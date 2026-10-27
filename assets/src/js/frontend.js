@@ -346,5 +346,5 @@ App.prototype.renderMap=function(items){
   if(!pts.length){if(!notice.length)this.$root.find('.kbl-map').append('<div class="kbl-map-empty">'+esc(LBL('no_coordinates','No valid coordinates are available for these branches.'))+'</div>');}
   else notice.remove();
 };
-$(function(){$('.kbl-locator-wrap').each(function(){new App($(this));});});
+$(function(){$('.kbl-locator-wrap').each(function(){var app=new App($(this));$(this).data('kblApp',app);});});
 })(jQuery);
