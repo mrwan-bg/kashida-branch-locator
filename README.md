@@ -10,6 +10,8 @@
 </p>
 
 <p align="center">
+  <a href="https://wordpress.org/plugins/kashida-branch-locator/"><strong>WordPress.org Plugin Page</strong></a>
+  &nbsp; • &nbsp;
   <a href="https://kashida.ly/wp-plugins/kashida-branch-locator/"><strong>View Plugin on Kashida</strong></a>
   &nbsp; • &nbsp;
   <a href="https://github.com/mrwan-bg/kashida-branch-locator/releases/latest"><strong>Download from GitHub</strong></a>
