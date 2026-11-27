@@ -34,95 +34,55 @@ class Branch {
         ] );
 
         $search = sanitize_text_field( (string) $args['search'] );
-        $like = '%' . $wpdb->esc_like( $search ) . '%';
-        $city = sanitize_text_field( (string) $args['city'] );
+        $like   = '' !== $search ? '%' . $wpdb->esc_like( $search ) . '%' : '';
+        $city   = sanitize_text_field( (string) $args['city'] );
         $group_id = absint( $args['group_id'] );
         $group_slug = sanitize_text_field( (string) $args['group_slug'] );
-        $branch_slug = sanitize_text_field( (string) $args['branch_slug'] );
         $group_slugs = is_array( $args['group_slugs'] ) ? array_values( array_filter( array_map( 'sanitize_text_field', $args['group_slugs'] ) ) ) : [];
-        $branch_slugs = is_array( $args['branch_slugs'] ) ? array_values( array_filter( array_map( 'sanitize_text_field', $args['branch_slugs'] ) ) ) : [];
         $group_slugs_csv = implode( ',', $group_slugs );
+        $branch_slug = sanitize_text_field( (string) $args['branch_slug'] );
+        $branch_slugs = is_array( $args['branch_slugs'] ) ? array_values( array_filter( array_map( 'sanitize_text_field', $args['branch_slugs'] ) ) ) : [];
         $branch_slugs_csv = implode( ',', $branch_slugs );
 
-        $page = max( 1, (int) $args['page'] );
-        $per = max( 1, min( 100, (int) $args['per_page'] ) );
-        $offset = ( $page - 1 ) * $per;
-
-
-        $filter_params = [
-            $search, $like, $like, $like, $like,
-            $city, $city,
-            $group_id, $group_id,
-            $group_slug, $group_slug,
-            $group_slugs_csv, $group_slugs_csv,
-            $branch_slug, $branch_slug,
-            $branch_slugs_csv, $branch_slugs_csv,
-        ];
-
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber -- Query targets the plugin's custom table; prepare() accepts an array of replacement values.
+        // Keep the SQL structure static. Optional filters are activated by their
+        // corresponding neutral-value placeholders; all user values are prepared.
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom branch table has no equivalent WordPress API.
         $total = (int) $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM {$wpdb->prefix}kashida_branch_locator_branches b LEFT JOIN {$wpdb->prefix}kashida_branch_locator_groups g ON g.id = b.group_id
-            WHERE (%s = '' OR b.name LIKE %s OR b.city LIKE %s OR b.address LIKE %s OR b.phone LIKE %s)
-            AND (%s = '' OR b.city = %s)
-            AND (%d = 0 OR b.group_id = %d)
-            AND (%s = '' OR g.slug = %s)
-            AND (%s = '' OR FIND_IN_SET(g.slug, %s))
-            AND (%s = '' OR b.slug = %s)
-            AND (%s = '' OR FIND_IN_SET(b.slug, %s))",
-            $filter_params
+            'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'kashida_branch_locator_branches b LEFT JOIN ' . $wpdb->prefix . 'kashida_branch_locator_groups g ON g.id = b.group_id WHERE (%s = %s OR (b.name LIKE %s OR b.city LIKE %s OR b.address LIKE %s OR b.phone LIKE %s)) AND (%s = %s OR b.city = %s) AND (%d = 0 OR b.group_id = %d) AND (%s = %s OR g.slug = %s) AND (%s = %s OR FIND_IN_SET(g.slug, %s)) AND (%s = %s OR b.slug = %s) AND (%s = %s OR FIND_IN_SET(b.slug, %s))',
+            $search, '', $like, $like, $like, $like,
+            $city, '', $city,
+            $group_id, $group_id,
+            $group_slug, '', $group_slug,
+            $group_slugs_csv, '', $group_slugs_csv,
+            $branch_slug, '', $branch_slug,
+            $branch_slugs_csv, '', $branch_slugs_csv
         ) );
-        $query_params = array_merge( $filter_params, [ $per, $offset ] );
-        $order_desc = strtoupper( (string) $args['order'] ) === 'DESC';
 
-        if ( $args['orderby'] === 'city' ) {
-            if ( $order_desc ) {
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber -- Query targets the plugin's custom table; prepare() accepts an array of replacement values.
-                $items = $wpdb->get_results( $wpdb->prepare(
-                    "SELECT b.*, g.name AS group_name, g.slug AS group_slug, g.color AS group_color FROM {$wpdb->prefix}kashida_branch_locator_branches b LEFT JOIN {$wpdb->prefix}kashida_branch_locator_groups g ON g.id = b.group_id
-                    WHERE (%s = '' OR b.name LIKE %s OR b.city LIKE %s OR b.address LIKE %s OR b.phone LIKE %s) AND (%s = '' OR b.city = %s) AND (%d = 0 OR b.group_id = %d) AND (%s = '' OR g.slug = %s) AND (%s = '' OR FIND_IN_SET(g.slug, %s)) AND (%s = '' OR b.slug = %s) AND (%s = '' OR FIND_IN_SET(b.slug, %s)) ORDER BY b.city DESC LIMIT %d OFFSET %d",
-                    $query_params
-                ) );
-            } else {
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber -- Query targets the plugin's custom table; prepare() accepts an array of replacement values.
-                $items = $wpdb->get_results( $wpdb->prepare(
-                    "SELECT b.*, g.name AS group_name, g.slug AS group_slug, g.color AS group_color FROM {$wpdb->prefix}kashida_branch_locator_branches b LEFT JOIN {$wpdb->prefix}kashida_branch_locator_groups g ON g.id = b.group_id
-                    WHERE (%s = '' OR b.name LIKE %s OR b.city LIKE %s OR b.address LIKE %s OR b.phone LIKE %s) AND (%s = '' OR b.city = %s) AND (%d = 0 OR b.group_id = %d) AND (%s = '' OR g.slug = %s) AND (%s = '' OR FIND_IN_SET(g.slug, %s)) AND (%s = '' OR b.slug = %s) AND (%s = '' OR FIND_IN_SET(b.slug, %s)) ORDER BY b.city ASC LIMIT %d OFFSET %d",
-                    $query_params
-                ) );
-            }
-        } elseif ( $args['orderby'] === 'created_at' ) {
-            if ( $order_desc ) {
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber -- Query targets the plugin's custom table; prepare() accepts an array of replacement values.
-                $items = $wpdb->get_results( $wpdb->prepare(
-                    "SELECT b.*, g.name AS group_name, g.slug AS group_slug, g.color AS group_color FROM {$wpdb->prefix}kashida_branch_locator_branches b LEFT JOIN {$wpdb->prefix}kashida_branch_locator_groups g ON g.id = b.group_id
-                    WHERE (%s = '' OR b.name LIKE %s OR b.city LIKE %s OR b.address LIKE %s OR b.phone LIKE %s) AND (%s = '' OR b.city = %s) AND (%d = 0 OR b.group_id = %d) AND (%s = '' OR g.slug = %s) AND (%s = '' OR FIND_IN_SET(g.slug, %s)) AND (%s = '' OR b.slug = %s) AND (%s = '' OR FIND_IN_SET(b.slug, %s)) ORDER BY b.created_at DESC LIMIT %d OFFSET %d",
-                    $query_params
-                ) );
-            } else {
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber -- Query targets the plugin's custom table; prepare() accepts an array of replacement values.
-                $items = $wpdb->get_results( $wpdb->prepare(
-                    "SELECT b.*, g.name AS group_name, g.slug AS group_slug, g.color AS group_color FROM {$wpdb->prefix}kashida_branch_locator_branches b LEFT JOIN {$wpdb->prefix}kashida_branch_locator_groups g ON g.id = b.group_id
-                    WHERE (%s = '' OR b.name LIKE %s OR b.city LIKE %s OR b.address LIKE %s OR b.phone LIKE %s) AND (%s = '' OR b.city = %s) AND (%d = 0 OR b.group_id = %d) AND (%s = '' OR g.slug = %s) AND (%s = '' OR FIND_IN_SET(g.slug, %s)) AND (%s = '' OR b.slug = %s) AND (%s = '' OR FIND_IN_SET(b.slug, %s)) ORDER BY b.created_at ASC LIMIT %d OFFSET %d",
-                    $query_params
-                ) );
-            }
-        } else {
-            if ( $order_desc ) {
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber -- Query targets the plugin's custom table; prepare() accepts an array of replacement values.
-                $items = $wpdb->get_results( $wpdb->prepare(
-                    "SELECT b.*, g.name AS group_name, g.slug AS group_slug, g.color AS group_color FROM {$wpdb->prefix}kashida_branch_locator_branches b LEFT JOIN {$wpdb->prefix}kashida_branch_locator_groups g ON g.id = b.group_id
-                    WHERE (%s = '' OR b.name LIKE %s OR b.city LIKE %s OR b.address LIKE %s OR b.phone LIKE %s) AND (%s = '' OR b.city = %s) AND (%d = 0 OR b.group_id = %d) AND (%s = '' OR g.slug = %s) AND (%s = '' OR FIND_IN_SET(g.slug, %s)) AND (%s = '' OR b.slug = %s) AND (%s = '' OR FIND_IN_SET(b.slug, %s)) ORDER BY b.name DESC LIMIT %d OFFSET %d",
-                    $query_params
-                ) );
-            } else {
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber -- Query targets the plugin's custom table; prepare() accepts an array of replacement values.
-                $items = $wpdb->get_results( $wpdb->prepare(
-                    "SELECT b.*, g.name AS group_name, g.slug AS group_slug, g.color AS group_color FROM {$wpdb->prefix}kashida_branch_locator_branches b LEFT JOIN {$wpdb->prefix}kashida_branch_locator_groups g ON g.id = b.group_id
-                    WHERE (%s = '' OR b.name LIKE %s OR b.city LIKE %s OR b.address LIKE %s OR b.phone LIKE %s) AND (%s = '' OR b.city = %s) AND (%d = 0 OR b.group_id = %d) AND (%s = '' OR g.slug = %s) AND (%s = '' OR FIND_IN_SET(g.slug, %s)) AND (%s = '' OR b.slug = %s) AND (%s = '' OR FIND_IN_SET(b.slug, %s)) ORDER BY b.name ASC LIMIT %d OFFSET %d",
-                    $query_params
-                ) );
-            }
-        }
+        $page   = max( 1, (int) $args['page'] );
+        $per    = max( 1, min( 1000, (int) $args['per_page'] ) );
+        $offset = ( $page - 1 ) * $per;
+        $orderby = in_array( $args['orderby'], [ 'name', 'city', 'created_at' ], true ) ? $args['orderby'] : 'name';
+        $order   = strtoupper( (string) $args['order'] ) === 'DESC' ? 'DESC' : 'ASC';
+
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom branch table has no equivalent WordPress API.
+        $items = $wpdb->get_results( $wpdb->prepare(
+            'SELECT b.*, g.name AS group_name, g.slug AS group_slug, g.color AS group_color FROM ' . $wpdb->prefix . 'kashida_branch_locator_branches b LEFT JOIN ' . $wpdb->prefix . 'kashida_branch_locator_groups g ON g.id = b.group_id WHERE (%s = %s OR (b.name LIKE %s OR b.city LIKE %s OR b.address LIKE %s OR b.phone LIKE %s)) AND (%s = %s OR b.city = %s) AND (%d = 0 OR b.group_id = %d) AND (%s = %s OR g.slug = %s) AND (%s = %s OR FIND_IN_SET(g.slug, %s)) AND (%s = %s OR b.slug = %s) AND (%s = %s OR FIND_IN_SET(b.slug, %s)) ORDER BY CASE WHEN %s = %s AND %s = %s THEN b.name END ASC, CASE WHEN %s = %s AND %s = %s THEN b.city END ASC, CASE WHEN %s = %s AND %s = %s THEN b.created_at END ASC, CASE WHEN %s = %s AND %s = %s THEN b.name END DESC, CASE WHEN %s = %s AND %s = %s THEN b.city END DESC, CASE WHEN %s = %s AND %s = %s THEN b.created_at END DESC LIMIT %d OFFSET %d',
+            $search, '', $like, $like, $like, $like,
+            $city, '', $city,
+            $group_id, $group_id,
+            $group_slug, '', $group_slug,
+            $group_slugs_csv, '', $group_slugs_csv,
+            $branch_slug, '', $branch_slug,
+            $branch_slugs_csv, '', $branch_slugs_csv,
+            $orderby, 'name', $order, 'ASC',
+            $orderby, 'city', $order, 'ASC',
+            $orderby, 'created_at', $order, 'ASC',
+            $orderby, 'name', $order, 'DESC',
+            $orderby, 'city', $order, 'DESC',
+            $orderby, 'created_at', $order, 'DESC',
+            $per, $offset
+        ) );
+
         return [ 'items' => $items ?: [], 'total' => $total ];
     }
 
@@ -166,7 +126,18 @@ class Branch {
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom branch table requires a direct update.
         $result = $wpdb->update( self::table(), $payload, [ 'id' => $id ] );
         // WordPress returns 0 when the row exists but values are unchanged; that is not a failure.
-        return false !== $result;
+        if ( false === $result ) {
+            return false;
+        }
+        if ( 0 === $result ) {
+            // Distinguish an unchanged row from an ID that no longer exists.
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom branch table has no equivalent WordPress API.
+            return (bool) $wpdb->get_var( $wpdb->prepare(
+                "SELECT id FROM {$wpdb->prefix}kashida_branch_locator_branches WHERE id = %d",
+                $id
+            ) );
+        }
+        return true;
     }
 
     private static function normalize_latitude( $value ): float {

@@ -1,0 +1,151 @@
+/* Kashida Branch Locator — theme adaptation layer (2.6.2)
+   Colors follow the active theme: accent/button color and radius are injected from theme.json or the
+   theme palette; surfaces, borders and text derive from the theme's own text color (currentColor). */
+.kbl-locator-wrap.kbl-v2{
+  --kbl2-on-brand:#fff;
+  --kbl2-line:rgba(128,128,128,.28);
+  --kbl2-soft:rgba(128,128,128,.09);
+  --kbl2-surface:transparent;
+}
+@supports (color:color-mix(in srgb,red 10%,transparent)){
+  .kbl-locator-wrap.kbl-v2{
+    --kbl2-line:color-mix(in srgb,currentColor 18%,transparent);
+    --kbl2-soft:color-mix(in srgb,currentColor 7%,transparent);
+  }
+}
+.kbl-theme-auto{--kbl2-surface:var(--wp--preset--color--base,transparent)}
+
+/* surfaces and text follow the theme */
+.kbl-theme-auto.kbl-v2 .kbl2-field,
+.kbl-theme-auto.kbl-v2 .kbl2-table-wrap,
+.kbl-theme-auto.kbl-v2 .kbl2-card,
+.kbl-theme-auto.kbl-v2 .kbl2-list-item,
+.kbl-theme-auto.kbl-v2 .kbl2-acc,
+.kbl-theme-auto.kbl-v2 .kbl2-iconbtn,
+.kbl-theme-auto.kbl-v2 .kbl2-btn-ghost,
+.kbl-theme-auto.kbl-v2 .kbl2-single{background:var(--kbl2-surface);color:inherit}
+.kbl-theme-auto.kbl-v2 .kbl2-table,
+.kbl-theme-auto.kbl-v2 .kbl2-card,
+.kbl-theme-auto.kbl-v2 .kbl2-list-item,
+.kbl-theme-auto.kbl-v2 .kbl2-acc-head,
+.kbl-theme-auto.kbl-v2 .kbl2-field,
+.kbl-theme-auto.kbl-v2 .kbl2-field input,
+.kbl-theme-auto.kbl-v2 .kbl2-field select{color:inherit}
+.kbl-theme-auto.kbl-v2 .kbl2-field select option{color:#1d2a3d;background:#fff}
+.kbl-theme-auto.kbl-v2 .kbl2-table thead th{background:var(--kbl2-soft)}
+.kbl-theme-auto.kbl-v2 .kbl2-table tbody tr:hover td{background:var(--kbl2-soft)}
+.kbl-theme-auto.kbl-v2 .kbl2-field:focus-within{box-shadow:0 0 0 3px color-mix(in srgb,var(--kbl2-brand) 22%,transparent)}
+.kbl-theme-auto.kbl-v2 .kbl2-acc.is-open .kbl2-acc-head{background:color-mix(in srgb,var(--kbl2-c) 12%,transparent)}
+.kbl-theme-auto.kbl-v2 .kbl2-card,
+.kbl-theme-auto.kbl-v2 .kbl2-single{box-shadow:0 4px 14px color-mix(in srgb,currentColor 8%,transparent)}
+
+/* brand color from the theme */
+.kbl-theme-auto.kbl-v2 .kbl2-btn-ghost,
+.kbl-theme-auto.kbl-v2 .kbl2-iconbtn{color:var(--kbl2-brand)!important;border-color:var(--kbl2-line)}
+.kbl-theme-auto.kbl-v2 .kbl2-btn-ghost:hover,
+.kbl-theme-auto.kbl-v2 .kbl2-iconbtn:hover{background:var(--kbl2-soft);border-color:var(--kbl2-brand)}
+.kbl-theme-auto.kbl-v2 .kbl2-legend input{accent-color:var(--kbl2-brand)}
+.kbl-theme-auto.kbl-v2 .kbl2-btn{border-radius:var(--kbl2-radius)}
+
+/* popups / legend / modal: use theme base + contrast colors when the theme defines them */
+.kbl-theme-auto.kbl-v2 .kbl-map-popup,
+.kbl-theme-auto.kbl-v2 .kbl2-legend,
+.kbl-theme-auto.kbl-v2 .kbl2-modal-box{background:var(--wp--preset--color--base,#fff);color:var(--wp--preset--color--contrast,#1d2a3d)}
+.kbl-theme-auto.kbl-v2 .kbl-map-popup .kbl-popup,
+.kbl-theme-auto.kbl-v2 .kbl-map-popup .kbl-popup>div{color:inherit}
+.kbl-theme-auto.kbl-v2 .kbl2-iconbtn.kbl2-modal-close{background:transparent}
+
+/* single branch card */
+.kbl-v2 .kbl2-single{display:flex;flex-direction:column;gap:1em;width:100%;max-width:34em;padding:1.3em;border:1px solid var(--kbl2-line);border-top:.3em solid var(--kbl2-c,var(--kbl2-brand,#315bea));border-radius:var(--kbl2-radius,.75em);background:var(--kbl2-surface);box-shadow:0 4px 14px rgba(20,40,90,.07);color:inherit}
+.kbl-v2 .kbl2-single-head{display:flex;flex-direction:column;align-items:flex-start;gap:.5em}
+.kbl-v2 .kbl2-single-title{margin:0;font-size:1.3em;line-height:1.3;color:inherit}
+.kbl-v2 .kbl2-single-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.kbl-v2 .kbl2-single-list li{display:flex;gap:.8em;align-items:flex-start;margin:0;padding:.75em 0;border-bottom:1px solid var(--kbl2-line)}
+.kbl-v2 .kbl2-single-list li:last-child{border-bottom:0}
+.kbl-v2 .kbl2-single-list .kbl2-ico{width:1.25em;height:1.25em;margin-top:.2em;color:var(--kbl2-brand,#315bea)}
+.kbl-v2 .kbl2-single-list li>div{display:flex;flex-direction:column;gap:.1em;min-width:0}
+.kbl-v2 .kbl2-single-label{font-size:.85em;opacity:.65}
+.kbl-v2 .kbl2-single-list strong{font-weight:600;overflow-wrap:anywhere}
+.kbl-v2 .kbl2-single-list a{color:inherit;text-decoration:none}
+.kbl-v2 .kbl2-single-actions{display:flex;flex-wrap:wrap;gap:.6em;padding-top:.3em}
+.kbl-v2 .kbl2-single-actions .kbl2-btn{flex:1 1 9em;font-size:1.05em}
+
+/* container width / alignment (Settings → Display container, or width="" in the shortcode) */
+.kbl-locator-wrap.kbl-v2{width:100%;max-width:var(--kbl2-max-width,100%);margin-inline:auto;box-sizing:border-box}
+.kbl-locator-wrap.kbl-v2.kbl-align-start{margin-inline:0}
+
+/* per-button colors (Settings → Button colors). Empty = follow the theme / plugin default */
+.kbl-locator-wrap.kbl-v2 .kbl2-btn-primary{background:var(--kbl2-btn-dir,var(--kbl2-brand,#1f4fa8));border-color:var(--kbl2-btn-dir,var(--kbl2-brand,#1f4fa8));color:var(--kbl2-btn-dir-text,var(--kbl2-on-brand,#fff))!important}
+.kbl-locator-wrap.kbl-v2 .kbl2-btn-call{background:var(--kbl-call-color,#147d64);border-color:var(--kbl-call-color,#147d64);color:var(--kbl2-btn-call-text,#fff)!important}
+.kbl-locator-wrap.kbl-v2 .kbl2-btn-web{background:var(--kbl-website-color,#a64f2b);border-color:var(--kbl-website-color,#a64f2b);color:var(--kbl2-btn-web-text,#fff)!important}
+.kbl-locator-wrap.kbl-v2 .kbl2-btn-ghost.kbl2-open-details,
+.kbl-locator-wrap.kbl-v2 .kbl2-iconbtn.kbl2-open-details{color:var(--kbl2-btn-details,var(--kbl2-brand,#1f4fa8))!important;border-color:var(--kbl2-btn-details,var(--kbl2-line))}
+.kbl-locator-wrap.kbl-v2 .kbl2-btn-primary:hover,.kbl-locator-wrap.kbl-v2 .kbl2-btn-call:hover,.kbl-locator-wrap.kbl-v2 .kbl2-btn-web:hover{filter:brightness(.92)}
+
+
+/* Accessibility and interaction refinement */
+.kbl-locator-wrap.kbl-v2 :is(a,button,input,select):focus-visible {
+  outline: 2px solid var(--kbl2-brand, #315bea);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--kbl2-brand, #315bea) 16%, transparent);
+}
+.kbl-locator-wrap.kbl-v2 .kbl2-btn {
+  min-height: 36px;
+  padding: .55em .85em;
+  font-size: .875em;
+  font-weight: 400;
+  line-height: 1.25;
+  text-decoration: none;
+}
+.kbl-locator-wrap.kbl-v2 .kbl2-badge {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: .3em .7em;
+  border-radius: 999px;
+  font-size: .78em;
+  font-weight: 400;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.kbl-locator-wrap.kbl-v2 :is(.kbl2-card-title,.kbl2-list-title,.kbl2-single-title) {
+  font-weight: 700;
+  line-height: 1.35;
+}
+.kbl-locator-wrap.kbl-v2 .kbl2-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.kbl-locator-wrap.kbl-v2 .kbl2-field :is(input,select) {
+  min-height: 42px;
+  max-width: 100%;
+}
+@media (max-width: 640px) {
+  .kbl-locator-wrap.kbl-v2 .kbl2-toolbar {
+    align-items: stretch;
+    gap: 10px;
+  }
+  .kbl-locator-wrap.kbl-v2 .kbl2-field-search,
+  .kbl-locator-wrap.kbl-v2 .kbl2-field-select {
+    width: 100%;
+    min-width: 0;
+  }
+  .kbl-locator-wrap.kbl-v2 .kbl2-actions {
+    gap: 6px;
+  }
+  .kbl-locator-wrap.kbl-v2 .kbl2-btn {
+    min-height: 34px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kbl-locator-wrap.kbl-v2 *,
+  .kbl-locator-wrap.kbl-v2 *::before,
+  .kbl-locator-wrap.kbl-v2 *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

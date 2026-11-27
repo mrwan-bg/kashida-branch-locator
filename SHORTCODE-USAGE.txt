@@ -1,4 +1,4 @@
-KASHIDA BRANCH LOCATOR SHORTCODE USAGE — v2.3.1
+KASHIDA BRANCH LOCATOR SHORTCODE USAGE — v2.5.33
 
 Default directory:
 [kashida_branch_locator]
@@ -74,3 +74,10 @@ Use these optional attributes with [kashida_branch_locator]:
 
 Example:
 [kashida_branch_locator layout="cards" columns="3" group_cards="true" city_filter="true" call_color="#159947" directions_color="#2459d3"]
+
+
+New in 2.7.0
+------------
+width="1200" | width="90%"      Maximum width of this locator (overrides Settings -> Display Container)
+theme_colors="true|false"       Match the active theme (overrides Settings -> Theme Integration)
+call_color / directions_color / details_color / website_color = "#hex"   Per-button color (overrides Settings -> Button Colors)
