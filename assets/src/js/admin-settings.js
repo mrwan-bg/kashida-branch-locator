@@ -4,7 +4,7 @@
     hex = String(hex || '').replace('#', '');
     if (hex.length === 3) hex = hex.replace(/(.)/g, '$1$1');
     if (!/^[0-9a-f]{6}$/i.test(hex)) return '#fff';
-    var r = parseInt(hex.substr(0, 2), 16), g = parseInt(hex.substr(2, 2), 16), b = parseInt(hex.substr(4, 2), 16);
+    var r = Number.parseInt(hex.substr(0, 2), 16), g = Number.parseInt(hex.substr(2, 2), 16), b = Number.parseInt(hex.substr(4, 2), 16);
     return ((r * 299 + g * 587 + b * 114) / 1000) > 160 ? '#111' : '#fff';
   }
   function paint() {
@@ -16,10 +16,10 @@
     });
   }
   function syncWidth(v) {
-    v = Math.max(0, Math.min(2400, parseInt(v, 10) || 0));
+    v = Math.max(0, Math.min(2400, Number.parseInt(v, 10) || 0));
     $('#kbl-container-width').val(v);
     $('#kbl-container-width-range').val(v);
-    $('.bl-chip').each(function () { $(this).toggleClass('is-active', parseInt($(this).data('width'), 10) === v); });
+    $('.bl-chip').each(function () { $(this).toggleClass('is-active', Number.parseInt($(this).data('width'), 10) === v); });
   }
   $(function () {
     $('.kbl-btn-color-picker').wpColorPicker({
