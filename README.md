@@ -26,7 +26,7 @@
 
 ## Release and compatibility
 
-The current repository metadata identifies the plugin as **v2.5.33**. The plugin header and the WordPress readme stable tag should remain aligned with that version for this release.
+The current plugin version is **v2.7.0**. The plugin header and WordPress readme stable tag are aligned with this version. Compatibility has been tested with WordPress 7.2 and PHP 8.6; the minimum PHP requirement remains PHP 8.0.
 
 For installation, use the [WordPress.org plugin page](https://wordpress.org/plugins/kashida-branch-locator/) or download the [latest published GitHub release](https://github.com/mrwan-bg/kashida-branch-locator/releases/latest). The **Source ZIP** link above downloads the current `main` branch snapshot; it is not necessarily the same as a tagged release package.
 
@@ -153,3 +153,36 @@ The plugin itself does not include analytics, advertising, telemetry, licensing 
 ---
 
 Designed and developed by **Kashida Media Services**.
+
+---
+
+## الشرح باللغة العربية
+
+**إضافة مواقع الفروع من كشيدة (Kashida Branch Locator)** تتيح إدارة فروع الشركات والمكاتب والمتاجر ومراكز الخدمات من لوحة تحكم ووردبريس، ثم عرضها للزوار بطرق متعددة ومتجاوبة مع مختلف أحجام الشاشات.
+
+### طرق عرض الفروع
+- **الجدول (Table):** عرض بيانات الفروع في جدول منظم.
+- **البطاقات (Cards):** عرض كل فرع داخل بطاقة مستقلة.
+- **القائمة (List):** عرض الفروع في قائمة رأسية.
+- **الأكورديون (Accordion):** تجميع الفروع في أقسام قابلة للفتح والإغلاق.
+- **الخريطة (Map):** عرض مواقع الفروع على خريطة تفاعلية.
+- **الخريطة والجدول (Map + Table):** عرض الخريطة والجدول مع مزامنة تحديد الفرع بينهما.
+
+### المميزات
+- إضافة الفروع وإدارتها وتنظيمها ضمن مجموعات مع ألوان مخصصة.
+- البحث والتصفية حسب الكلمات والمدينة والمجموعة.
+- ترتيب النتائج وتقسيمها إلى صفحات أو استخدام التحميل اللانهائي عند تفعيله.
+- استيراد بيانات الفروع من ملفات CSV وXLSX مع معاينة البيانات قبل الاستيراد.
+- عرض أرقام الهاتف وروابط الاتصال والاتجاهات إلى مواقع الفروع.
+- دعم اللغتين واتجاهي العرض RTL وLTR، مع وراثة الخطوط من القالب النشط.
+- تخصيص طريقة العرض والحقول وأدوات البحث والتصفية من خلال أداة Display Builder، ثم إنشاء الرمز القصير لإضافته إلى صفحات الموقع.
+- استخدام خرائط OpenStreetMap دون الحاجة إلى مفتاح Google Maps API.
+
+### طريقة الاستخدام
+1. ثبّت الإضافة وفعّلها من لوحة تحكم ووردبريس.
+2. أضف مجموعات الفروع ثم أضف الفروع يدوياً أو استوردها من ملف CSV أو XLSX.
+3. افتح Display Builder وحدد طريقة العرض والحقول وخيارات البحث والتصفية.
+4. انسخ الرمز القصير الذي تم إنشاؤه وأضفه إلى الصفحة المطلوبة.
+
+**متطلبات التشغيل:** WordPress 5.8 أو أحدث، وPHP 8.0 أو أحدث.
+
