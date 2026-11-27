@@ -6,7 +6,7 @@ function LBL(k,d){ return labels()[k] || d; }
 function esc(v){ return String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function mapsUrl(b){ return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(b.latitude+','+b.longitude); }
 function splitPhoneNumbers(v){
-  return String(v==null?'':v).split(/\s+[-–—]\s+|\s*[,;]\s*/).map(function(n){return n.trim();}).filter(Boolean);
+  return String(v==null?'':v).split(/[,;]|\s+[-–—]\s+/).map(function(n){return n.trim();}).filter(Boolean);
 }
 function phone(v){
   var numbers=splitPhoneNumbers(v);
@@ -190,7 +190,7 @@ function detailsModal(b,c){
   var h='<div class="kbl2-modal" role="dialog" aria-modal="true" aria-label="'+esc(b.name)+'"><div class="kbl2-modal-box" style="--kbl2-c:'+esc(b.group_color||'#315bea')+'"><button type="button" class="kbl2-iconbtn kbl2-modal-close" aria-label="'+esc(LBL('close','Close'))+'">'+ico('x')+'</button><h3>'+esc(b.name)+'</h3>'+gbadge(b);
   h+='<div class="kbl2-dl">'+f(LBL('city','City'),esc(b.city||''),'city')+f(LBL('address','Address'),esc(b.address||''),'pin')+f(LBL('phone','Phone'),b.phone?plainPhones(b.phone):'','phone')+f(LBL('phone2','Secondary phone'),b.phone2?plainPhones(b.phone2):'','phone')+f(LBL('website','Website'),b.website?'<a target="_blank" rel="noopener noreferrer" href="'+esc(b.website)+'">'+esc(LBL('visit_website','Visit website'))+'</a>':'','globe')+'</div><div class="kbl2-actions">';
   if(b.phone)h+='<a class="kbl2-btn kbl2-btn-call" href="tel:'+esc(primaryPhone(b.phone))+'">'+ico('phone')+'<span>'+esc(LBL('call','Call'))+'</span></a>';
-  if(isFinite(parseFloat(b.latitude))&&isFinite(parseFloat(b.longitude)))h+='<a class="kbl2-btn kbl2-btn-primary" target="_blank" rel="noopener" href="'+mapsUrl(b)+'">'+ico('pin')+'<span>'+esc(LBL('directions','Directions'))+'</span></a>';
+  if(Number.isFinite(Number.parseFloat(b.latitude))&&Number.isFinite(Number.parseFloat(b.longitude)))h+='<a class="kbl2-btn kbl2-btn-primary" target="_blank" rel="noopener" href="'+mapsUrl(b)+'">'+ico('pin')+'<span>'+esc(LBL('directions','Directions'))+'</span></a>';
   return h+'</div></div></div>';
 }
 function paginate($el,page,total,c){
@@ -288,7 +288,7 @@ App.prototype.bind=function(){
   this.$root.on('click','.kbl2-modal',function(e){if(e.target===this)self.$root.find('.kbl2-modal').remove();});
   this.$root.on('keydown',function(e){if(e.key==='Escape')self.$root.find('.kbl2-modal').remove();});
   this.$root.on('change','.kbl2-legend input',function(){self.c.hiddenGroups=self.c.hiddenGroups||{};self.c.hiddenGroups[$(this).val()]=!this.checked;self.render();});
-  this.$root.on('click','.kbl-page',function(){self.page=parseInt($(this).data('page'),10)||1;self.render();});
+  this.$root.on('click','.kbl-page',function(){self.page=Number.parseInt($(this).data('page'),10)||1;self.render();});
   $(window).on('scroll.kblInfinite'+(this.root.id||Math.random().toString(36).slice(2)),function(){
     if(self.c.display_mode!=='infinite_scroll'||!self.c.pagination||self.loadingMore)return;
     var items=visibleRows(self.all,self.c),pages=Math.max(1,Math.ceil(items.length/Math.max(1,self.c.per_page||15)));
@@ -311,7 +311,7 @@ App.prototype.select=function(id,fromMarker){
   this.$root.find('.kbl-row[data-id="'+id+'"]').addClass('active');
   if(this.map){
     Object.keys(this.map.markers).forEach(function(k){self.map.markers[k].el.classList.toggle('active',String(k)===String(id));});
-    if(isFinite(parseFloat(b.latitude))&&isFinite(parseFloat(b.longitude))){self.map.center=[b.latitude,b.longitude];self.map.open(b);self.map.draw();}
+    if(Number.isFinite(Number.parseFloat(b.latitude))&&Number.isFinite(Number.parseFloat(b.longitude))){self.map.center=[b.latitude,b.longitude];self.map.open(b);self.map.draw();}
     if(!fromMarker){var r=this.$root.find('.kbl-row[data-id="'+id+'"]').get(0);if(r)r.scrollIntoView({behavior:'smooth',block:'nearest'});}
   }
 };
@@ -339,7 +339,7 @@ App.prototype.renderMap=function(items){
   if(!this.map||this.map.el!==mapEl){if(this.map)this.map.destroy();this.map=new MapView(mapEl,this.c,this);}
   this.map.c=this.c;
   this.map.clear();var pts=[];
-  items.forEach(function(b){var lat=parseFloat(b.latitude),lng=parseFloat(b.longitude);if(!isFinite(lat)||!isFinite(lng)||lat===0&&lng===0)return;self.map.add(b);pts.push([lat,lng]);});
+  items.forEach(function(b){var lat=Number.parseFloat(b.latitude),lng=Number.parseFloat(b.longitude);if(!Number.isFinite(lat)||!Number.isFinite(lng)||lat===0&&lng===0)return;self.map.add(b);pts.push([lat,lng]);});
   this.map.fit(pts);
   if(this.map.legend){
     if((this.c.layout||'table')==='map'){var gs=[],seen={};this.all.forEach(function(b){var k=b.group_slug||'__u__';if(!seen[k]){seen[k]=1;gs.push({k:k,n:b.group_name||LBL('group','Group'),c:b.group_color||'#0a6b70'});}});
@@ -352,7 +352,7 @@ App.prototype.renderMap=function(items){
 };
 window.KBLFrontend={
   updatePreview:function(element,config,items){
-    var root=$(element),layout=config.layout||'table',height=Math.max(300,Math.min(1200,parseInt(config.height,10)||520));
+    var root=$(element),layout=config.layout||'table',height=Math.max(300,Math.min(1200,Number.parseInt(config.height,10)||520));
     root.attr('dir',document.documentElement.dir==='rtl'?'rtl':'ltr')
       .attr('class','kbl-locator-wrap kbl-v2 kbl-layout-'+layout)
       .css({'--kbl-call-color':config.call_color,'--kbl-directions-color':config.directions_color,'--kbl-website-color':config.website_color,'--kbl-card-columns':config.columns});

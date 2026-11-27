@@ -358,6 +358,7 @@ class Admin {
                         <div class="bl-width-control">
                             <label for="kbl-container-width"><?php esc_html_e( 'Maximum width (px)', 'kashida-branch-locator' ); ?></label>
                             <div class="bl-width-row">
+                                <label class="screen-reader-text" for="kbl-container-width-range"><?php esc_html_e( 'Maximum width (px)', 'kashida-branch-locator' ); ?></label>
                                 <input type="range" id="kbl-container-width-range" min="0" max="2400" step="20" value="<?php echo esc_attr( (string) $width ); ?>">
                                 <input type="number" id="kbl-container-width" name="kashida_branch_locator_container_width" min="0" max="2400" step="10" value="<?php echo esc_attr( (string) $width ); ?>">
                             </div>

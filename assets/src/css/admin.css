@@ -2672,7 +2672,7 @@
     font-family: inherit;
 }
 .bl-display-builder-box { width:min(1280px,calc(100vw - 40px))!important; max-width:1280px!important; }
-.bl-display-builder { grid-template-columns: minmax(320px, 36%) minmax(0, 1fr); align-items:start; }
+.bl-display-builder { align-items:start; }
 .bl-builder-section,.bl-builder-preview,.bl-builder-output { min-width:0; }
 .bl-builder-preview { grid-column:2; grid-row:1 / span 3; }
 .bl-builder-preview-canvas { min-width:0; width:100%; overflow-x:hidden; overflow-y:auto; }
