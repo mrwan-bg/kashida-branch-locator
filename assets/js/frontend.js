@@ -6,7 +6,27 @@ function LBL(k,d){ return labels()[k] || d; }
 function esc(v){ return String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function mapsUrl(b){ return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(b.latitude+','+b.longitude); }
 function splitPhoneNumbers(v){
-  return String(v==null?'':v).split(/[,;]|\s+[-–—]\s+/).map(function(n){return n.trim();}).filter(Boolean);
+  var input=String(v==null?'':v), parts=[], current='';
+  for(var i=0;i<input.length;i++){
+    var ch=input.charAt(i), prev=i>0?input.charAt(i-1):'', next=i+1<input.length?input.charAt(i+1):'';
+    var separator=ch===',' || ch===';';
+    if((ch==='-' || ch==='–' || ch==='—') && prev && next && /\s/.test(prev) && /\s/.test(next)){
+      separator=true;
+    }
+    if(separator){
+      var item=current.trim();
+      if(item) parts.push(item);
+      current='';
+      if(ch==='-' || ch==='–' || ch==='—'){
+        while(current.length===0 && i+1<input.length && /\s/.test(input.charAt(i+1))) i++;
+      }
+    }else{
+      current+=ch;
+    }
+  }
+  var last=current.trim();
+  if(last) parts.push(last);
+  return parts;
 }
 function phone(v){
   var numbers=splitPhoneNumbers(v);
