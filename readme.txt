@@ -2,9 +2,9 @@
 Contributors: mrwanbg
 Tags: branches, locations, map, store locator, directory
 Requires at least: 5.8
-Tested up to: 7.1
+Tested up to: 7.2
 Requires PHP: 8.0
-Stable tag: 2.5.33
+Stable tag: 2.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,41 @@ The plugin is designed to remain lightweight and does not require a page builder
 * Multi-select branches and groups, preserving selected items across admin pages; branches can be selected across all matching search/filter results.
 * Nonce and capability checks for administrative AJAX actions.
 * Coordinate and group validation.
+
+
+
+= شرح الإضافة بالعربية =
+
+إضافة مواقع الفروع من كشيدة (Kashida Branch Locator) تتيح إدارة فروع الشركات والمكاتب والمتاجر ومراكز الخدمات من لوحة تحكم ووردبريس، ثم عرضها للزوار بطرق متعددة ومتجاوبة.
+
+= طرق عرض الفروع =
+
+* **الجدول (Table):** عرض بيانات الفروع في جدول منظم.
+* **البطاقات (Cards):** عرض كل فرع داخل بطاقة مستقلة.
+* **القائمة (List):** عرض الفروع في قائمة رأسية.
+* **الأكورديون (Accordion):** تجميع الفروع في أقسام قابلة للفتح والإغلاق.
+* **الخريطة (Map):** عرض مواقع الفروع على خريطة تفاعلية.
+* **الخريطة والجدول (Map + Table):** عرض الخريطة والجدول مع مزامنة تحديد الفرع بينهما.
+
+= أبرز المميزات =
+
+* إدارة الفروع وتنظيمها ضمن مجموعات مع ألوان مخصصة.
+* البحث والتصفية حسب الكلمات والمدينة والمجموعة.
+* ترتيب النتائج وتقسيمها إلى صفحات أو استخدام التحميل اللانهائي عند تفعيله.
+* استيراد ملفات CSV وXLSX مع معاينة البيانات قبل الاستيراد.
+* عرض أرقام الهاتف وروابط الاتصال والاتجاهات إلى مواقع الفروع.
+* دعم RTL وLTR ووراثة الخطوط من القالب النشط.
+* تخصيص طريقة العرض والحقول وأدوات البحث والتصفية من خلال Display Builder وإنشاء رمز قصير للصفحة.
+* استخدام خرائط OpenStreetMap دون الحاجة إلى مفتاح Google Maps API.
+
+= طريقة الاستخدام =
+
+1. ثبّت الإضافة وفعّلها من لوحة تحكم ووردبريس.
+2. أضف مجموعات الفروع ثم أضف الفروع يدوياً أو استوردها من CSV أو XLSX.
+3. افتح Display Builder وحدد طريقة العرض والحقول وخيارات البحث والتصفية.
+4. انسخ الرمز القصير وأضفه إلى الصفحة المطلوبة.
+
+متطلبات التشغيل: WordPress 5.8 أو أحدث، وPHP 8.0 أو أحدث.
 
 == Shortcodes ==
 
@@ -184,6 +219,16 @@ No. The plugin does not include analytics or tracking. OpenStreetMap and Google 
 4. Frontend layouts: examples of Table, Cards, List, Accordion, Map, and Map + Table views.
 
 == Changelog ==
+
+= 2.7.0 =
+* Refined all six frontend layouts with clearer visual hierarchy, softer borders, improved spacing, and responsive behavior.
+* Improved compact mobile branch cards and group color presentation.
+* Standardized search and filter control heights and refined result-count styling.
+* Improved Display Builder previews, sizing, and settings organization.
+* Refined admin navigation, forms, controls, and modal presentation.
+* Improved CSV/XLSX import handling and preview behavior.
+* Improved SQL preparation, output escaping, and WordPress Plugin Check compatibility.
+* Tested with WordPress 7.2 and PHP 8.6.
 
 = 2.5.33 =
 * Improved database schema compatibility by using a TIMESTAMP default for created_at in the branches and groups tables.
