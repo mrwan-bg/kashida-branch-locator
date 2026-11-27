@@ -1,0 +1,74 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  php-lint:
+    name: PHP syntax (PHP ${{ matrix.php-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['8.0', '8.4']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: none
+      - name: Lint PHP files
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            php -l "$file"
+          done < <(find . -type f -name '*.php' -not -path './.git/*' -print0)
+
+  javascript-syntax:
+    name: JavaScript syntax
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check JavaScript files
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            node --check "$file"
+          done < <(find assets -type f -name '*.js' -not -path '*/node_modules/*' -print0)
+
+  mirrored-assets:
+    name: Verify source and production assets match
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Compare mirrored assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in admin.css admin-v2.css frontend.css; do
+            if [ -f "assets/css/$file" ] && [ -f "assets/src/css/$file" ]; then
+              cmp "assets/css/$file" "assets/src/css/$file"
+            fi
+          done
+          for file in admin.js admin-settings.js frontend.js import.js; do
+            if [ -f "assets/js/$file" ] && [ -f "assets/src/js/$file" ]; then
+              cmp "assets/js/$file" "assets/src/js/$file"
+            fi
+          done
