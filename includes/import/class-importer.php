@@ -89,7 +89,7 @@ class Importer {
      * @param array $rows Parsed records keyed by spreadsheet column header.
      * @return true|\WP_Error
      */
-    private function validate_headers( array $rows ): true|\WP_Error {
+    private function validate_headers( array $rows ): bool|\WP_Error {
         if ( empty( $rows[0] ) || ! is_array( $rows[0] ) ) {
             return new \WP_Error( 'kashida_branch_locator_invalid_headers', __( 'The file does not contain a valid header row. Use the Kashida Branch Locator import template.', 'kashida-branch-locator' ) );
         }
