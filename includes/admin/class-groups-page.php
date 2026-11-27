@@ -5,8 +5,8 @@ use Kashida\BranchLocator\Models\Group;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Groups_Page {
-    public function __construct() { $this->render(); }
-    private function render(): void {
+    public function __construct() {}
+    public function render(): void {
         $groups = Group::all();
         ?>
         <div class="wrap bl-admin-wrap">
@@ -47,7 +47,7 @@ class Groups_Page {
                         /* translators: %s: group name. */
                         $group_aria_label = sprintf( __( 'Select %s', 'kashida-branch-locator' ), $g->name );
                         ?>
-                        <th scope="row" class="check-column"><input type="checkbox" class="bl-row-select" value="<?php echo esc_attr($g->id); ?>" data-slug="<?php echo esc_attr($g->slug); ?>" aria-label="<?php echo esc_attr( $group_aria_label ); ?>"></th>
+                        <th scope="row" class="check-column"><input type="checkbox" class="bl-row-select" value="<?php echo esc_attr($g->id); ?>" data-slug="<?php echo esc_attr($g->slug); ?>" data-preview-name="<?php echo esc_attr($g->name); ?>" data-preview-color="<?php echo esc_attr($g->color); ?>" aria-label="<?php echo esc_attr( $group_aria_label ); ?>"></th>
                         <td><span class="bl-color-swatch" style="background:<?php echo esc_attr($g->color); ?>"></span></td>
                         <td><strong><?php echo esc_html($g->name); ?></strong></td>
                         <td><code><?php echo esc_html($g->slug); ?></code></td>
@@ -59,7 +59,7 @@ class Groups_Page {
                         </td>
                         <td><?php echo (int)$g->branch_count; ?></td>
                         <td class="bl-actions-cell">
-                            <button type="button" class="button button-primary button-small bl-open-display-builder" data-group="<?php echo esc_attr($g->slug); ?>" data-group-name="<?php echo esc_attr($g->name); ?>"><?php esc_html_e('Display','kashida-branch-locator'); ?></button>
+                            <button type="button" class="button button-primary button-small bl-open-display-builder" data-group="<?php echo esc_attr($g->slug); ?>" data-group-name="<?php echo esc_attr($g->name); ?>" data-group-color="<?php echo esc_attr($g->color); ?>"><?php esc_html_e('Display','kashida-branch-locator'); ?></button>
                             <button type="button" class="button button-small bl-edit-group" data-id="<?php echo esc_attr($g->id); ?>" data-name="<?php echo esc_attr($g->name); ?>" data-color="<?php echo esc_attr($g->color); ?>"><?php esc_html_e('Edit','kashida-branch-locator'); ?></button>
                             <button type="button" class="button button-small button-link-delete bl-delete-group" data-id="<?php echo esc_attr($g->id); ?>"><?php esc_html_e('Delete','kashida-branch-locator'); ?></button>
                         </td>
@@ -76,7 +76,7 @@ class Groups_Page {
                 <form id="bl-group-form" class="bl-modal-form">
                     <input type="hidden" id="bl-group-id" name="id" value="">
                     <div class="bl-form-row"><label for="bl-g-name"><?php esc_html_e('Group Name *','kashida-branch-locator'); ?></label><input type="text" id="bl-g-name" name="name" required></div>
-                    <div class="bl-form-row bl-color-field-row"><label for="bl-g-color"><?php esc_html_e('Color','kashida-branch-locator'); ?></label><div class="bl-color-field-controls"><input type="color" id="bl-g-color" name="color" value="<?php echo esc_attr( get_option( 'kashida_branch_locator_default_group_color', '#0a6b70' ) ); ?>" class="kbl-color-picker"><input type="text" id="bl-g-color-hex" class="kbl-color-hex" value="<?php echo esc_attr( get_option( 'kashida_branch_locator_default_group_color', '#0a6b70' ) ); ?>" maxlength="7" pattern="^#[0-9A-Fa-f]{6}$" aria-label="<?php esc_attr_e('Color HEX value','kashida-branch-locator'); ?>" placeholder="#0A6B70"></div></div>
+                    <div class="bl-form-row bl-color-field-row"><label for="bl-g-color"><?php esc_html_e('Color','kashida-branch-locator'); ?></label><div class="bl-color-field-controls"><input type="text" id="bl-g-color" name="color" value="<?php echo esc_attr( get_option( 'kashida_branch_locator_default_group_color', '#0a6b70' ) ); ?>" class="kbl-color-picker"><input type="text" id="bl-g-color-hex" class="kbl-color-hex" value="<?php echo esc_attr( get_option( 'kashida_branch_locator_default_group_color', '#0a6b70' ) ); ?>" maxlength="7" pattern="^#[0-9A-Fa-f]{6}$" aria-label="<?php esc_attr_e('Color HEX value','kashida-branch-locator'); ?>" placeholder="#0A6B70"></div></div>
                     <div class="bl-modal-footer"><button type="submit" class="button button-primary"><?php esc_html_e('Save','kashida-branch-locator'); ?></button><button type="button" class="button bl-modal-close"><?php esc_html_e('Cancel','kashida-branch-locator'); ?></button></div>
                 </form>
             </div>
@@ -123,14 +123,11 @@ class Groups_Page {
                             <label><span><?php esc_html_e('Map zoom','kashida-branch-locator'); ?></span><input type="number" min="1" max="18" value="6" data-builder-option="zoom"></label>
                             <label><span><?php esc_html_e('Cards columns','kashida-branch-locator'); ?></span><input type="number" min="1" max="6" value="3" data-builder-option="columns"></label>
                             <label class="bl-builder-check"><input type="checkbox" data-builder-option="group_cards"> <?php esc_html_e('Group cards under group headings','kashida-branch-locator'); ?></label>
-                            <label><span><?php esc_html_e('Call button color','kashida-branch-locator'); ?></span><input type="color" value="#12b76a" data-builder-option="call_color"></label>
-                            <label><span><?php esc_html_e('Directions button color','kashida-branch-locator'); ?></span><input type="color" value="#1769e8" data-builder-option="directions_color"></label>
-                            <label><span><?php esc_html_e('Website button color','kashida-branch-locator'); ?></span><input type="color" value="#d85b00" data-builder-option="website_color"></label>
                         </div>
                     </div>
                     <div class="bl-builder-preview">
                         <div class="bl-builder-output-head"><h3><?php esc_html_e('Live Preview','kashida-branch-locator'); ?></h3><span class="bl-builder-preview-note"><?php esc_html_e('Preview only — your selected settings will be used in the generated shortcode.','kashida-branch-locator'); ?></span></div>
-                        <div id="bl-builder-preview" class="bl-builder-preview-canvas"></div>
+                        <iframe id="bl-builder-preview" class="bl-builder-preview-canvas" title="<?php esc_attr_e('Branch locator preview','kashida-branch-locator'); ?>"></iframe>
                     </div>
                     <div class="bl-builder-output">
                         <div class="bl-builder-output-head"><h3><?php esc_html_e('Generated Shortcode','kashida-branch-locator'); ?></h3><button type="button" class="button button-primary bl-copy-generated-shortcode"><?php esc_html_e('Copy Shortcode','kashida-branch-locator'); ?></button></div>

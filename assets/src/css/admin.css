@@ -2364,13 +2364,16 @@
 .bl-settings-wrap {
     max-width:none!important;
     width:auto;
-    margin-right:24px
+    margin-right:20px;
+    box-sizing:border-box
 }
 .bl-settings-page-head {
     margin-top:20px
 }
 .bl-settings-form {
-    max-width:1180px
+    width:100%;
+    max-width:none!important;
+    box-sizing:border-box
 }
 .bl-settings-card {
     margin:0 0 18px;
@@ -2513,7 +2516,9 @@
     color:#667085
 }
 .bl-settings-wrap .bl-admin-footer {
-    max-width:1180px
+    width:100%;
+    max-width:none!important;
+    box-sizing:border-box
 }
 .bl-import-container-full {
     width:100%;
@@ -2655,5 +2660,146 @@
     .bl-import-guide .button {
         width:100%;
         text-align:center
+    }
+}
+
+
+/* v2.5.34 — Display Builder layout, preview and theme-friendly typography */
+.bl-display-builder-box,
+.bl-display-builder-box button,
+.bl-display-builder-box input,
+.bl-display-builder-box select {
+    font-family: inherit;
+}
+.bl-display-builder-box { width:min(1280px,calc(100vw - 40px))!important; max-width:1280px!important; }
+.bl-display-builder { grid-template-columns:minmax(300px, minmax(320px, 36%)) minmax(0,1fr); align-items:start; }
+.bl-builder-section,.bl-builder-preview,.bl-builder-output { min-width:0; }
+.bl-builder-preview { grid-column:2; grid-row:1 / span 3; }
+.bl-builder-preview-canvas { min-width:0; width:100%; overflow-x:hidden; overflow-y:auto; }
+.bl-preview-toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:8px; min-width:0; padding:9px; margin-bottom:10px; border:1px solid #e1e5ea; }
+.bl-preview-search,.bl-preview-filter,.bl-preview-sort { display:inline-flex; align-items:center; gap:5px; max-width:100%; padding:7px 10px; border:1px solid #d5ddea; border-radius:8px; background:#fff; font-size:inherit; }
+.bl-preview-meta { margin:8px 0; color:#667085; font-size:inherit; }
+.bl-preview-table-layout { grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); }
+.bl-preview-table-layout>* { min-width:0; overflow-wrap:anywhere; }
+.bl-preview-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:12px; }
+.bl-preview-card { width:100%; max-width:none; min-width:0; }
+.bl-preview-card-secondary { opacity:.78; }
+.bl-preview-list { display:grid; gap:10px; }
+.bl-preview-list .bl-preview-card { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:start; }
+.bl-preview-list .bl-preview-fields { grid-column:1/-1; }
+.bl-preview-list-item { display:none; }
+.bl-preview-accordion details { overflow:hidden; border:1px solid #dbe3ed; border-radius:10px; background:#fff; }
+.bl-preview-accordion summary { padding:12px 14px; cursor:pointer; font-weight:600; }
+.bl-preview-accordion .bl-preview-card { border:0; border-top:1px solid #e5eaf0; border-radius:0; box-shadow:none; }
+.bl-preview-table { grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); }
+.bl-preview-actions { flex-wrap:wrap; }
+.bl-preview-pagination { margin-top:14px; text-align:center; color:#1769e8; }
+.bl-builder-output { grid-column:1/-1; }
+@media(max-width:980px) {
+    .bl-display-builder { grid-template-columns:minmax(0,1fr); }
+    .bl-builder-preview { grid-column:1; grid-row:auto; }
+    .bl-builder-output { grid-column:1; }
+}
+@media(max-width:600px) {
+    .bl-display-builder-box { width:calc(100vw - 20px)!important; max-width:calc(100vw - 20px)!important; max-height:calc(100vh - 20px)!important; }
+    .bl-display-builder { padding:10px!important; gap:10px; }
+    .bl-builder-section,.bl-builder-preview { padding:11px!important; }
+    .bl-builder-output-head { align-items:flex-start; flex-direction:column; }
+    .bl-builder-output-head .button { width:100%; }
+    .bl-preview-table { grid-template-columns:1fr 1fr; }
+}
+#bl-builder-preview.bl-builder-preview-canvas {
+    display:block;
+    height:520px;
+    padding:0;
+    overflow:hidden;
+    background:#fff;
+}
+
+/* v2.7.0 — Give Display Builder the full available workspace */
+.bl-display-builder-box {
+    width: min(1760px, calc(100vw - 32px)) !important;
+    max-width: calc(100vw - 32px) !important;
+    max-height: calc(100vh - 24px) !important;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden !important;
+}
+.bl-display-builder-box > .bl-modal-header {
+    flex: 0 0 auto;
+}
+.bl-display-builder {
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: minmax(390px, 0.78fr) minmax(0, 1.22fr) !important;
+    gap: 22px !important;
+    padding: 22px !important;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+.bl-builder-section,
+.bl-builder-preview,
+.bl-builder-output {
+    min-width: 0;
+}
+.bl-builder-preview {
+    grid-column: 2 !important;
+    grid-row: 1 / span 3 !important;
+    position: sticky;
+    top: 0;
+    align-self: start;
+}
+.bl-builder-preview-canvas {
+    min-height: 560px;
+    max-height: min(68vh, 820px);
+}
+.bl-builder-output {
+    grid-column: 1 / -1 !important;
+}
+@media (min-width: 1600px) {
+    .bl-display-builder {
+        grid-template-columns: minmax(440px, 0.72fr) minmax(0, 1.28fr) !important;
+        gap: 26px !important;
+        padding: 26px !important;
+    }
+    .bl-builder-preview-canvas {
+        min-height: 620px;
+    }
+}
+@media (max-width: 1100px) {
+    .bl-display-builder-box {
+        width: calc(100vw - 24px) !important;
+        max-width: calc(100vw - 24px) !important;
+    }
+    .bl-display-builder {
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 16px !important;
+    }
+    .bl-builder-preview {
+        grid-column: 1 !important;
+        grid-row: auto !important;
+        position: static;
+    }
+    .bl-builder-output {
+        grid-column: 1 !important;
+    }
+    .bl-builder-preview-canvas {
+        min-height: 440px;
+        max-height: 62vh;
+    }
+}
+@media (max-width: 600px) {
+    .bl-display-builder-box {
+        width: calc(100vw - 12px) !important;
+        max-width: calc(100vw - 12px) !important;
+        max-height: calc(100vh - 12px) !important;
+    }
+    .bl-display-builder {
+        padding: 10px !important;
+        gap: 12px !important;
+    }
+    .bl-builder-preview-canvas {
+        min-height: 360px;
+        max-height: 55vh;
     }
 }

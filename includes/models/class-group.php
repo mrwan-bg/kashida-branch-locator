@@ -41,7 +41,18 @@ class Group {
         $payload = [];
         if ( isset( $data['name'] ) ) $payload['name'] = sanitize_text_field( $data['name'] );
         if ( isset( $data['color'] ) ) $payload['color'] = sanitize_hex_color( $data['color'] ) ?: '#0a6b70';
-        return $payload ? (bool) $wpdb->update( self::table(), $payload, [ 'id' => $id ] ) : false;
+        if ( empty( $payload ) ) {
+            return false;
+        }
+
+        $result = $wpdb->update( self::table(), $payload, [ 'id' => $id ] );
+        if ( false === $result ) {
+            return false;
+        }
+
+        // WordPress returns 0 when the submitted values are unchanged.
+        // Treat that as a successful save only when the target group exists.
+        return 0 === $result ? (bool) self::find( $id ) : true;
     }
 
     public static function delete( int $id ): bool {

@@ -6,9 +6,9 @@ use Kashida\BranchLocator\Models\Group;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Branches_Page {
-    public function __construct() { $this->render(); }
+    public function __construct() {}
 
-    private function render(): void {
+    public function render(): void {
         $groups = Group::all();
         $cities = Branch::get_cities();
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin list filter; no state-changing action is performed.
@@ -48,14 +48,14 @@ class Branches_Page {
                 <div class="bl-filters">
                     <label class="screen-reader-text" for="bl-branches-search"><?php esc_html_e('Search branches','kashida-branch-locator'); ?></label>
                     <input type="search" id="bl-branches-search" name="s" value="<?php echo esc_attr($search); ?>" placeholder="<?php esc_attr_e('Search branches…','kashida-branch-locator'); ?>" class="bl-search-input">
-                    <label class="screen-reader-text" for="bl-branches-city"><?php esc_html_e('City','kashida-branch-locator'); ?></label>
+                    <label class="screen-reader-text" for="bl-branches-city"><?php esc_html_e('Filter by city','kashida-branch-locator'); ?></label>
                     <select id="bl-branches-city" name="city">
                         <option value=""><?php esc_html_e('All Cities','kashida-branch-locator'); ?></option>
                         <?php foreach($cities as $c): ?>
                             <option value="<?php echo esc_attr($c); ?>" <?php selected($city_f,$c); ?>><?php echo esc_html($c); ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <label class="screen-reader-text" for="bl-branches-group"><?php esc_html_e('Group','kashida-branch-locator'); ?></label>
+                    <label class="screen-reader-text" for="bl-branches-group"><?php esc_html_e('Filter by group','kashida-branch-locator'); ?></label>
                     <select id="bl-branches-group" name="group_id">
                         <option value=""><?php esc_html_e('All Groups','kashida-branch-locator'); ?></option>
                         <?php foreach($groups as $g): ?>
@@ -97,7 +97,7 @@ class Branches_Page {
                         /* translators: %s: branch name. */
                         $branch_aria_label = sprintf( __( 'Select %s', 'kashida-branch-locator' ), $b->name );
                         ?>
-                        <th scope="row" class="check-column"><input type="checkbox" class="bl-row-select" value="<?php echo esc_attr($b->id); ?>" data-slug="<?php echo esc_attr($b->slug); ?>" aria-label="<?php echo esc_attr( $branch_aria_label ); ?>"></th>
+                        <th scope="row" class="check-column"><input type="checkbox" class="bl-row-select" value="<?php echo esc_attr($b->id); ?>" data-slug="<?php echo esc_attr($b->slug); ?>" data-preview-name="<?php echo esc_attr($b->name); ?>" data-preview-city="<?php echo esc_attr($b->city); ?>" data-preview-address="<?php echo esc_attr($b->address); ?>" data-preview-phone="<?php echo esc_attr($b->phone); ?>" data-preview-phone2="<?php echo esc_attr($b->phone2 ?? ''); ?>" data-preview-website="<?php echo esc_attr($b->website ?? ''); ?>" data-preview-latitude="<?php echo esc_attr($b->latitude); ?>" data-preview-longitude="<?php echo esc_attr($b->longitude); ?>" data-preview-group-name="<?php echo esc_attr($b->group_name ?? ''); ?>" data-preview-group-slug="<?php echo esc_attr($b->group_slug ?? ''); ?>" data-preview-group-color="<?php echo esc_attr($b->group_color ?? '#0a6b70'); ?>" aria-label="<?php echo esc_attr( $branch_aria_label ); ?>"></th>
                         <td class="bl-branch-name-cell">
                             <div class="bl-branch-name-wrap">
                                 <span class="bl-branch-pin" aria-hidden="true">●</span>
@@ -118,7 +118,7 @@ class Branches_Page {
                         <td class="bl-branch-coords-cell"><span class="bl-data-label"><?php esc_html_e('Coordinates','kashida-branch-locator'); ?></span><code><?php echo esc_html($b->latitude . ', ' . $b->longitude); ?></code></td>
                         <td class="bl-row-actions">
                             <div class="bl-row-actions-wrap">
-                            <button type="button" class="button button-primary button-small bl-open-display-builder" data-branch="<?php echo esc_attr($b->slug); ?>" data-branch-name="<?php echo esc_attr($b->name); ?>"><?php esc_html_e('Display','kashida-branch-locator'); ?></button>
+                            <button type="button" class="button button-primary button-small bl-open-display-builder" data-branch="<?php echo esc_attr($b->slug); ?>" data-branch-name="<?php echo esc_attr($b->name); ?>" data-branch-city="<?php echo esc_attr($b->city); ?>" data-branch-address="<?php echo esc_attr($b->address); ?>" data-branch-phone="<?php echo esc_attr($b->phone); ?>" data-branch-phone2="<?php echo esc_attr($b->phone2 ?? ''); ?>" data-branch-website="<?php echo esc_attr($b->website ?? ''); ?>" data-branch-latitude="<?php echo esc_attr($b->latitude); ?>" data-branch-longitude="<?php echo esc_attr($b->longitude); ?>" data-branch-group-name="<?php echo esc_attr($b->group_name ?? ''); ?>" data-branch-group-slug="<?php echo esc_attr($b->group_slug ?? ''); ?>" data-group-color="<?php echo esc_attr($b->group_color ?? '#0a6b70'); ?>"><?php esc_html_e('Display','kashida-branch-locator'); ?></button>
                             <button class="button button-small bl-edit-branch"
                                 data-id="<?php echo esc_attr($b->id); ?>"
                                 data-name="<?php echo esc_attr($b->name); ?>"
@@ -254,14 +254,11 @@ class Branches_Page {
                             <label><span><?php esc_html_e('Results per page','kashida-branch-locator'); ?></span><input type="number" min="1" max="100" value="15" data-builder-option="per_page"></label>
                             <label><span><?php esc_html_e('Map height','kashida-branch-locator'); ?></span><input type="number" min="300" max="1200" value="520" data-builder-option="height"></label>
                             <label><span><?php esc_html_e('Map zoom','kashida-branch-locator'); ?></span><input type="number" min="1" max="18" value="6" data-builder-option="zoom"></label>
-                            <label data-layout-options="cards,accordion,list,table,map-table"><span><?php esc_html_e('Call button color','kashida-branch-locator'); ?></span><input type="color" value="#12b76a" data-builder-option="call_color"></label>
-                            <label data-layout-options="cards,accordion,list,table,map-table"><span><?php esc_html_e('Directions button color','kashida-branch-locator'); ?></span><input type="color" value="#1769e8" data-builder-option="directions_color"></label>
-                            <label data-layout-options="cards,accordion,list,table,map-table"><span><?php esc_html_e('Website button color','kashida-branch-locator'); ?></span><input type="color" value="#d85b00" data-builder-option="website_color"></label>
                         </div>
                     </div>
                     <div class="bl-builder-preview">
                         <div class="bl-builder-output-head"><h3><?php esc_html_e('Live Preview','kashida-branch-locator'); ?></h3><span class="bl-builder-preview-note"><?php esc_html_e('Preview only — your selected settings will be used in the generated shortcode.','kashida-branch-locator'); ?></span></div>
-                        <div id="bl-builder-preview" class="bl-builder-preview-canvas"></div>
+                        <iframe id="bl-builder-preview" class="bl-builder-preview-canvas" title="<?php esc_attr_e('Branch locator preview','kashida-branch-locator'); ?>"></iframe>
                     </div>
                     <div class="bl-builder-output">
                         <div class="bl-builder-output-head"><h3><?php esc_html_e('Generated Shortcode','kashida-branch-locator'); ?></h3><button type="button" class="button button-primary bl-copy-generated-shortcode"><?php esc_html_e('Copy Shortcode','kashida-branch-locator'); ?></button></div>

@@ -23,9 +23,164 @@ class Branch_Locator_Shortcode {
         return $this->render( $atts );
     }
 
+    /**
+     * Sanitize a CSS color token coming from theme settings.
+     */
+    private function clean_color( $value ): string {
+        $value = trim( (string) $value );
+        if ( 0 === strpos( $value, 'var:preset|color|' ) ) {
+            $value = 'var(--wp--preset--color--' . sanitize_key( substr( $value, 17 ) ) . ')';
+        }
+        if ( preg_match( '/^(#[0-9a-f]{3,8}|(?:rgb|hsl)a?\([0-9.,%\s\/deg]+\)|var\(--[a-z0-9_-]+\))$/i', $value ) ) {
+            return $value;
+        }
+        return '';
+    }
+
+    private function hex_contrast( string $hex ): string {
+        $hex = ltrim( $hex, '#' );
+        if ( 3 === strlen( $hex ) ) {
+            $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+        }
+        if ( 6 > strlen( $hex ) || ! ctype_xdigit( substr( $hex, 0, 6 ) ) ) {
+            return '#ffffff';
+        }
+        $r = hexdec( substr( $hex, 0, 2 ) );
+        $g = hexdec( substr( $hex, 2, 2 ) );
+        $b = hexdec( substr( $hex, 4, 2 ) );
+        return ( ( $r * 299 + $g * 587 + $b * 114 ) / 1000 ) > 160 ? '#111111' : '#ffffff';
+    }
+
+    /**
+     * Reads the active theme's accent color, button text color and button radius
+     * (block themes via theme.json global styles, classic themes via palette / theme mods).
+     */
+    private function str_at( array $data, array $path ): string {
+        foreach ( $path as $key ) {
+            if ( ! is_array( $data ) || ! isset( $data[ $key ] ) ) {
+                return '';
+            }
+            $data = $data[ $key ];
+        }
+        return is_string( $data ) ? $data : '';
+    }
+
+    private function theme_css_vars(): string {
+        try {
+            return $this->build_theme_css_vars();
+        } catch ( \Throwable $e ) {
+            return '';
+        }
+    }
+
+    /**
+     * Global appearance options saved on the Settings page.
+     */
+    private function appearance_options(): array {
+        $color = static function ( string $key ): string {
+            $value = sanitize_hex_color( (string) get_option( $key, '' ) );
+            return is_string( $value ) ? $value : '';
+        };
+        return [
+            'theme_colors'     => '0' !== (string) get_option( 'kashida_branch_locator_theme_colors', '1' ),
+            'width'            => absint( get_option( 'kashida_branch_locator_container_width', 0 ) ),
+            'align'            => 'start' === get_option( 'kashida_branch_locator_container_align', 'center' ) ? 'start' : 'center',
+            'call_color'       => $color( 'kashida_branch_locator_btn_call_color' ),
+            'directions_color' => $color( 'kashida_branch_locator_btn_directions_color' ),
+            'details_color'    => $color( 'kashida_branch_locator_btn_details_color' ),
+            'website_color'    => $color( 'kashida_branch_locator_btn_website_color' ),
+        ];
+    }
+
+    private function build_theme_css_vars(): string {
+        $brand = '';
+        $on    = '';
+        $radius = '';
+
+        if ( function_exists( 'wp_get_global_styles' ) ) {
+            $styles = (array) wp_get_global_styles();
+            $brand  = $this->clean_color( $this->str_at( $styles, [ 'elements', 'button', 'color', 'background' ] ) );
+            $on     = $this->clean_color( $this->str_at( $styles, [ 'elements', 'button', 'color', 'text' ] ) );
+            if ( '' === $brand ) {
+                $brand = $this->clean_color( $this->str_at( $styles, [ 'elements', 'link', 'color', 'text' ] ) );
+                $on    = '';
+            }
+            $r = $this->str_at( $styles, [ 'elements', 'button', 'border', 'radius' ] );
+            if ( preg_match( '/^[0-9.]+(px|em|rem|%)$/', $r ) ) {
+                $radius = $r;
+            }
+        }
+
+        if ( '' === $brand ) {
+            foreach ( [ 'accent_color', 'primary_color', 'link_color', 'header_textcolor' ] as $mod ) {
+                $val = get_theme_mod( $mod );
+                if ( is_string( $val ) && '' !== $val ) {
+                    $val = '#' === $val[0] ? $val : '#' . ltrim( $val, '#' );
+                    $brand = $this->clean_color( $val );
+                    if ( '' !== $brand ) {
+                        break;
+                    }
+                }
+            }
+        }
+
+        if ( '' === $brand ) {
+            $palette = get_theme_support( 'editor-color-palette' );
+            $palette = is_array( $palette ) && isset( $palette[0] ) && is_array( $palette[0] ) ? $palette[0] : [];
+            $first = '';
+            foreach ( $palette as $swatch ) {
+                $slug  = is_array( $swatch ) && isset( $swatch['slug'] ) && is_string( $swatch['slug'] ) ? $swatch['slug'] : '';
+                $color = is_array( $swatch ) ? $this->clean_color( isset( $swatch['color'] ) && is_string( $swatch['color'] ) ? $swatch['color'] : '' ) : '';
+                if ( '' === $color ) {
+                    continue;
+                }
+                if ( '' === $first ) {
+                    $first = $color;
+                }
+                if ( preg_match( '/primary|accent|brand|main/i', $slug ) ) {
+                    $brand = $color;
+                    break;
+                }
+            }
+            if ( '' === $brand ) {
+                $brand = $first;
+            }
+        }
+
+        $colors = apply_filters( 'kashida_bl_theme_colors', [ 'brand' => $brand, 'on_brand' => $on, 'radius' => $radius ] );
+        $colors = is_array( $colors ) ? $colors : [];
+        $brand  = $this->clean_color( isset( $colors['brand'] ) && is_string( $colors['brand'] ) ? $colors['brand'] : '' );
+        $on     = $this->clean_color( isset( $colors['on_brand'] ) && is_string( $colors['on_brand'] ) ? $colors['on_brand'] : '' );
+        $radius = isset( $colors['radius'] ) && is_string( $colors['radius'] ) && preg_match( '/^[0-9.]+(px|em|rem|%)$/', $colors['radius'] ) ? $colors['radius'] : '';
+
+        if ( '' === $brand ) {
+            return '';
+        }
+        if ( '' === $on ) {
+            $on = '#' === $brand[0] ? $this->hex_contrast( $brand ) : '#ffffff';
+        }
+
+        $css = '.kbl-locator-wrap.kbl-theme-auto{--kbl2-brand:' . $brand . ';--kbl2-on-brand:' . $on . ';';
+        if ( '' !== $radius ) {
+            $css .= '--kbl2-radius:' . $radius . ';';
+        }
+        return $css . '}';
+    }
+
     public function register_assets(): void {
-        wp_register_style( 'kashida-branch-locator-frontend', KASHIDA_BRANCH_LOCATOR_ASSETS_URL . 'css/frontend.css', [], KASHIDA_BRANCH_LOCATOR_VERSION );
-        wp_register_script( 'kashida-branch-locator-frontend', KASHIDA_BRANCH_LOCATOR_ASSETS_URL . 'js/frontend.js', [ 'jquery' ], KASHIDA_BRANCH_LOCATOR_VERSION, true );
+        $css_path = KASHIDA_BRANCH_LOCATOR_PATH . 'assets/css/frontend.css';
+        $js_path  = KASHIDA_BRANCH_LOCATOR_PATH . 'assets/js/frontend.js';
+        $css_version = is_file( $css_path ) ? (string) filemtime( $css_path ) : KASHIDA_BRANCH_LOCATOR_VERSION;
+        $js_version  = is_file( $js_path ) ? (string) filemtime( $js_path ) : KASHIDA_BRANCH_LOCATOR_VERSION;
+        wp_register_style( 'kashida-branch-locator-frontend', KASHIDA_BRANCH_LOCATOR_ASSETS_URL . 'css/frontend.css', [], $css_version );
+        $theme_path = KASHIDA_BRANCH_LOCATOR_PATH . 'assets/css/frontend-theme.css';
+        $theme_version = is_file( $theme_path ) ? (string) filemtime( $theme_path ) : KASHIDA_BRANCH_LOCATOR_VERSION;
+        wp_register_style( 'kashida-branch-locator-theme', KASHIDA_BRANCH_LOCATOR_ASSETS_URL . 'css/frontend-theme.css', [ 'kashida-branch-locator-frontend' ], $theme_version );
+        $theme_vars = $this->theme_css_vars();
+        if ( '' !== $theme_vars ) {
+            wp_add_inline_style( 'kashida-branch-locator-theme', $theme_vars );
+        }
+        wp_register_script( 'kashida-branch-locator-frontend', KASHIDA_BRANCH_LOCATOR_ASSETS_URL . 'js/frontend.js', [ 'jquery' ], $js_version, true );
     }
 
     public function render( array $atts = [] ): string {
@@ -34,8 +189,32 @@ class Branch_Locator_Shortcode {
             'per_page' => 15, 'layout' => 'table', 'orderby' => 'name', 'order' => 'ASC',
             'show_name' => 'true', 'show_city' => 'true', 'show_address' => 'true', 'show_phone' => 'true',
             'show_group' => 'false', 'show_call' => 'true', 'show_directions' => 'true',
-            'height' => 520, 'zoom' => 6, 'columns' => 3, 'group_cards' => 'false', 'call_color' => '#12b76a', 'directions_color' => '#1769e8', 'website_color' => '#d85b00',
+            'height' => 520, 'zoom' => 6, 'columns' => 3, 'group_cards' => 'false', 'theme_colors' => '', 'width' => '', 'details_color' => '', 'call_color' => '', 'directions_color' => '', 'website_color' => '',
         ], $atts, 'kashida_branch_locator' );
+
+        $kbl_opts = $this->appearance_options();
+        foreach ( [ 'call_color', 'directions_color', 'details_color', 'website_color' ] as $kbl_key ) {
+            $kbl_val = sanitize_hex_color( (string) $atts[ $kbl_key ] );
+            $atts[ $kbl_key ] = is_string( $kbl_val ) && '' !== $kbl_val ? $kbl_val : $kbl_opts[ $kbl_key ];
+        }
+        $kbl_theme_on = '' === trim( (string) $atts['theme_colors'] ) ? (bool) $kbl_opts['theme_colors'] : filter_var( $atts['theme_colors'], FILTER_VALIDATE_BOOLEAN );
+        $kbl_width    = trim( (string) $atts['width'] );
+        if ( '' === $kbl_width && $kbl_opts['width'] > 0 ) {
+            $kbl_width = (string) $kbl_opts['width'];
+        }
+        $kbl_extra = '';
+        if ( preg_match( '/^([0-9]{2,4})(px|%|rem|em|vw)?$/', $kbl_width, $kbl_m ) ) {
+            $kbl_extra .= '--kbl2-max-width:' . $kbl_m[1] . ( $kbl_m[2] ?? 'px' ) . ';';
+        }
+        foreach ( [ 'directions' => 'dir', 'details' => 'details' ] as $kbl_name => $kbl_var ) {
+            if ( '' !== $atts[ $kbl_name . '_color' ] ) {
+                $kbl_extra .= '--kbl2-btn-' . $kbl_var . ':' . $atts[ $kbl_name . '_color' ] . ';--kbl2-btn-' . $kbl_var . '-text:' . $this->hex_contrast( $atts[ $kbl_name . '_color' ] ) . ';';
+            }
+        }
+        $kbl_call_c = '' !== $atts['call_color'] ? $atts['call_color'] : '#147d64';
+        $kbl_web_c  = '' !== $atts['website_color'] ? $atts['website_color'] : '#a64f2b';
+        $kbl_extra .= '--kbl2-btn-call-text:' . $this->hex_contrast( $kbl_call_c ) . ';--kbl2-btn-web-text:' . $this->hex_contrast( $kbl_web_c ) . ';';
+        $kbl_align_class = 'start' === $kbl_opts['align'] ? ' kbl-align-start' : '';
 
         $allowed_layouts = [ 'table', 'cards', 'accordion', 'list', 'map', 'map-table' ];
         $layout = in_array( (string) $atts['layout'], $allowed_layouts, true ) ? (string) $atts['layout'] : 'table';
@@ -78,6 +257,7 @@ class Branch_Locator_Shortcode {
         }
 
         wp_enqueue_style( 'kashida-branch-locator-frontend' );
+        wp_enqueue_style( 'kashida-branch-locator-theme' );
         wp_enqueue_script( 'kashida-branch-locator-frontend' );
         $kbl_is_arabic = 0 === strpos( determine_locale(), 'ar' ) || 0 === strpos( get_locale(), 'ar' );
         wp_localize_script( 'kashida-branch-locator-frontend', 'kbl_front_labels', [
@@ -117,6 +297,12 @@ class Branch_Locator_Shortcode {
             'results_count' => $kbl_is_arabic ? 'عرض %1$d من أصل %2$d نتيجة.' : __( 'Showing %1$d of %2$d results.', 'kashida-branch-locator' ),
             'page' => $kbl_is_arabic ? 'الصفحة' : __( 'Page', 'kashida-branch-locator' ),
             'go_to_page' => $kbl_is_arabic ? 'الانتقال إلى الصفحة' : __( 'Go to page', 'kashida-branch-locator' ),
+            'search_btn' => $kbl_is_arabic ? 'بحث' : __( 'Search', 'kashida-branch-locator' ),
+            'actions' => $kbl_is_arabic ? 'الإجراءات' : __( 'Actions', 'kashida-branch-locator' ),
+            'details' => $kbl_is_arabic ? 'التفاصيل' : __( 'Details', 'kashida-branch-locator' ),
+            'show_on_map' => $kbl_is_arabic ? 'عرض على الخريطة' : __( 'View on map', 'kashida-branch-locator' ),
+            'legend' => $kbl_is_arabic ? 'المجموعات' : __( 'Groups', 'kashida-branch-locator' ),
+            'my_location' => $kbl_is_arabic ? 'موقعي' : __( 'My location', 'kashida-branch-locator' ),
             'map_touch_hint' => $kbl_is_arabic ? 'استخدم إصبعين لتحريك الخريطة' : __( 'Use two fingers to move the map', 'kashida-branch-locator' ),
         ] );
 
@@ -148,9 +334,9 @@ class Branch_Locator_Shortcode {
             'show_directions' => filter_var( $atts['show_directions'], FILTER_VALIDATE_BOOLEAN ),
             'columns' => max( 1, min( 6, (int) $atts['columns'] ) ),
             'group_cards' => filter_var( $atts['group_cards'], FILTER_VALIDATE_BOOLEAN ),
-            'call_color' => sanitize_hex_color( (string) $atts['call_color'] ) ?: '#12b76a',
+            'call_color' => sanitize_hex_color( (string) $atts['call_color'] ) ?: '#147d64',
             'directions_color' => sanitize_hex_color( (string) $atts['directions_color'] ) ?: '#1769e8',
-            'website_color' => sanitize_hex_color( (string) $atts['website_color'] ) ?: '#d85b00',
+            'website_color' => sanitize_hex_color( (string) $atts['website_color'] ) ?: '#a64f2b',
             'items' => $items,
         ];
 
@@ -168,8 +354,8 @@ class Branch_Locator_Shortcode {
             $kbl_language = (string) determine_locale();
         }
         $kbl_is_rtl = (bool) preg_match( '/^(ar|he|fa|ur)([_-]|$)/i', $kbl_language );
-        echo '<div class="kbl-locator-wrap kbl-layout-' . esc_attr( $layout ) . '" dir="' . esc_attr( $kbl_is_rtl ? 'rtl' : 'ltr' ) . '" style="--kbl-call-color:' . esc_attr( $config['call_color'] ) . ';--kbl-directions-color:' . esc_attr( $config['directions_color'] ) . ';--kbl-website-color:' . esc_attr( $config['website_color'] ) . ';--kbl-card-columns:' . (int) $config['columns'] . ';" data-config="' . esc_attr( wp_json_encode( $config ) ) . '">';
-        if ( $single && $layout === 'table' && $branch_slug !== '' ) {
+        echo '<div class="kbl-locator-wrap kbl-v2 kbl-layout-' . esc_attr( $layout ) . ( $kbl_theme_on ? ' kbl-theme-auto' : '' ) . esc_attr( $kbl_align_class ) . '" dir="' . esc_attr( $kbl_is_rtl ? 'rtl' : 'ltr' ) . '" style="--kbl-call-color:' . esc_attr( $config['call_color'] ) . ';--kbl-directions-color:' . esc_attr( $config['directions_color'] ) . ';--kbl-website-color:' . esc_attr( $config['website_color'] ) . ';--kbl-card-columns:' . (int) $config['columns'] . ';' . esc_attr( $kbl_extra ) . '" data-config="' . esc_attr( wp_json_encode( $config ) ) . '">';
+        if ( $single && $branch_slug !== '' && in_array( $layout, [ 'table', 'cards', 'list', 'accordion' ], true ) ) {
             $branch = $single;
             include KASHIDA_BRANCH_LOCATOR_PATH . 'templates/single-branch.php';
         } else {

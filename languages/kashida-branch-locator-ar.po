@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Kashida Branch Locator 2.5.32\n"
+"Project-Id-Version: Kashida Branch Locator 2.5.33\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -280,10 +280,10 @@ msgid "Organize branches into groups and create reusable display codes."
 msgstr "نظّم الفروع ضمن مجموعات وأنشئ رموز عرض قابلة لإعادة الاستخدام."
 
 msgid "Upload an Excel (.xlsx) or CSV file. Columns: Name, City, Address, Phone, Lat, Lng, Group. Location (lat,lng) is also supported."
-msgstr "ارفع ملف Excel بامتداد \u200e.xlsx\u200e أو ملف CSV. الأعمدة المطلوبة: الاسم، المدينة، العنوان، الهاتف، خط العرض، خط الطول، المجموعة. كما يمكن استخدام حقل الموقع بصيغة (خط العرض، خط الطول)."
+msgstr "ارفع ملف Excel (.xlsx) أو CSV. الأعمدة: الاسم، المدينة، العنوان، الهاتف، خط العرض، خط الطول، المجموعة. كما يمكن استخدام حقل الموقع بصيغة (خط العرض، خط الطول)."
 
 msgid "Use the template as a reference. It contains column instructions only and no sample locations."
-msgstr "استخدم القالب كمرجع؛ فهو يحتوي على تعليمات الأعمدة فقط ولا يتضمن مواقع تجريبية."
+msgstr "استخدم القالب مرجعًا لتجهيز البيانات؛ فهو يحتوي على تعليمات الأعمدة فقط ولا يتضمن مواقع تجريبية."
 
 msgid "Search branches"
 msgstr "ابحث عن الفروع"
@@ -334,13 +334,13 @@ msgid "Import Branches"
 msgstr "استيراد الفروع"
 
 msgid "Prepare your file"
-msgstr "تجهيز الملف"
+msgstr "جهّز ملفك"
 
 msgid "Drag & drop your file here, or click to browse"
-msgstr "اسحب الملف وأفلته هنا، أو انقر لاختياره"
+msgstr "اسحب الملف وأفلته هنا، أو انقر لاستعراض الملفات"
 
 msgid "Browse File"
-msgstr "اختيار ملف"
+msgstr "استعراض الملفات"
 
 msgid "Update existing branches (matched by name)"
 msgstr "تحديث الفروع الموجودة (حسب تطابق الاسم)"
@@ -352,7 +352,7 @@ msgid "Preview"
 msgstr "معاينة"
 
 msgid "Run Import"
-msgstr "بدء الاستيراد"
+msgstr "تنفيذ الاستيراد"
 
 msgid "Download Error Report"
 msgstr "تنزيل تقرير الأخطاء"
@@ -393,21 +393,17 @@ msgstr "كل المدن"
 msgid "Branch name, city, address or phone number"
 msgstr "اسم الفرع أو المدينة أو العنوان أو رقم الهاتف"
 
+msgid "View plugin on Kashida"
+msgstr "عرض الإضافة على موقع كشيدة"
 
 msgid "Settings"
 msgstr "الإعدادات"
-
-msgid "Help"
-msgstr "المساعدة"
-
-msgid "Groups"
-msgstr "المجموعات"
 
 msgid "Configure default group colors and how branch results are displayed."
 msgstr "اضبط الألوان الافتراضية للمجموعات وطريقة عرض نتائج الفروع."
 
 msgid "Group Appearance"
-msgstr "مظهر المجموعة"
+msgstr "مظهر المجموعات"
 
 msgid "Choose the initial color used for newly created groups."
 msgstr "اختر اللون الافتراضي للمجموعات الجديدة."
@@ -416,22 +412,22 @@ msgid "Default group color"
 msgstr "لون المجموعة الافتراضي"
 
 msgid "This color is applied when a new group is created. You can customize each group later."
-msgstr "يُطبَّق هذا اللون عند إنشاء مجموعة جديدة، ويمكنك تخصيص لون كل مجموعة لاحقًا."
+msgstr "يُطبّق هذا اللون عند إنشاء مجموعة جديدة، ويمكنك تخصيص لون كل مجموعة لاحقًا."
 
 msgid "Branch Display"
 msgstr "عرض الفروع"
 
 msgid "Control how branch results load on the public-facing locator."
-msgstr "تحكّم في طريقة تحميل نتائج الفروع في دليل الفروع الظاهر للزوار."
+msgstr "تحكّم في طريقة تحميل نتائج الفروع في واجهة دليل الفروع."
 
 msgid "Branch Display Mode"
-msgstr "وضع عرض الفروع"
+msgstr "طريقة عرض الفروع"
 
 msgid "Pagination"
 msgstr "تقسيم الصفحات"
 
-msgid "Show navigation controls between result pages"
-msgstr "إظهار أدوات التنقل بين صفحات النتائج"
+msgid "Show navigation controls between result pages."
+msgstr "إظهار أدوات التنقل بين صفحات النتائج."
 
 msgid "Infinite Scroll"
 msgstr "التمرير اللانهائي"
@@ -443,22 +439,22 @@ msgid "Save Changes"
 msgstr "حفظ التغييرات"
 
 msgid "Changes apply to the branch locator display and newly created groups."
-msgstr "تُطبّق التغييرات على عرض دليل الفروع والمجموعات الجديدة."
+msgstr "تُطبّق التغييرات على عرض الفروع والمجموعات الجديدة."
 
 msgid "Download Import Template"
 msgstr "تنزيل قالب الاستيراد"
 
 msgid "Accepted formats: .xlsx, .csv (legacy .xls requires PhpSpreadsheet)"
-msgstr "الصيغ المقبولة: ‎.xlsx و‎.csv (تتطلب ملفات ‎.xls القديمة مكتبة PhpSpreadsheet)"
+msgstr "التنسيقات المقبولة: ‎.xlsx و‎.csv (تتطلب ملفات ‎.xls القديمة مكتبة PhpSpreadsheet)"
 
 msgid "File Requirements"
 msgstr "متطلبات الملف"
 
 msgid "Supported Formats"
-msgstr "الصيغ المدعومة"
+msgstr "التنسيقات المدعومة"
 
 msgid "Excel (.xlsx) or CSV (.csv)."
-msgstr "Excel ‏(.xlsx) أو CSV ‏(.csv)."
+msgstr "Excel (.xlsx) أو CSV (.csv)."
 
 msgid "Legacy .xls files require PhpSpreadsheet."
 msgstr "تتطلب ملفات ‎.xls القديمة مكتبة PhpSpreadsheet."
@@ -467,143 +463,205 @@ msgid "Supported Columns"
 msgstr "الأعمدة المدعومة"
 
 msgid "Name, City, Address, Phone, Lat, Lng, Group, and Location (lat,lng)."
-msgstr "الاسم، المدينة، العنوان، الهاتف، خط العرض، خط الطول، المجموعة، والموقع (خط العرض، خط الطول)."
+msgstr "الاسم، المدينة، العنوان، الهاتف، خط العرض، خط الطول، المجموعة، وحقل الموقع (خط العرض، خط الطول)."
 
 msgid "Tip"
 msgstr "نصيحة"
 
 msgid "Download the import template for column guidance before preparing your file."
-msgstr "نزّل قالب الاستيراد لمعرفة الأعمدة المطلوبة قبل تجهيز الملف."
-
-msgid "Importing…"
-msgstr "جارٍ الاستيراد…"
-
-msgid "Import Complete"
-msgstr "اكتمل الاستيراد"
-
-msgid "Import Failed"
-msgstr "فشل الاستيراد"
-
-
-msgid "Edit Branch"
-msgstr "تعديل الفرع"
-
-
-msgid "Edit Group"
-msgstr "تعديل المجموعة"
-
-
-msgid "Add Branch"
-msgstr "إضافة فرع"
-
-
-msgid "Secondary Phone"
-msgstr "رقم الهاتف الإضافي"
-
+msgstr "نزّل قالب الاستيراد لمعرفة الأعمدة المطلوبة قبل تجهيز ملفك."
 
 msgid "Search branches…"
 msgstr "ابحث عن الفروع…"
 
-
 msgid "Select all matching results"
 msgstr "تحديد جميع النتائج المطابقة"
-
-
-msgid "All matching results selected."
-msgstr "تم تحديد جميع النتائج المطابقة."
-
-
-msgid "%d selected"
-msgstr "تم تحديد %d"
-
-
-msgid "Selected: %s"
-msgstr "تم تحديد: %s"
-
-
-msgid "Only .xlsx, .xls, and .csv files are accepted."
-msgstr "تُقبل الملفات بصيغ .xlsx و .xls و .csv فقط."
-
-
-msgid "Live Preview"
-msgstr "معاينة مباشرة"
-
-
-msgid "Preview only — your selected settings will be used in the generated shortcode."
-msgstr "معاينة فقط — ستُستخدم الإعدادات المحددة عند إنشاء الرمز القصير."
-
-
-msgid "Color"
-msgstr "اللون"
-
 
 msgid "Select all on this page"
 msgstr "تحديد الكل في هذه الصفحة"
 
+msgid "Secondary Phone"
+msgstr "رقم الهاتف الإضافي"
 
-msgid "Name"
-msgstr "الاسم"
+msgid "Color"
+msgstr "اللون"
 
+msgid "Select Color"
+msgstr "اختيار اللون"
 
-msgid "City"
-msgstr "المدينة"
-
-
-msgid "Address"
-msgstr "العنوان"
-
-
-msgid "Phone"
-msgstr "رقم الهاتف"
-
-
-msgid "Group"
-msgstr "المجموعة"
-
+msgid "%d selected"
+msgstr "تم تحديد %d"
 
 msgid "branches"
 msgstr "الفروع"
 
-
 msgid "groups"
 msgstr "المجموعات"
 
+msgid "Add Branch"
+msgstr "إضافة فرع"
 
-msgid "Are you sure you want to delete all selected items?"
-msgstr "هل أنت متأكد من حذف جميع العناصر المحددة؟"
+msgid "Edit Branch"
+msgstr "تعديل الفرع"
 
+msgid "Edit Group"
+msgstr "تعديل المجموعة"
 
-msgid "Delete %d selected branches? This action cannot be undone."
-msgstr "حذف %d من الفروع المحددة؟ لا يمكن التراجع عن هذا الإجراء."
+msgid "Branch Name"
+msgstr "اسم الفرع"
 
+msgid "Group Name"
+msgstr "اسم المجموعة"
 
-msgid "Delete %d selected groups? Their branches will be unassigned. This action cannot be undone."
-msgstr "حذف %d من المجموعات المحددة؟ ستُلغى المجموعة المرتبطة بفروعها. لا يمكن التراجع عن هذا الإجراء."
+msgid "City"
+msgstr "المدينة"
 
+msgid "Phone"
+msgstr "رقم الهاتف"
 
-msgid "Selecting…"
-msgstr "جارٍ التحديد…"
+msgid "Address"
+msgstr "العنوان"
 
+msgid "Latitude"
+msgstr "خط العرض"
 
-msgid "Copied"
-msgstr "تم النسخ"
+msgid "Longitude"
+msgstr "خط الطول"
 
+msgid "Group"
+msgstr "المجموعة"
 
-msgid "Create Shortcode"
-msgstr "إنشاء الرمز القصير"
+msgid "No Group"
+msgstr "بدون مجموعة"
 
+msgid "Search branches..."
+msgstr "ابحث عن الفروع..."
 
-msgid "Copy Shortcode"
-msgstr "نسخ الرمز القصير"
+msgid "Total branches"
+msgstr "إجمالي الفروع"
 
+msgid "Total groups"
+msgstr "إجمالي المجموعات"
 
-msgid "Website"
-msgstr "الموقع الإلكتروني"
+msgid "Current results"
+msgstr "النتائج الحالية"
 
+msgid "Shown on this page"
+msgstr "المعروض في هذه الصفحة"
+
+msgid "Branch groups"
+msgstr "مجموعات الفروع"
+
+msgid "Manage branches"
+msgstr "إدارة الفروع"
+
+msgid "Organize your locations"
+msgstr "نظّم مواقعك"
+
+msgid "Reusable display codes"
+msgstr "رموز عرض قابلة لإعادة الاستخدام"
+
+msgid "One code per group"
+msgstr "رمز واحد لكل مجموعة"
+
+msgid "Configured branch groups"
+msgstr "مجموعات الفروع المُعدّة"
+
+msgid "Manage group names, colors and display codes."
+msgstr "إدارة أسماء المجموعات وألوانها ورموز العرض."
+
+msgid "Search, filter, edit details or copy a display code."
+msgstr "ابحث عن الفروع وصفِّها وعدّل بياناتها أو انسخ رمز العرض."
+
+msgid "Button Colors"
+msgstr "ألوان الأزرار"
+
+msgid "Set a color for each button. Leave a color empty to keep the automatic theme-matched look. Shortcode attributes still override these values."
+msgstr "حدّد لوناً لكل زر. اترك اللون فارغاً ليبقى المظهر المتوافق مع الثيم تلقائياً. تبقى خصائص الشورت كود أعلى أولوية من هذه القيم."
+
+msgid "Directions / View on map"
+msgstr "الاتجاهات / عرض على الخريطة"
+
+msgid "Main action button. Empty follows your theme accent color."
+msgstr "زر الإجراء الرئيسي. إن تُرك فارغاً يتبع لون الثيم."
+
+msgid "Call button"
+msgstr "زر الاتصال"
+
+msgid "Phone call button. Empty uses the plugin green."
+msgstr "زر الاتصال الهاتفي. إن تُرك فارغاً يُستخدم الأخضر الافتراضي."
+
+msgid "Details button"
+msgstr "زر التفاصيل"
+
+msgid "Outlined button and icon on cards and tables. Empty follows your theme accent color."
+msgstr "الزر المحدَّد بإطار وأيقونة التفاصيل في البطاقات والجداول. إن تُرك فارغاً يتبع لون الثيم."
+
+msgid "Website button"
+msgstr "زر الموقع الإلكتروني"
+
+msgid "Visit website button. Empty uses the plugin copper tone."
+msgstr "زر زيارة الموقع. إن تُرك فارغاً يُستخدم اللون النحاسي الافتراضي."
+
+msgid "Theme"
+msgstr "الثيم"
+
+msgid "Live preview"
+msgstr "معاينة مباشرة"
+
+msgid "Sample Branch"
+msgstr "فرع تجريبي"
+
+msgid "Sample address"
+msgstr "عنوان تجريبي"
+
+msgid "Call"
+msgstr "اتصال"
 
 msgid "Directions"
 msgstr "الاتجاهات"
 
+msgid "Details"
+msgstr "التفاصيل"
 
-msgid "Call"
-msgstr "اتصال"
+msgid "Display Container"
+msgstr "حاوية العرض"
+
+msgid "Choose how wide the locator is on your pages."
+msgstr "اختر عرض الحاوية التي يظهر فيها دليل الفروع في صفحاتك."
+
+msgid "Maximum width (px)"
+msgstr "أقصى عرض (بكسل)"
+
+msgid "Width presets"
+msgstr "عروض جاهزة"
+
+msgid "Full width"
+msgstr "عرض كامل"
+
+msgid "0 means the locator fills the full width of its content area. Per shortcode you can use width=\"1200\" or width=\"90%\"."
+msgstr "القيمة 0 تعني ملء عرض منطقة المحتوى بالكامل. ويمكنك في كل شورت كود استخدام width=\"1200\" أو width=\"90%\"."
+
+msgid "Alignment"
+msgstr "المحاذاة"
+
+msgid "Centered"
+msgstr "توسيط"
+
+msgid "Start (left in LTR, right in RTL)"
+msgstr "البداية (يسار في LTR ويمين في RTL)"
+
+msgid "Theme Integration"
+msgstr "التكامل مع الثيم"
+
+msgid "Let the locator inherit your active theme style."
+msgstr "اجعل دليل الفروع يرث نمط الثيم المفعّل."
+
+msgid "Match theme colors and style"
+msgstr "مطابقة ألوان الثيم ونمطه"
+
+msgid "Uses the theme accent color, button text color, corner radius, font family and font size. Turn off to use the plugin default palette."
+msgstr "يستخدم لون التمييز في الثيم ولون نص الأزرار واستدارة الزوايا ونوع الخط وحجمه. أوقفه لاستخدام الألوان الافتراضية للإضافة."
+
+msgid "Control colors, container width, theme integration and how branch results are displayed."
+msgstr "تحكم في الألوان وعرض الحاوية والتكامل مع الثيم وطريقة عرض نتائج الفروع."
